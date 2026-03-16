@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://goratehero.com/sitemap.xml
