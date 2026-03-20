@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate Hero Programs — Product Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#080F1E;--navy2:#0C1527;--navy3:#0E1A2E;
+  --blue:#2563EB;--blue2:#3B82F6;--blue3:#1D4ED8;
+  --w:#FFFFFF;--w80:rgba(255,255,255,0.8);--w50:rgba(255,255,255,0.5);--w20:rgba(255,255,255,0.2);
+  --fd:'Bebas Neue',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
+}
+body{font-family:var(--fb);background:#e8e8e4;overflow-x:hidden}
+
+.page{width:850px;margin:0 auto 32px;box-shadow:0 20px 80px rgba(0,0,0,0.25)}
+
+/* ═══ COVER ═══ */
+.cover{background:var(--navy);min-height:1100px;display:grid;grid-template-rows:auto 1fr auto;position:relative;overflow:hidden}
+.cover-top{padding:56px 64px 0;position:relative;z-index:2}
+.cover-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.05) 1px,transparent 1px);background-size:50px 50px}
+.cover-glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(37,99,235,0.2),transparent 70%);pointer-events:none}
+.logo{font-family:var(--fd);font-size:42px;letter-spacing:7px;color:var(--w);line-height:1}
+.logo span{color:var(--blue2)}
+.tagline-sm{font-size:11px;letter-spacing:.2em;color:var(--w50);text-transform:uppercase;margin-top:4px}
+.cover-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 64px;position:relative;z-index:2;text-align:center}
+.cover-label{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.35);color:var(--blue2);padding:6px 18px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px}
+.cover-h1{font-family:var(--fd);font-size:88px;letter-spacing:3px;color:var(--w);line-height:.88;margin-bottom:20px}
+.cover-h2{font-family:var(--fd);font-size:36px;letter-spacing:4px;color:var(--blue2);margin-bottom:28px}
+.cover-desc{font-size:17px;color:var(--w50);max-width:520px;line-height:1.8;margin-bottom:40px}
+.cover-pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:0}
+.cover-pill{background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.25);color:var(--blue2);padding:6px 14px;border-radius:99px;font-size:12px;font-weight:700}
+.cover-bottom{padding:32px 64px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:2}
+.cover-by{font-size:13px;color:var(--w50)}
+.cover-by strong{color:var(--w);font-weight:700}
+.cover-contact{text-align:right}
+.cover-contact p{font-size:12px;color:var(--w50)}
+.cover-contact strong{color:var(--blue2);font-size:14px}
+
+/* ═══ PROGRAMS PAGES ═══ */
+.progs-page{background:var(--navy2);min-height:1100px;padding:64px;position:relative;overflow:hidden}
+.progs-page::before{content:'';position:absolute;top:0;right:0;width:400px;height:400px;background:radial-gradient(circle,rgba(37,99,235,0.07),transparent 70%);pointer-events:none}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px}
+.section-h{font-family:var(--fd);font-size:52px;letter-spacing:2px;color:var(--w);margin-bottom:40px;line-height:.9}
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.prog-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;position:relative;overflow:hidden;transition:border-color .2s}
+.prog-card:hover{border-color:rgba(37,99,235,0.4)}
+.prog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.prog-card.c-blue::before{background:linear-gradient(90deg,var(--blue),var(--blue2))}
+.prog-card.c-ind::before{background:linear-gradient(90deg,#6366f1,#818cf8)}
+.prog-card.c-cyan::before{background:linear-gradient(90deg,#0891b2,#22d3ee)}
+.prog-card.c-em::before{background:linear-gradient(90deg,#059669,#34d399)}
+.prog-card.c-orange::before{background:linear-gradient(90deg,#d97706,#fbbf24)}
+.prog-card.c-rose::before{background:linear-gradient(90deg,#e11d48,#fb7185)}
+.prog-card.c-violet::before{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.pc-num{font-family:var(--fd);font-size:42px;color:rgba(37,99,235,0.18);line-height:1;margin-bottom:2px}
+.pc-title{font-family:var(--fd);font-size:28px;letter-spacing:1px;color:var(--w);margin-bottom:12px;line-height:1}
+.pc-bullets{list-style:none;display:flex;flex-direction:column;gap:7px}
+.pc-bullets li{font-size:13px;color:var(--w50);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.pc-bullets li::before{content:'→';color:var(--blue2);font-size:12px;flex-shrink:0;margin-top:1px}
+.pc-bullets li strong{color:var(--w80);font-weight:700}
+
+/* ═══ COMPARISON PAGE ═══ */
+.compare-page{background:var(--w);min-height:600px;padding:64px}
+.cmp-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.cmp-h{font-family:var(--fd);font-size:52px;letter-spacing:2px;color:var(--navy);margin-bottom:40px;line-height:.9}
+.cmp-table{width:100%;border-collapse:collapse}
+.cmp-table th{background:var(--navy);color:var(--w);padding:14px 18px;font-family:var(--fd);font-size:16px;letter-spacing:.5px;text-align:left}
+.cmp-table th:first-child{border-radius:10px 0 0 0}
+.cmp-table th:last-child{border-radius:0 10px 0 0}
+.cmp-table td{padding:13px 18px;font-size:13px;border-bottom:1px solid #eee;vertical-align:top}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table tr:nth-child(even) td{background:#f8faff}
+.cmp-table td:first-child{font-weight:700;color:var(--navy);font-size:13px}
+.check{color:#16a34a;font-weight:800}
+.dash{color:#9ca3af}
+
+/* ═══ CTA PAGE ═══ */
+.cta-page{background:var(--blue3);min-height:400px;padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;overflow:hidden}
+.cta-page::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(255,255,255,0.06),transparent)}
+.cta-left{position:relative;z-index:1}
+.cta-h{font-family:var(--fd);font-size:58px;letter-spacing:2px;color:var(--w);line-height:.9;margin-bottom:20px}
+.cta-body{font-size:16px;color:rgba(255,255,255,0.75);line-height:1.75;margin-bottom:28px}
+.cta-btn{display:inline-block;background:var(--w);color:var(--blue3);padding:16px 36px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none}
+.cta-right{position:relative;z-index:1}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:20px;text-align:center}
+.stat-val{font-family:var(--fd);font-size:38px;color:var(--w);letter-spacing:1px;line-height:1;margin-bottom:4px}
+.stat-label{font-size:12px;color:rgba(255,255,255,0.55);font-weight:600;line-height:1.4}
+
+/* ═══ FOOTER ═══ */
+.doc-footer{background:var(--navy);padding:28px 64px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.doc-footer p{font-size:11px;color:var(--w50)}
+.doc-footer .logo-sm{font-family:var(--fd);font-size:20px;letter-spacing:4px;color:var(--w)}
+.doc-footer .logo-sm span{color:var(--blue2)}
+
+@media screen{body{padding:40px 20px}}
+@media print{body{background:#fff;padding:0}.page{margin:0;box-shadow:none;page-break-after:always}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ COVER PAGE -->
+<div class="page">
+<div class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-top">
+    <div class="logo">RATE <span>HERO</span></div>
+    <div class="tagline-sm">Financing Built for the Way You Actually Earn · NMLS #2822806</div>
+  </div>
+  <div class="cover-hero">
+    <div class="cover-label">📋 Full Program Suite</div>
+    <div class="cover-h1">OUR<br>PROGRAMS</div>
+    <div class="cover-h2">FINANCING BUILT FOR INVESTORS</div>
+    <div class="cover-desc">top-tier lenders. 7 documentation types. No SSN to start. We work with multiple wholesale lenders to find the right program for every borrower — no cookie-cutter approvals, no one-size-fits-all answers.</div>
+    <div class="cover-pills">
+      <div class="cover-pill">📈 DSCR</div>
+      <div class="cover-pill">📋 Bank Statement</div>
+      <div class="cover-pill">📊 Asset Utilization</div>
+      <div class="cover-pill">📄 Profit & Loss</div>
+      <div class="cover-pill">✉️ WVOE</div>
+      <div class="cover-pill">🏠 Full Doc</div>
+      <div class="cover-pill">💰 Home Equity</div>
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-by">By <strong>Sean Davoodian</strong> · NMLS #1252107</div>
+    <div class="cover-contact">
+      <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="19717c757576596b786d7c717c6b76377a7674">[email&#160;protected]</a></p>
+      <strong>(747) 308-1635</strong>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ NON-QM PROGRAMS PAGE 1 -->
+<div class="page">
+<div class="progs-page">
+  <div class="section-label">Non-QM Programs</div>
+  <div class="section-h">PROGRAMS 1–4</div>
+  <div class="prog-grid">
+
+    <div class="prog-card c-blue">
+      <div class="pc-num">01</div>
+      <div class="pc-title">FULL DOC</div>
+      <ul class="pc-bullets">
+        <li><strong>1-year or 2-year</strong> full doc options available</li>
+        <li>Finance up to <strong>90% LTV</strong></li>
+        <li>Up to <strong>$4M</strong> loan limit</li>
+        <li>As low as <strong>600 FICO</strong></li>
+        <li>Gift funds from <strong>ANY 3rd party</strong></li>
+        <li>Gift funds eligible to meet reserves</li>
+        <li>Large deposit not required to be sourced</li>
+        <li>Gift of equity for all occupancies</li>
+      </ul>
+    </div>
+
+    <div class="prog-card c-ind">
+      <div class="pc-num">02</div>
+      <div class="pc-title">BANK STATEMENTS</div>
+      <ul class="pc-bullets">
+        <li><strong>12 or 24-month</strong> options available</li>
+        <li>Finance up to <strong>90% LTV</strong></li>
+        <li>Up to <strong>$4M</strong> loan limit</li>
+        <li>As low as <strong>600 FICO</strong></li>
+        <li>No tax returns or W-2s required</li>
+        <li><strong>1-year self-employed</strong> OK</li>
+        <li>Personal or business statements accepted</li>
+        <li>As low as <strong>10% expense factor</strong></li>
+        <li>Personal bank statement at <strong>100%</strong></li>
+        <li>Co-borrower fixed income OK</li>
+      </ul>
+    </div>
+
+    <div class="prog-card c-cyan">
+      <div class="pc-num">03</div>
+      <div class="pc-title">ASSET UTILIZATION</div>
+      <ul class="pc-bullets">
+        <li>Finance up to <strong>80% LTV</strong></li>
+        <li>Up to <strong>$4M</strong> loan limit</li>
+        <li>As low as <strong>600 FICO</strong></li>
+        <li><strong>Interest-only</strong> option available</li>
+        <li>May be used as <strong>sole source</strong> of income</li>
+        <li>Only <strong>1 quarterly statement</strong> needed</li>
+        <li>Wide range of qualifying assets</li>
+        <li>Can supplement Full Doc, Bank Statement, P&L, WVOE, or 1099</li>
+      </ul>
+    </div>
+
+    <div class="prog-card c-em">
+      <div class="pc-num">04</div>
+      <div class="pc-title">DSCR</div>
+      <ul class="pc-bullets">
+        <li>Finance up to <strong>85% LTV</strong></li>
+        <li>Up to <strong>$4M</strong> loan limit</li>
+        <li>As low as <strong>600 FICO</strong></li>
+        <li><strong>No income verification</strong> — no W-2s or tax returns</li>
+        <li><strong>First-time homebuyers OK</strong></li>
+        <li>True <strong>no-ratio</strong> available</li>
+        <li><strong>Short-term rental</strong> eligible (Airbnb, VRBO)</li>
+        <li>Use higher of <strong>1007 or lease</strong> for income</li>
+        <li><strong>5–10 unit</strong> multifamily properties allowed</li>
+        <li>Available on <strong>2nd liens</strong></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ NON-QM PROGRAMS PAGE 2 -->
+<div class="page">
+<div class="progs-page">
+  <div class="section-label">Non-QM Programs Continued</div>
+  <div class="section-h">PROGRAMS 5–7</div>
+  <div class="prog-grid">
+
+    <div class="prog-card c-orange">
+      <div class="pc-num">05</div>
+      <div class="pc-title">PROFIT & LOSS</div>
+      <ul class="pc-bullets">
+        <li>Finance up to <strong>85% LTV</strong></li>
+        <li>Up to <strong>$4M</strong> loan limit</li>
+        <li>As low as <strong>600 FICO</strong></li>
+        <li><strong>12 or 24-month</strong> P&L options</li>
+        <li>Prepared by <strong>CPA / CTEC / EA</strong></li>
+        <li>Better pricing with <strong>2-month bank statements</strong></li>
+        <li>No bank statement required (P&L Only option)</li>
+        <li>Available on <strong>2nd liens</strong></li>
+      </ul>
+    </div>
+
+    <div class="prog-card c-rose">
+      <div class="pc-num">06</div>
+      <div class="pc-title">WVOE</div>
+      <ul class="pc-bullets">
+        <li>Finance up to <strong>80% LTV</strong></li>
+        <li>Up to <strong>$4M</strong> loan limit</li>
+        <li>As low as <strong>600 FICO</strong></li>
+        <li><strong>First-time homebuyers OK</strong></li>
+        <li><strong>Interest-only</strong> option available</li>
+        <li>Cash-out up to <strong>75% LTV</strong></li>
+        <li><strong>Unlimited cash in hand</strong></li>
+        <li><strong>2–4 unit</strong> properties eligible</li>
+      </ul>
+    </div>
+
+    <div class="prog-card c-violet" style="grid-column:1/-1">
+      <div class="pc-num">07</div>
+      <div class="pc-title">HOME EQUITY LOAN</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:4px">
+        <ul class="pc-bullets">
+          <li>Finance up to <strong>90% LTV</strong></li>
+          <li>Up to <strong>$750K</strong> loan limit</li>
+          <li>As low as <strong>660 FICO</strong></li>
+          <li><strong>All doc types</strong> accepted</li>
+        </ul>
+        <ul class="pc-bullets">
+          <li><strong>All occupancy types</strong> (primary, second, investment)</li>
+          <li><strong>12 or 24-month</strong> options available</li>
+          <li><strong>No appraisal option</strong> available</li>
+          <li>Can use <strong>rental income</strong> to qualify</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ COMPARISON MATRIX -->
+<div class="page">
+<div class="compare-page">
+  <div class="cmp-label">At a Glance</div>
+  <div class="cmp-h">PROGRAM<br>COMPARISON</div>
+  <table class="cmp-table">
+    <thead>
+      <tr>
+        <th style="width:160px">Program</th>
+        <th>Max LTV</th>
+        <th>Min FICO</th>
+        <th>Income Doc</th>
+        <th>Max Loan</th>
+        <th>1st-Time Buyer</th>
+        <th>2nd Lien</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Full Doc</td>
+        <td>90%</td>
+        <td>600</td>
+        <td>W-2 / Tax Returns</td>
+        <td>$4M</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Bank Statement</td>
+        <td>90%</td>
+        <td>600</td>
+        <td>12–24 mo deposits</td>
+        <td>$4M</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Asset Utilization</td>
+        <td>80%</td>
+        <td>600</td>
+        <td>Portfolio statements</td>
+        <td>$4M</td>
+        <td class="check">✓</td>
+        <td class="dash">—</td>
+      </tr>
+      <tr>
+        <td>DSCR</td>
+        <td>85%</td>
+        <td>600</td>
+        <td>None required</td>
+        <td>$4M</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>Profit & Loss</td>
+        <td>85%</td>
+        <td>600</td>
+        <td>CPA-prepared P&L</td>
+        <td>$4M</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+      <tr>
+        <td>WVOE</td>
+        <td>80%</td>
+        <td>600</td>
+        <td>Employer verification</td>
+        <td>$4M</td>
+        <td class="check">✓</td>
+        <td class="dash">—</td>
+      </tr>
+      <tr>
+        <td>Home Equity Loan</td>
+        <td>90%</td>
+        <td>660</td>
+        <td>All types accepted</td>
+        <td>$750K</td>
+        <td class="check">✓</td>
+        <td class="check">✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px">
+    <div style="background:#f0f4ff;border:1px solid rgba(37,99,235,0.15);border-radius:12px;padding:20px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">Asset Qualifying %</div>
+      <div style="font-size:12px;color:#3a4a5c;line-height:1.8">
+        Checking/Savings: <strong>100%</strong><br>
+        Stocks & Bonds: <strong>70%</strong><br>
+        Retirement (59½+): <strong>70%</strong><br>
+        Retirement (under 59½): <strong>50%</strong><br>
+        Life Insurance CSV: <strong>100%</strong>
+      </div>
+    </div>
+    <div style="background:#f0f4ff;border:1px solid rgba(37,99,235,0.15);border-radius:12px;padding:20px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">DSCR Highlights</div>
+      <div style="font-size:12px;color:#3a4a5c;line-height:1.8">
+        Short-term rental eligible<br>
+        AirDNA / Lease / 1007 accepted<br>
+        5–10 unit multifamily OK<br>
+        LLC entity lending available<br>
+        No-ratio programs available
+      </div>
+    </div>
+    <div style="background:#f0f4ff;border:1px solid rgba(37,99,235,0.15);border-radius:12px;padding:20px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">Home Equity Highlights</div>
+      <div style="font-size:12px;color:#3a4a5c;line-height:1.8">
+        Stand-alone or piggyback<br>
+        All occupancy types<br>
+        All doc types accepted<br>
+        No appraisal option available<br>
+        Rental income may qualify
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ CTA + FOOTER -->
+<div class="page">
+<div class="cta-page">
+  <div class="cta-left">
+    <div class="cta-h">GET YOUR<br>BEST RATE<br>TODAY.</div>
+    <div class="cta-body">No SSN required to start. No credit pull. Takes 2 minutes. Our advisors will identify exactly which program fits your situation and deliver competing quotes from top-tier lenders.</div>
+    <a href="https://goratehero.com" class="cta-btn">Start at goratehero.com →</a>
+    <div style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.5)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a121f1616153a081b0e1f121f081554191517">[email&#160;protected]</a> · goratehero.com</div>
+  </div>
+  <div class="cta-right">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-val">50+</div>
+        <div class="stat-label">Wholesale Lenders Competing for Your Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">21</div>
+        <div class="stat-label">Day Average Close — Even on Complex Files</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">4.9★</div>
+        <div class="stat-label">Client Rating Across All Programs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">$2.1B</div>
+        <div class="stat-label">Total Loan Volume Funded</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="doc-footer">
+  <div class="logo-sm">RATE <span>HERO</span></div>
