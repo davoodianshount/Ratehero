@@ -8,17 +8,41 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#080F1E;--navy2:#0C1527;--navy3:#0E1A2E;
-  --dk:#080F1E;--dk2:#0C1527;--dk3:#0E1A2E;
-  --blue:#2563EB;--blue2:#3B82F6;--blue3:#1D4ED8;
-  --amber:#F59E0B;--amber2:#FCD34D;
-  
-  --w:#FFFFFF;--w80:rgba(255,255,255,0.82);--w55:rgba(255,255,255,0.55);--w25:rgba(255,255,255,0.25);
-  --card:rgba(255,255,255,0.04);--cardb:rgba(255,255,255,0.08);
-  --fd:'Bebas Neue',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
+  --bg:     #F8FAFF;
+  --bg2:    #FFFFFF;
+  --bg3:    #EEF2FF;
+  --bg4:    #F1F5FD;
+  --navy:   #F8FAFF;
+  --navy2:  #EEF2FF;
+  --navy3:  #F1F5FD;
+  --dk:     #F8FAFF;
+  --dk2:    #EEF2FF;
+  --dk3:    #F1F5FD;
+  --blue:   #2563EB;
+  --blue2:  #3B82F6;
+  --blue3:  #1D4ED8;
+  --teal:   #2563EB;
+  --amber:  #E8920A;
+  --amber2: #FCD34D;
+  --gold:   #E8920A;
+  --gold2:  #F5B731;
+  --green:  #16a34a;
+  --green2: #4ade80;
+  --red:    #DC2626;
+  --w:      #0F172A;
+  --w80:    #374151;
+  --w55:    #6B7280;
+  --w50:    #6B7280;
+  --w25:    #9CA3AF;
+  --card:   rgba(37,99,235,0.04);
+  --cardb:  rgba(37,99,235,0.08);
+  --border: rgba(0,0,0,0.09);
+  --card-sh:0 4px 20px rgba(0,0,0,0.07),0 1px 4px rgba(0,0,0,0.04);
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Plus Jakarta Sans',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:#e8e8e4;overflow-x:hidden}
+body{font-family:var(--fb);background:var(--bg);overflow-x:hidden}
 
 /* ── PAGE SHELL ── */
 .page{width:850px;min-height:1100px;margin:0 auto 0;position:relative;overflow:hidden}
@@ -190,6 +214,269 @@ body{font-family:var(--fb);background:#e8e8e4;overflow-x:hidden}
 .concl-contact{margin-top:34px;position:relative;z-index:1}
 .concl-contact p{font-size:13px;color:rgba(255,255,255,0.48);margin-bottom:4px}
 .concl-contact strong{color:var(--w);font-size:15px}
+
+/* ── LIGHT THEME: COVER ── */
+.cover{background:linear-gradient(145deg,#0F1E38 0%,#1A3A8F 55%,#2563EB 100%) !important}
+.cv-grid{background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px) !important}
+.cv-logo{color:#fff !important}
+.cv-logo span{color:#FCD34D !important}
+.cv-badge{background:rgba(255,255,255,0.12) !important;border-color:rgba(255,255,255,0.25) !important;color:#fff !important}
+.cv-eyebrow{color:rgba(255,255,255,0.7) !important}
+.cv-title{color:#fff !important}
+.cv-title em,.cv-title-em{color:#FCD34D !important}
+.cv-sub{color:rgba(255,255,255,0.65) !important}
+.cv-desc{color:rgba(255,255,255,0.78) !important}
+.cv-pill{background:rgba(255,255,255,0.1) !important;border-color:rgba(255,255,255,0.22) !important;color:#fff !important}
+.cv-pill.am{background:rgba(245,183,49,0.15) !important;border-color:rgba(245,183,49,0.35) !important;color:#FCD34D !important}
+.cv-bottom{border-top-color:rgba(255,255,255,0.1) !important}
+.cv-by{color:rgba(255,255,255,0.55) !important}
+.cv-by strong{color:#fff !important}
+.cv-contact{color:rgba(255,255,255,0.55) !important}
+.cv-contact strong{color:#FCD34D !important}
+
+/* ── LIGHT THEME: BODY + BASE ── */
+body{background:var(--bg) !important;color:var(--w) !important}
+body::before{background-image:linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px) !important}
+
+/* ── LIGHT THEME: TOC ── */
+.toc-page{background:#fff !important}
+.toc-tag{color:var(--blue) !important}
+.toc-h{color:#0F172A !important}
+.toc-intro{color:#4B5563 !important}
+.toc-label{color:#0F172A !important}
+.toc-num{color:var(--blue) !important}
+.toc-item{border-bottom-color:#e5e7eb !important}
+
+/* ── LIGHT THEME: INTRO / TWO-COL PAGES ── */
+.intro-page{background:#fff !important}
+.intro-left{background:#F1F5FD !important}
+.intro-right{background:#fff !important}
+.ilabel{color:var(--blue) !important}
+.ih1{color:#0F172A !important}
+.ibody{color:#374151 !important}
+.ipull{background:rgba(37,99,235,0.06) !important;border-left-color:var(--blue) !important}
+.ipull p{color:#0F172A !important}
+.r-label{color:var(--blue) !important}
+.r-h2{color:#0F172A !important}
+.r-body{color:#374151 !important}
+.stat-box{background:#F1F5FD !important;border-color:rgba(37,99,235,0.15) !important}
+.stat-val{color:var(--blue) !important}
+.stat-lbl{color:#6B7280 !important}
+
+/* ── LIGHT THEME: DARK SECTION PAGES → LIGHT ── */
+.steps-page,.qualify-page,.programs-page,.road-page,.letters-page,
+.scenario-page,.sc-page,.mistakes-page,.exit-page,.switch-page,
+.numbers-page,.matrix-page,.progs-page,.dark-bg{
+  background:var(--bg3) !important
+}
+
+/* ── LIGHT THEME: WHITE/LIGHT PAGES ── */
+.what-page,.promise-page,.loans-page,.how-page,.compare-page,.voice-example{
+  background:#fff !important
+}
+
+/* ── LIGHT THEME: SECTION LABELS + HEADINGS ── */
+.pg-tag{color:var(--blue) !important}
+.pg-h1{color:#0F172A !important}
+.pg-sub{color:#374151 !important}
+.pg-tag-l{color:var(--blue) !important}
+.pg-h1-l{color:#0F172A !important}
+.pg-sub-l{color:#374151 !important}
+.wh-tag{color:var(--blue) !important}
+.wh-h1{color:#0F172A !important}
+.wh-intro{color:#374151 !important}
+h1,h2,h3{color:#0F172A}
+p{color:#374151}
+
+/* ── LIGHT THEME: CARDS ── */
+.sc-card,.prog-card,.req-card,.path-card,.how-card,
+.exit-card,.promise-card,.loan-card,.step-card,
+.mc,.story,.letter-row{
+  background:#fff !important;
+  border-color:rgba(0,0,0,0.09) !important;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06) !important;
+}
+/* keep dark cards with colored borders */
+.sc-card::before,.prog-card::before,.req-card::before,.path-card::before,
+.how-card::before,.exit-card::before,.promise-card::before,.loan-card::before,
+.exit-card::before,.mc::before,.story::before{opacity:1 !important}
+
+/* Card text */
+.sc-icon,.prog-icon,.req-icon,.path-icon,.how-icon,.ec-icon,.mc-icon,.story-icon,.pc-icon,.lc-icon{color:inherit}
+.sc-title,.prog-name,.req-title,.path-name,.how-title,.ec-title,.mc-title,.story-title,.pc-title,.lc-name{color:#0F172A !important}
+.sc-body,.prog-desc,.req-body,.path-desc,.how-body,.ec-body,.mc-body,.story-body,.pc-body,.lc-body{color:#4B5563 !important}
+.prog-tag,.path-who,.ec-tag,.lc-tag{color:var(--blue) !important}
+.letter-word{color:#0F172A !important}
+.letter-body{color:#374151 !important}
+.letter-highlight{color:var(--blue) !important}
+
+/* Numeric values in cards */
+.req-val,.how-stat,.tier-score,.istat-val,.hsc-num,.pstat-num{color:var(--blue) !important}
+.sc-val,.df-val{color:#374151 !important}
+.sc-val.blue,.df-val.blue,.sc-rval,.sc-result-val{color:var(--blue) !important}
+.sc-val.amber,.df-val.amber{color:var(--amber) !important}
+.sc-val.green,.df-val.green{color:var(--green) !important}
+.sc-val.red,.df-val.red{color:var(--red) !important}
+.sc-key,.df-key{color:#6B7280 !important}
+.sc-row{border-bottom-color:rgba(0,0,0,0.07) !important}
+.sc-d-key{color:#6B7280 !important}
+.sc-d-val{color:#0F172A !important}
+
+/* Step rows */
+.step-row{background:transparent !important}
+.step-num{color:var(--blue) !important;opacity:.7}
+.step-title{color:#0F172A !important}
+.step-body{color:#4B5563 !important}
+.step-badge{background:rgba(37,99,235,0.07) !important;border-color:rgba(37,99,235,0.2) !important;color:var(--blue) !important}
+.step-divider{background:rgba(37,99,235,0.15) !important}
+.road-step{border-bottom-color:rgba(0,0,0,0.07) !important}
+.road-title{color:#0F172A !important}
+.road-body{color:#4B5563 !important}
+.road-tip{background:rgba(37,99,235,0.07) !important;border-color:rgba(37,99,235,0.18) !important;color:var(--blue) !important}
+
+/* Formula box stays dark */
+.formula-box{background:#0F1E38 !important;border-color:rgba(37,99,235,0.2) !important}
+.formula-num{color:#fff !important}
+.formula-num span{color:rgba(255,255,255,0.55) !important}
+.formula-div,.formula-eq{color:var(--blue2) !important}
+.formula-result{color:var(--blue2) !important}
+.formula-result span{color:rgba(255,255,255,0.55) !important}
+.formula-label{color:var(--blue2) !important}
+
+/* BRRRR letters */
+.letter-big{color:var(--amber) !important}
+.letters-page .pg-h1{color:#0F172A !important}
+
+/* Deal flow box stays dark */
+.deal-flow{background:#0F1E38 !important}
+.df-label,.df-title{color:var(--blue2) !important}
+.df-row{border-bottom-color:rgba(255,255,255,0.06) !important}
+.df-key,.df-val{color:rgba(255,255,255,0.7) !important}
+.df-row.total .df-key{color:#fff !important}
+
+/* Key metrics */
+.key-metrics .km{background:#F1F5FD !important;border-color:rgba(37,99,235,0.15) !important}
+.km-val{color:var(--blue) !important}
+.km-val.green{color:var(--green) !important}
+.km-val.amber{color:var(--amber) !important}
+.km-lbl{color:#6B7280 !important}
+
+/* Tier boxes */
+.tier.green{background:rgba(22,163,74,0.06) !important;border-color:rgba(22,163,74,0.2) !important}
+.tier.blue{background:rgba(37,99,235,0.06) !important;border-color:rgba(37,99,235,0.2) !important}
+.tier.amber{background:rgba(232,146,10,0.06) !important;border-color:rgba(232,146,10,0.2) !important}
+.tier-label{color:#0F172A !important}
+.tier-body{color:#6B7280 !important}
+
+/* Section tags / badges */
+.section-tag,.stag,.pbadge,.step-pill{background:rgba(37,99,235,0.08) !important;border-color:rgba(37,99,235,0.2) !important;color:var(--blue) !important}
+.pbadge-blue{background:rgba(37,99,235,0.08) !important;border-color:rgba(37,99,235,0.2) !important;color:var(--blue) !important}
+.pbadge-amber{background:rgba(232,146,10,0.08) !important;border-color:rgba(232,146,10,0.2) !important;color:var(--amber) !important}
+.pbadge-green{background:rgba(22,163,74,0.08) !important;border-color:rgba(22,163,74,0.2) !important;color:var(--green) !important}
+
+/* Scenario page dark accent boxes */
+.sc-result{background:rgba(37,99,235,0.07) !important;border-color:rgba(37,99,235,0.2) !important}
+.sc-result-label{color:var(--blue) !important}
+.sc-result-val{color:var(--blue) !important}
+.sc-result.amber{background:rgba(232,146,10,0.07) !important;border-color:rgba(232,146,10,0.2) !important}
+.sc-result.amber .sc-result-label,.sc-result.amber .sc-result-val{color:var(--amber) !important}
+.sc-result.green{background:rgba(22,163,74,0.07) !important;border-color:rgba(22,163,74,0.2) !important}
+.sc-result.green .sc-result-label,.sc-result.green .sc-result-val{color:var(--green) !important}
+.sc-rlabel{color:var(--blue) !important}
+.sc-rval{color:var(--blue) !important}
+.sc-card.amber .sc-rlabel,.sc-card.amber .sc-rval{color:var(--amber) !important}
+.sc-card.green .sc-rlabel,.sc-card.green .sc-rval{color:var(--green) !important}
+
+/* Pull quotes */
+.pull-quote{background:#0F1E38 !important}
+.pq-text{color:#fff !important}
+.pq-attr{color:var(--blue2) !important}
+
+/* Comparison table */
+.compare-table{border-color:rgba(0,0,0,0.09) !important;box-shadow:0 4px 20px rgba(0,0,0,0.07) !important}
+.ct-header .ct-h:first-child{background:var(--bg3) !important;color:#6B7280 !important}
+.ct-h.rh{background:var(--blue) !important;color:#fff !important}
+.ct-h.bank{background:var(--bg4) !important;color:#9CA3AF !important}
+.ct-row:nth-child(even){background:#fff !important}
+.ct-row:nth-child(odd){background:var(--bg4) !important}
+.ct-label{color:#0F172A !important}
+.ct-rh{color:var(--green) !important;background:rgba(22,163,74,0.04) !important}
+.ct-bank{color:var(--red) !important}
+
+/* Prog matrix */
+.pm-header{background:#0F1E38 !important}
+.pm-row:nth-child(even){background:#f9fafb !important}
+.pm-row:nth-child(odd){background:#fff !important}
+.pm-name{color:#0F172A !important}
+.pm-sub{color:#6B7280 !important}
+.pm-cell{color:#374151 !important}
+.pm-cell.check{color:var(--green) !important}
+.pm-cell.x{color:var(--red) !important}
+.pm-cell.maybe{color:var(--amber) !important}
+
+/* Story cards */
+.story{background:#fff !important;border-color:rgba(0,0,0,0.09) !important}
+.story::before{background:var(--blue) !important}
+.story-title{color:#0F172A !important}
+.story-what{color:var(--blue) !important}
+.story-body{color:#374151 !important}
+.story-result{background:rgba(22,163,74,0.08) !important;border-color:rgba(22,163,74,0.25) !important;color:var(--green) !important}
+
+/* Trust bar */
+.trust-bar{background:var(--bg3) !important;border-color:rgba(0,0,0,0.07) !important}
+
+/* Timing / warning box */
+.timing-box{background:rgba(37,99,235,0.06) !important;border-color:rgba(37,99,235,0.2) !important}
+.tb-label{color:var(--blue) !important}
+.tb-body{color:#374151 !important}
+
+/* STR playbook specific */
+.prog-page.dark .pl,.prog-page.dark .pr{background:var(--bg3) !important}
+.prog-page.light .pl{background:#fff !important}
+.prog-page.light .pr{background:#F0FDF8 !important}
+.dark .ptag,.dark .pnum,.dark .pwhat,.dark .puses-title,.dark .ex-label{color:var(--blue) !important}
+.dark .ptitle{color:#0F172A !important}
+.dark .pdesc{color:#374151 !important}
+.dark .pdesc strong{color:#0F172A !important}
+.dark .puse-label{color:#0F172A !important}
+.dark .puse-body{color:#6B7280 !important}
+.dark .ex-box{background:rgba(37,99,235,0.05) !important;border-color:rgba(37,99,235,0.15) !important}
+.dark .ex-text{color:#0F172A !important}
+.light .ptag,.light .pwhat,.light .puses-title{color:var(--blue) !important}
+.light .ptitle{color:#0F172A !important}
+.sc-card,.sc-card.amber,.sc-card.green{background:#fff !important;border-color:rgba(0,0,0,0.09) !important}
+.sc-card-title{color:#0F172A !important}
+.sc-card-body{color:#6B7280 !important}
+.istat{background:rgba(37,99,235,0.05) !important;border-color:rgba(37,99,235,0.15) !important}
+.istat-val{color:var(--blue) !important}
+.istat-label{color:#6B7280 !important}
+
+/* Creative financing sections */
+.sect-left{background:var(--bg3) !important}
+.sect-right{background:#fff !important}
+.prog-left{background:var(--bg4) !important}
+.prog-right{background:#fff !important}
+.white-bg{background:#fff !important}
+[class*="page"]:not(.cover):not(.cta-page):not(.concl) h2{color:#0F172A !important}
+[class*="page"]:not(.cover):not(.cta-page):not(.concl) p:not(.cv-desc):not(.cv-by){color:#374151}
+
+/* Footer / doc footer */
+.doc-footer{background:var(--bg3) !important;border-top-color:rgba(0,0,0,0.08) !important}
+.doc-footer p,.doc-footer a,.doc-footer span{color:#6B7280 !important}
+
+/* CONCLUSION / CTA PAGE stays blue gradient */
+.concl,.cta-page,.conclusion-page{background:linear-gradient(145deg,#0F1E38 0%,#1A3A8F 55%,#2563EB 100%) !important}
+.concl::before,.cta-page::before{background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px) !important}
+.concl-logo,.cta-logo{color:#fff !important}
+.concl-logo span,.cta-logo span{color:#FCD34D !important}
+.concl-title,.cta-title{color:#fff !important}
+.concl-body,.cta-body{color:rgba(255,255,255,0.78) !important}
+.concl-cta,.cta-btn{background:#fff !important;color:var(--blue) !important;box-shadow:0 8px 32px rgba(0,0,0,0.2) !important}
+.concl-contact p,.cta-contact p{color:rgba(255,255,255,0.5) !important}
+.concl-contact strong,.cta-contact strong{color:#fff !important}
+.cal-box{background:rgba(255,255,255,0.1) !important;border-color:rgba(255,255,255,0.2) !important}
+.cal-box p{color:rgba(255,255,255,0.6) !important}
+.cal-box a{color:#FCD34D !important}
 </style>
 </head>
 <body>
@@ -776,7 +1063,7 @@ body{font-family:var(--fb);background:#e8e8e4;overflow-x:hidden}
   <div class="concl-contact">
     <p>Sean Davoodian · NMLS #1252107</p>
     <strong>(747) 308-1635 · hello@ratehero.com</strong>
-    <p style="margin-top:24px;font-size:11px;opacity:.4">Rate Hero Mortgage · NMLS #2822806 · Equal Housing Lender · Licensed in 30+ States<br>Not a commitment to lend. Programs subject to approval. Terms and conditions apply.</p>
+    <p style="margin-top:24px;font-size:11px;opacity:.4">Rate Hero · NMLS #2822806 · Equal Housing Lender · Licensed in 30+ States<br>Not a commitment to lend. Programs subject to approval. Terms and conditions apply.</p>
   </div>
 
   <!-- Wave decoration -->
