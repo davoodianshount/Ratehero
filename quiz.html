@@ -274,8 +274,25 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 52px
         <div class="result-tagline" id="r-tagline">Qualify on rental income — no personal income required</div>
         <div class="result-why" id="r-why"></div>
         <div class="result-features" id="r-features"></div>
-        <a href="../index.html" class="result-cta" onclick="sessionStorage.setItem('openFunnel','1');return true;" id="r-cta">Get My Rate Quote — No SSN Required →</a>
-        <div class="result-other">No commitment · Takes 2 minutes · <a href="../dscr-calculator.html">Try the DSCR calculator first</a></div>
+        <!-- Inline lead capture form -->
+        <div id="quiz-form" style="margin-top:4px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <input type="text" id="qf-first" placeholder="First Name" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:13px 16px;font-size:15px;color:#fff;font-family:var(--fb);outline:none;transition:border .2s;" onfocus="this.style.borderColor='rgba(37,99,235,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" required>
+            <input type="text" id="qf-last" placeholder="Last Name" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:13px 16px;font-size:15px;color:#fff;font-family:var(--fb);outline:none;transition:border .2s;" onfocus="this.style.borderColor='rgba(37,99,235,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+            <input type="email" id="qf-email" placeholder="Email Address" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:13px 16px;font-size:15px;color:#fff;font-family:var(--fb);outline:none;transition:border .2s;" onfocus="this.style.borderColor='rgba(37,99,235,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+            <input type="tel" id="qf-phone" placeholder="Phone Number" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:13px 16px;font-size:15px;color:#fff;font-family:var(--fb);outline:none;transition:border .2s;" onfocus="this.style.borderColor='rgba(37,99,235,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+          </div>
+          <button onclick="submitQuizLead()" class="result-cta" id="r-cta" style="border:none;cursor:pointer;width:100%;">Unlock My Full Rate Breakdown →</button>
+          <p style="margin-top:10px;text-align:center;font-size:12px;color:rgba(255,255,255,0.35);">🔒 No SSN · No credit pull · Never sold · <a href="../dscr-calculator.html" style="color:rgba(59,130,246,0.7);text-decoration:none;">Try the calculator first</a></p>
+        </div>
+        <!-- Success state (hidden until submitted) -->
+        <div id="quiz-success" style="display:none;text-align:center;padding:24px 0;">
+          <div style="font-size:36px;margin-bottom:12px;">✅</div>
+          <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;">You're a Hero.</div>
+          <div style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;">A Rate Hero advisor will reach out within <strong style="color:#fff;">1 business hour</strong> with your personalized rate options.</div>
+        </div>
       </div>
     </div>
     <div class="alt-programs" id="alt-wrap">
@@ -324,6 +341,18 @@ function back(step){
   document.getElementById('s'+(step-1)).classList.add('active');
   updateProgress(step-1);
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function submitQuizLead(){
+  var first = document.getElementById('qf-first').value.trim();
+  var email = document.getElementById('qf-email').value.trim();
+  var phone = document.getElementById('qf-phone').value.trim();
+  if(!first){document.getElementById('qf-first').focus();return;}
+  if(!email && !phone){document.getElementById('qf-email').focus();return;}
+  // Hide form, show success
+  document.getElementById('quiz-form').style.display='none';
+  document.getElementById('quiz-success').style.display='block';
+  // Could POST to webhook here — e.g. fetch('/api/lead', {method:'POST', body: JSON.stringify({first, email, phone, program: document.getElementById('r-prog').textContent, answers: ans})})
 }
 
 function showResult(){
