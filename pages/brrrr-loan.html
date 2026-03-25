@@ -135,6 +135,7 @@ footer{background:var(--navy);border-top:1px solid var(--bd)}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:#2563EB;color:#fff;padding:8px 16px;z-index:10001;font-weight:700;text-decoration:none;border-radius:0 0 6px 0;transition:top .2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 <nav style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;">
   <a href="../index.html" class="nlogo"><svg width="16" height="22" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;flex-shrink:0">
   <defs>
@@ -167,6 +168,7 @@ footer{background:var(--navy);border-top:1px solid var(--bd)}
   <div class="nright"><a href="../pages/about.html" style="color:rgba(255,255,255,0.65);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">About</a><div class="nphone">Call: <strong>(747) 308-1635</strong></div><a href="../index.html" class="nbtn" onclick="sessionStorage.setItem('openFunnel','1');return true;">Apply Now</a></div>
 </nav>
 
+<main id="main-content">
 <!-- HERO -->
 <section class="phero">
   <div class="phero-bg"></div><div class="phero-grid"></div>
@@ -438,6 +440,7 @@ footer{background:var(--navy);border-top:1px solid var(--bd)}
       </div>
     </div>
   </div>
+</main>
 </footer>
 
 <script>
