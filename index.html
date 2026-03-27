@@ -99,6 +99,8 @@ nav {
   font-size: 18px; font-weight: 700; cursor: pointer; text-decoration: none;
   display: inline-block; transition: all 0.2s;
 }
+.btn-hero { background: var(--blue); color: var(--white); border: none; padding: 18px 48px; border-radius: 12px; font-family: var(--font-b); font-size: 19px; font-weight: 700; cursor: pointer; transition: all 0.22s; letter-spacing: 0.01em; box-shadow: 0 8px 32px rgba(37,99,235,0.4); }
+.btn-hero:hover { background: var(--blue-bright); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,99,235,0.55); }
 .btn-nav:hover { background: var(--blue-bright); transform: translateY(-1px); }
 
 /* ─── HERO ─── */
@@ -425,8 +427,9 @@ footer { background: var(--navy); border-top: 1px solid var(--border); }
 @media (max-width: 960px) {
   nav, .funnel-nav { padding: 0 20px; }
   .nav-links, .nav-phone { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
+  .hero { grid-template-columns: 1fr; padding: 72px 20px 56px; gap: 40px; }
   .hero-right { display: none; }
+  .btn-hero { padding: 16px 36px; font-size: 17px; width: 100%; max-width: 360px; }
   .trust-bar { padding: 14px 20px; }
   .trust-inner { flex-wrap: wrap; gap: 12px; justify-content: center; }
   .trust-divider { display: none; }
@@ -442,7 +445,94 @@ footer { background: var(--navy); border-top: 1px solid var(--border); }
   .opt-grid, .opt-grid.three { grid-template-columns: 1fr 1fr; }
   .input-row { grid-template-columns: 1fr; }
   .back-btn { left: 12px; bottom: 80px; top: auto; transform: none; }
+  /* Situation grid — 2 col on tablet */
+  .situation-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Situation grid — 2 col on tablet */
+  .situation-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Case studies — 1 col on tablet */
+  .case-studies-grid { grid-template-columns: 1fr !important; }
+  /* Hard money banner — stack on mobile */
+  .hm-inner { flex-direction: column !important; text-align: center; gap: 14px !important; }
+  .situation-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+@media (max-width: 600px) {
+  .hero { padding: 56px 16px 48px; }
+  h1 { font-size: clamp(38px, 10vw, 62px) !important; }
+  .hero-sub { font-size: 16px !important; }
+  .btn-hero { padding: 15px 28px; font-size: 16px; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .opt-grid, .opt-grid.three { grid-template-columns: 1fr; }
+  .section { padding: 48px 16px; }
+  .funnel-body { padding: 24px 16px; }
+  .step h2 { font-size: clamp(22px, 6vw, 32px); }
+  /* Funnel form inputs full width */
+  .f-row { grid-template-columns: 1fr !important; }
+  /* Trust checks wrap cleanly */
+  .hero-trust-row { flex-direction: column; gap: 10px; align-items: center; }
+  /* Footer */
+  .footer-cols { grid-template-columns: 1fr; }
+  /* Sticky CTA smaller on mobile */
+  #stickyCTA { bottom: 16px; right: 16px; }
+  #stickyCTA button { padding: 12px 20px; font-size: 14px; }
+  /* Situation grid 1 col */
+  .situation-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Situation grid — 2 col on phone */
+  .situation-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Case studies 1 col */
+  .case-studies-grid { grid-template-columns: 1fr !important; }
+  /* Hard money banner stack */
+  .hm-inner { flex-direction: column !important; text-align: center !important; padding: 16px !important; }
+  /* Accordion */
+  .accordion-q { font-size: 15px; padding: 16px 14px; }
+}
+
+/* ─── SITUATION SELECTOR ─── */
+.situation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.sit-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: 14px;
+  padding: 22px 18px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  transition: all 0.22s;
+  font-family: var(--font-b);
+  position: relative;
+  overflow: hidden;
+}
+.sit-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-bright));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.sit-card:hover { background: rgba(37,99,235,0.12); border-color: rgba(37,99,235,0.5); transform: translateY(-3px); box-shadow: 0 10px 32px rgba(37,99,235,0.2); }
+.sit-card:hover::before { opacity: 1; }
+.sit-card--amber { border-color: rgba(245,158,11,0.25); }
+.sit-card--amber::before { background: linear-gradient(90deg, #F59E0B, #FCD34D); }
+.sit-card--amber:hover { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.5); box-shadow: 0 10px 32px rgba(245,158,11,0.15); }
+.sit-icon { font-size: 28px; line-height: 1; }
+.sit-title { font-size: 14px; font-weight: 800; color: var(--white); line-height: 1.2; }
+.sit-sub { font-size: 11px; color: var(--white-65); font-weight: 500;
+  .situation-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 </style>
 
 <meta property="og:type" content="website">
@@ -555,53 +645,24 @@ footer { background: var(--navy); border-top: 1px solid var(--border); }
     <div style="width:100%;max-width:780px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;">
       <div class="hero-badge">Strategic Financing &nbsp;·&nbsp; Zero Runaround &nbsp;·&nbsp; Lightning-Fast ⚡</div>
       <h1>Your Income.<br>Your Rules.<br><span>Our Rates.</span></h1>
-      <p class="hero-sub" style="text-align:center;max-width:620px;">Smart financing for homeowners, investors, and everything in between.</p>
-      <p style="font-size:13px;color:rgba(255,255,255,0.38);margin-bottom:20px;text-align:center;">Rates updated daily &middot; Lock yours in before they move</p>
+      <p class="hero-sub" style="text-align:center;max-width:560px;">For homeowners, investors, and everyone in between.</p>
 
+      <button onclick="openFunnel('purchase')" class="btn-hero" aria-label="Find My Ideal Loan - Start 60-second qualification" style="margin-bottom:14px;max-width:300px;">
+        Find My Ideal Loan &rarr;
+      </button>
+      <p style="font-size:12px;color:rgba(255,255,255,0.38);margin-bottom:28px;letter-spacing:.04em;">⚡ 60-Second Qualification</p>
 
-      <div style="display:inline-flex;align-items:center;gap:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 20px;font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:24px;flex-wrap:wrap;justify-content:center;gap:16px;">
-        <span style="display:flex;align-items:center;gap:5px"><span style="color:#3B82F6;font-weight:700">✓</span> No SSN required</span>
-        <span style="display:flex;align-items:center;gap:5px"><span style="color:#3B82F6;font-weight:700">✓</span> No credit pull</span>
-        <span style="display:flex;align-items:center;gap:5px"><span style="color:#3B82F6;font-weight:700">✓</span> Takes 2 minutes</span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:4px;" class="hero-trust-row">
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;">
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#3B82F6;font-weight:700;font-size:15px;">✓</span> No SSN Required</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#3B82F6;font-weight:700;font-size:15px;">✓</span> No Credit Pull</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;">
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#3B82F6;font-weight:700;font-size:15px;">✓</span> No Tax Returns Required</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#3B82F6;font-weight:700;font-size:15px;">✓</span> LLC &amp; Investor Friendly</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#3B82F6;font-weight:700;font-size:15px;">✓</span> 21-Day Closings Available</span>
+        </div>
       </div>
-
-      <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,0.32);margin-bottom:12px;text-align:center;">Select your program to get started</p>
-
-      <p style="font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;">What best describes your situation?</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;">
-        <button onclick="openFunnel('dscr')" style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:12px;padding:16px 12px;cursor:pointer;text-align:left;transition:all .2s;font-family:var(--font-b);" onmouseover="this.style.background='rgba(37,99,235,0.18)';this.style.borderColor='rgba(37,99,235,0.5)'" onmouseout="this.style.background='rgba(37,99,235,0.08)';this.style.borderColor='rgba(37,99,235,0.25)'">
-          <div style="font-size:20px;margin-bottom:5px;">🏢</div>
-          <div style="font-size:13px;font-weight:800;color:var(--white);margin-bottom:2px;">Real Estate Investor</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);">DSCR · No income docs</div>
-        </button>
-        <button onclick="openFunnel('nonqm')" style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:12px;padding:16px 12px;cursor:pointer;text-align:left;transition:all .2s;font-family:var(--font-b);" onmouseover="this.style.background='rgba(37,99,235,0.18)';this.style.borderColor='rgba(37,99,235,0.5)'" onmouseout="this.style.background='rgba(37,99,235,0.08)';this.style.borderColor='rgba(37,99,235,0.25)'">
-          <div style="font-size:20px;margin-bottom:5px;">💼</div>
-          <div style="font-size:13px;font-weight:800;color:var(--white);margin-bottom:2px;">Self-Employed</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);">Bank stmt · P&L · 1099</div>
-        </button>
-        <button onclick="openFunnel('conventional')" style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:12px;padding:16px 12px;cursor:pointer;text-align:left;transition:all .2s;font-family:var(--font-b);" onmouseover="this.style.background='rgba(37,99,235,0.18)';this.style.borderColor='rgba(37,99,235,0.5)'" onmouseout="this.style.background='rgba(37,99,235,0.08)';this.style.borderColor='rgba(37,99,235,0.25)'">
-          <div style="font-size:20px;margin-bottom:5px;">🏠</div>
-          <div style="font-size:13px;font-weight:800;color:var(--white);margin-bottom:2px;">First-Time Buyer</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);">Conv · FHA · VA</div>
-        </button>
-        <button onclick="openFunnel('purchase')" style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:12px;padding:16px 12px;cursor:pointer;text-align:left;transition:all .2s;font-family:var(--font-b);" onmouseover="this.style.background='rgba(37,99,235,0.18)';this.style.borderColor='rgba(37,99,235,0.5)'" onmouseout="this.style.background='rgba(37,99,235,0.08)';this.style.borderColor='rgba(37,99,235,0.25)'">
-          <div style="font-size:20px;margin-bottom:5px;">💰</div>
-          <div style="font-size:13px;font-weight:800;color:var(--white);margin-bottom:2px;">Cash-Out / HELOC</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);">Tap equity · Up to 90% LTV</div>
-        </button>
-        <button onclick="openFunnel('brrrr')" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:16px 12px;cursor:pointer;text-align:left;transition:all .2s;font-family:var(--font-b);" onmouseover="this.style.background='rgba(245,158,11,0.18)';this.style.borderColor='rgba(245,158,11,0.5)'" onmouseout="this.style.background='rgba(245,158,11,0.08)';this.style.borderColor='rgba(245,158,11,0.25)'">
-          <div style="font-size:20px;margin-bottom:5px;">🔥</div>
-          <div style="font-size:13px;font-weight:800;color:var(--white);margin-bottom:2px;">Stuck in Hard Money</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);">Exit fast · 21-day refi</div>
-        </button>
-        <button onclick="openFunnel('dscr')" style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);border-radius:12px;padding:16px 12px;cursor:pointer;text-align:left;transition:all .2s;font-family:var(--font-b);" onmouseover="this.style.background='rgba(37,99,235,0.18)';this.style.borderColor='rgba(37,99,235,0.5)'" onmouseout="this.style.background='rgba(37,99,235,0.08)';this.style.borderColor='rgba(37,99,235,0.25)'">
-          <div style="font-size:20px;margin-bottom:5px;">📈</div>
-          <div style="font-size:13px;font-weight:800;color:var(--white);margin-bottom:2px;">Portfolio Investor</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.45);">10+ doors · LLC lending</div>
-        </button>
-      </div>
-      <p style="font-size:14px;color:rgba(255,255,255,0.38);margin-top:22px;margin-bottom:10px;letter-spacing:.01em;">Not sure which program?</p>
-      <a href="quiz.html" style="display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.35);color:#3B82F6;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;" onmouseover="this.style.background='rgba(37,99,235,0.2)'" onmouseout="this.style.background='rgba(37,99,235,0.1)'">⚡ Take the 60-Second Quiz &rarr;</a>
     </div>
 
 
@@ -625,7 +686,7 @@ footer { background: var(--navy); border-top: 1px solid var(--border); }
 
 <!-- HARD MONEY BANNER -->
 <div style="background:linear-gradient(90deg,#7C2D12,#B45309);border-top:1px solid rgba(245,158,11,0.3);border-bottom:1px solid rgba(245,158,11,0.3);padding:18px 52px;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;" class="hm-inner">
     <div style="display:flex;align-items:center;gap:14px;">
       <span style="font-size:24px;">🔥</span>
       <div>
@@ -634,6 +695,48 @@ footer { background: var(--navy); border-top: 1px solid var(--border); }
       </div>
     </div>
     <button onclick="openFunnel('brrrr')" style="background:#F59E0B;color:#1a1a1a;border:none;padding:12px 28px;border-radius:10px;font-weight:800;font-size:14px;cursor:pointer;white-space:nowrap;transition:all .2s;" onmouseover="this.style.background='#FCD34D'" onmouseout="this.style.background='#F59E0B'">Get Out of Hard Money →</button>
+  </div>
+</div>
+
+<!-- SITUATION SELECTOR -->
+<div style="background:var(--navy-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section" style="text-align:center;">
+    <div class="section-tag" style="margin:0 auto 18px;"><span class="dot"></span>Find Your Path</div>
+    <h2 style="margin-bottom:10px;">What Best Describes <span>Your Situation?</span></h2>
+    <p class="section-sub" style="margin-bottom:36px;">Select your situation and we'll match you to the right program instantly.</p>
+    <div class="situation-grid">
+      <button onclick="openFunnel('dscr')" class="sit-card" aria-label="Real Estate Investor">
+        <span class="sit-icon">🏢</span>
+        <span class="sit-title">Real Estate Investor</span>
+        <span class="sit-sub">DSCR · No income docs required</span>
+      </button>
+      <button onclick="openFunnel('nonqm')" class="sit-card" aria-label="Self-Employed">
+        <span class="sit-icon">💼</span>
+        <span class="sit-title">Self-Employed</span>
+        <span class="sit-sub">Bank statement · P&L · 1099</span>
+      </button>
+      <button onclick="openFunnel('conventional')" class="sit-card" aria-label="First-Time Buyer">
+        <span class="sit-icon">🏠</span>
+        <span class="sit-title">First-Time Buyer</span>
+        <span class="sit-sub">Conventional · FHA · VA</span>
+      </button>
+      <button onclick="openFunnel('purchase')" class="sit-card" aria-label="Cash-Out or HELOC">
+        <span class="sit-icon">💰</span>
+        <span class="sit-title">Cash-Out / HELOC</span>
+        <span class="sit-sub">Tap equity · Up to 90% LTV</span>
+      </button>
+      <button onclick="openFunnel('brrrr')" class="sit-card sit-card--amber" aria-label="Stuck in Hard Money">
+        <span class="sit-icon">🔥</span>
+        <span class="sit-title">Stuck in Hard Money</span>
+        <span class="sit-sub">Exit fast · 21-day refi</span>
+      </button>
+      <button onclick="openFunnel('dscr')" class="sit-card" aria-label="Portfolio Investor">
+        <span class="sit-icon">📈</span>
+        <span class="sit-title">Portfolio Investor</span>
+        <span class="sit-sub">10+ doors · LLC lending</span>
+      </button>
+    </div>
+    <p style="font-size:13px;color:var(--white-35);margin-top:28px;">Not sure? <a href="quiz.html" style="color:var(--blue-bright);text-decoration:none;font-weight:600;">Take the 60-second quiz →</a></p>
   </div>
 </div>
 
@@ -826,7 +929,7 @@ footer { background: var(--navy); border-top: 1px solid var(--border); }
     <div class="section-tag"><span class="dot"></span>Real Deal Math</div>
     <h2>Case Studies. <span>Real Numbers.</span></h2>
     <p class="section-sub">How Rate Hero structures deals for investors, self-employed borrowers, and homebuyers — from first call to close.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;" class="case-studies-grid">
       <div style="background:var(--navy-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .25s;" onmouseover="this.style.borderColor='rgba(37,99,235,0.4)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='translateY(0)'">
         <div style="background:linear-gradient(135deg,rgba(37,99,235,0.15),rgba(37,99,235,0.05));padding:24px 24px 16px;border-bottom:1px solid var(--border);">
           <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--teal);margin-bottom:8px;">DSCR Purchase · Texas</div>
