@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First-Time Homebuyer Road Map — Rate Hero</title>
+<meta name="description" content="From pre-approval to closing — the complete first-time homebuyer road map. Every step, every deadline, and everything nobody tells you. Rate Hero NMLS #2822806.">
+<link rel="canonical" href="https://goratehero.com/resources/first-time-homebuyer-roadmap.html">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:     #F8FAFF;
+  --bg2:    #FFFFFF;
+  --bg3:    #EEF2FF;
+  --bg4:    #F1F5FD;
+  --navy:   #080E1A;
+  --blue:   #3B82F6;
+  --blue2:  #3B82F6;
+  --blue3:  #1D4ED8;
+  --amber:  #E8920A;
+  --amber2: #FCD34D;
+  --green:  #16a34a;
+  --text:   #0F172A;
+  --text2:  #374151;
+  --text3:  #6B7280;
+  --border: rgba(0,0,0,0.08);
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Plus Jakarta Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(37,99,235,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.035) 1px,transparent 1px);background-size:52px 52px}
+
+/* ── PAGE SHELL ── */
+.page{width:850px;min-height:1100px;margin:0 auto;position:relative;overflow:hidden}
+@media screen{body{padding:40px 20px}.page{box-shadow:0 24px 80px rgba(0,0,0,0.1);margin-bottom:32px}}
+@media print{body{background:#fff}.page{width:100%;margin:0;page-break-after:always;box-shadow:none}@page{size:letter;margin:0}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+
+/* ── COVER ── */
+.cover{background:linear-gradient(145deg,#080E1A 0%,#0F1E38 40%,#1a3a8f 75%,#2563EB 100%);min-height:1100px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.cv-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:55px 55px}
+.cv-glow1{position:absolute;top:-120px;right:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.25),transparent 70%)}
+.cv-glow2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.1),transparent 70%)}
+.cv-top{padding:52px 60px 0;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.cv-logo{font-family:var(--fd);font-size:36px;letter-spacing:6px;color:#fff}
+.cv-logo span{color:#FCD34D}
+.cv-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:6px 16px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.cv-hero{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 60px 40px;position:relative;z-index:2}
+.cv-eyebrow{font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.cv-step-count{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,0.2);border:1px solid rgba(37,99,235,0.4);border-radius:99px;padding:6px 14px;margin-bottom:20px}
+.cv-step-count span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue2)}
+.cv-title{font-family:var(--fd);font-size:80px;letter-spacing:2px;color:#fff;line-height:.88;margin-bottom:12px}
+.cv-title em{color:#FCD34D;font-style:normal}
+.cv-subtitle{font-family:var(--fd);font-size:26px;letter-spacing:3px;color:rgba(255,255,255,0.5);margin-bottom:28px}
+.cv-desc{font-size:17px;color:rgba(255,255,255,0.7);line-height:1.8;max-width:500px;margin-bottom:36px}
+.cv-pills{display:flex;gap:10px;flex-wrap:wrap}
+.cv-pill{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);padding:6px 14px;border-radius:99px;font-size:12px;font-weight:600}
+.cv-pill.gold{background:rgba(245,183,49,0.12);border-color:rgba(245,183,49,0.3);color:#FCD34D}
+.cv-bottom{padding:28px 60px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;position:relative;z-index:2}
+.cv-by{font-size:13px;color:rgba(255,255,255,0.45)}
+.cv-by strong{color:#fff;font-weight:700}
+.cv-contact{text-align:right;font-size:12px;color:rgba(255,255,255,0.45)}
+.cv-contact strong{color:#FCD34D;font-size:13px}
+
+/* ── STEPS PAGES ── */
+.step-page{background:#fff;min-height:1100px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.step-page.alt{background:var(--bg4)}
+
+/* Step number accent bar */
+.step-accent{height:4px;background:linear-gradient(90deg,var(--blue),var(--blue2));width:100%}
+.step-accent.amber{background:linear-gradient(90deg,var(--amber),var(--amber2))}
+.step-accent.green{background:linear-gradient(90deg,var(--green),#4ade80)}
+
+.step-header{padding:52px 60px 36px;position:relative;}
+.step-num-bg{position:absolute;top:30px;right:50px;font-family:var(--fd);font-size:160px;color:rgba(37,99,235,0.05);line-height:1;pointer-events:none;user-select:none}
+.step-num-bg.amber{color:rgba(232,146,10,0.06)}
+.step-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);color:var(--blue);padding:5px 14px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.step-pill.amber{background:rgba(232,146,10,0.08);border-color:rgba(232,146,10,0.2);color:var(--amber)}
+.step-pill.green{background:rgba(22,163,74,0.08);border-color:rgba(22,163,74,0.2);color:var(--green)}
+.step-title{font-family:var(--fd);font-size:52px;letter-spacing:1.5px;color:var(--text);line-height:.92;margin-bottom:12px}
+.step-sub{font-size:16px;color:var(--text3);line-height:1.7;max-width:580px}
+
+.step-body{padding:0 60px 52px;flex:1;display:flex;flex-direction:column;gap:24px}
+
+/* Content cards */
+.content-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px 28px;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.content-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue)}
+.content-card.amber::before{background:var(--amber)}
+.content-card.green::before{background:var(--green)}
+.content-card.red::before{background:#DC2626}
+.cc-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.content-card.amber .cc-label{color:var(--amber)}
+.content-card.green .cc-label{color:var(--green)}
+.content-card.red .cc-label{color:#DC2626}
+.cc-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px}
+.cc-body{font-size:14px;color:var(--text2);line-height:1.8}
+.cc-body strong{color:var(--text);font-weight:700}
+
+/* Two-col layout for cards */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* Checklist */
+.checklist{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.check-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--text2);line-height:1.6}
+.check-icon{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px}
+.check-icon.amber{background:var(--amber)}
+.check-icon.green{background:var(--green)}
+.check-icon.red{background:#DC2626}
+
+/* Warning box */
+.warn-box{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);border-radius:12px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start}
+.warn-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.warn-body{font-size:14px;color:var(--text2);line-height:1.7}
+.warn-body strong{color:#DC2626;font-weight:700}
+
+/* Tip box */
+.tip-box{background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.2);border-radius:12px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start}
+.tip-body{font-size:14px;color:var(--text2);line-height:1.7}
+.tip-body strong{color:var(--green);font-weight:700}
+
+/* Data row */
+.data-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px}
+.data-row:last-child{border:none}
+.dr-key{color:var(--text3)}
+.dr-val{font-weight:700;color:var(--text)}
+.dr-val.blue{color:var(--blue)}
+.dr-val.amber{color:var(--amber)}
+.dr-val.green{color:var(--green)}
+.dr-val.red{color:#DC2626}
+
+/* Pull quote */
+.pull-quote{background:var(--navy);border-radius:14px;padding:24px 28px;position:relative;overflow:hidden}
+.pull-quote::before{content:'\201C';position:absolute;top:-10px;left:16px;font-family:var(--fd);font-size:80px;color:rgba(37,99,235,0.2);line-height:1}
+.pq-text{font-size:17px;font-weight:700;color:#fff;font-style:italic;line-height:1.6;position:relative;z-index:1}
+.pq-attr{font-size:12px;color:rgba(255,255,255,0.45);margin-top:10px;position:relative;z-index:1}
+
+/* Stat inline */
+.stat-inline{display:flex;gap:16px;flex-wrap:wrap}
+.si-box{background:var(--bg3);border:1px solid rgba(37,99,235,0.12);border-radius:12px;padding:16px 18px;text-align:center;flex:1;min-width:100px}
+.si-val{font-family:var(--fd);font-size:32px;color:var(--blue);line-height:1;margin-bottom:3px}
+.si-val.amber{color:var(--amber)}
+.si-val.red{color:#DC2626}
+.si-lbl{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;line-height:1.3}
+
+/* Timeline visual */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.tl-item:last-child{border:none}
+.tl-dot{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;margin-top:2px}
+.tl-dot.amber{background:var(--amber)}
+.tl-dot.green{background:var(--green)}
+.tl-content{}
+.tl-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px}
+.tl-body{font-size:13px;color:var(--text3);line-height:1.65}
+
+/* CONCLUSION */
+.concl-page{background:linear-gradient(145deg,#080E1A 0%,#0F1E38 45%,#1a3a8f 75%,#2563EB 100%);min-height:1100px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 70px;position:relative;overflow:hidden}
+.concl-page::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:55px 55px}
+.concl-logo{font-family:var(--fd);font-size:44px;letter-spacing:8px;color:#fff;position:relative;z-index:1;margin-bottom:8px}
+.concl-logo span{color:#FCD34D}
+.concl-eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.4);position:relative;z-index:1;margin-bottom:36px}
+.concl-title{font-family:var(--fd);font-size:64px;letter-spacing:2px;color:#fff;line-height:.9;position:relative;z-index:1;margin-bottom:20px}
+.concl-body{font-size:17px;color:rgba(255,255,255,0.75);line-height:1.82;max-width:520px;position:relative;z-index:1;margin-bottom:40px}
+.concl-cta{background:#fff;color:var(--blue);padding:17px 44px;border-radius:12px;font-size:16px;font-weight:800;text-decoration:none;position:relative;z-index:1;display:inline-block;box-shadow:0 8px 32px rgba(0,0,0,0.25)}
+.concl-contact{margin-top:36px;position:relative;z-index:1}
+.concl-contact p{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:5px}
+.concl-contact strong{color:#fff;font-size:15px}
+.nobody-tells{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:28px 32px;max-width:600px;margin:0 auto 40px;position:relative;z-index:1;text-align:left}
+.nt-title{font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#FCD34D;margin-bottom:16px}
+.nt-item{display:flex;gap:10px;margin-bottom:12px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.65}
+.nt-item:last-child{margin:0}
+.nt-icon{flex-shrink:0;color:#FCD34D;font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ COVER -->
+<div class="page cover">
+  <div class="cv-grid"></div>
+  <div class="cv-glow1"></div>
+  <div class="cv-glow2"></div>
+  <div class="cv-top">
+    <div class="cv-logo">RATE <span>HERO</span></div>
+    <div class="cv-badge">🏠 First-Time Buyer Guide</div>
+  </div>
+  <div class="cv-hero">
+    <div class="cv-eyebrow">From Pre-Approval to Keys in Hand</div>
+    <div class="cv-step-count"><span>7 Steps · Complete Road Map</span></div>
+    <div class="cv-title">FIRST-TIME<br>HOMEBUYER<br><em>ROAD MAP.</em></div>
+    <div class="cv-subtitle">START TO FINISH</div>
+    <div class="cv-desc">Buying your first home is overwhelming mostly because nobody tells you the order of operations. Here's the full picture — every step, every deadline, and everything nobody tells you.</div>
+    <div class="cv-pills">
+      <div class="cv-pill">📊 Pre-Approval</div>
+      <div class="cv-pill">🔍 Under Contract</div>
+      <div class="cv-pill">📋 Underwriting</div>
+      <div class="cv-pill gold">🔑 Closing Day</div>
+      <div class="cv-pill">⚠️ What Nobody Tells You</div>
+    </div>
+  </div>
+  <div class="cv-bottom">
+    <div class="cv-by">Prepared by <strong>Sean Davoodian</strong> · NMLS #1252107</div>
+    <div class="cv-contact"><div>(747) 308-1635</div><strong>hello@goratehero.com</strong></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ STEP 1 -->
+<div class="page step-page">
+  <div class="step-accent"></div>
+  <div class="step-header">
+    <div class="step-num-bg">01</div>
+    <div class="step-pill">Step 01 · Before You Talk to Anyone</div>
+    <div class="step-title">GET YOUR<br>FINANCES<br>IN ORDER.</div>
+    <div class="step-sub">Most buyers skip this and pay for it later. Do this before you apply for a single thing.</div>
+  </div>
+  <div class="step-body">
+    <div class="two-col">
+      <div class="content-card">
+        <div class="cc-label">Credit</div>
+        <div class="cc-title">Pull Your Full Credit Report</div>
+        <div class="cc-body">Check all three bureaus — Equifax, Experian, TransUnion. Dispute any errors <strong>before</strong> you apply. This takes time and can take weeks to resolve. Don't wait until you're under contract.</div>
+      </div>
+      <div class="content-card amber">
+        <div class="cc-label">Debt Ratio</div>
+        <div class="cc-title">Calculate Your DTI</div>
+        <div class="cc-body">Add up all monthly debt payments ÷ gross monthly income. Most lenders want this <strong>under 43%</strong>. Lower is always better. Know your number before your lender tells you.</div>
+      </div>
+    </div>
+    <div class="content-card green">
+      <div class="cc-label">Cash Position</div>
+      <div class="cc-title">Know Your Real Number — Down Payment + Closing Costs</div>
+      <div class="cc-body">This is where first-time buyers get blindsided. Your down payment is not your total cash needed.<br>Closing costs typically run <strong>2–5% of the loan amount</strong> on top of your down payment — and they're due at the closing table.</div>
+      <div class="stat-inline" style="margin-top:16px">
+        <div class="si-box"><div class="si-val">3.5%</div><div class="si-lbl">FHA min down</div></div>
+        <div class="si-box"><div class="si-val">5%</div><div class="si-lbl">Conv min down</div></div>
+        <div class="si-box"><div class="si-val amber">2–5%</div><div class="si-lbl">Closing costs</div></div>
+        <div class="si-box"><div class="si-val">0%</div><div class="si-lbl">VA down payment</div></div>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="warn-icon">⚠️</div>
+      <div class="warn-body"><strong>The closing cost blind spot:</strong> A buyer purchasing at $400,000 with 5% down needs $20,000 for the down payment — plus up to $20,000 more in closing costs. Budget for both before you start shopping.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ STEP 2 -->
+<div class="page step-page alt">
+  <div class="step-accent amber"></div>
+  <div class="step-header">
+    <div class="step-num-bg amber">02</div>
+    <div class="step-pill amber">Step 02 · Financing</div>
+    <div class="step-title">GET PRE-<br>APPROVED,<br>NOT PRE-QUAL'D.</div>
+    <div class="step-sub">These are not the same thing. One gets you into homes. The other is just a rough guess.</div>
+  </div>
+  <div class="step-body">
+    <div class="two-col">
+      <div class="content-card red">
+        <div class="cc-label">Avoid This</div>
+        <div class="cc-title">Pre-Qualification</div>
+        <div class="cc-body">A rough estimate based on what you tell the lender — no credit pull, no verification. Sellers and agents know it means nothing. <strong>Don't waste time on pre-qual.</strong></div>
+      </div>
+      <div class="content-card green">
+        <div class="cc-label">Do This</div>
+        <div class="cc-title">Pre-Approval</div>
+        <div class="cc-body">Your credit is pulled, income is verified, assets are reviewed. You receive a pre-approval letter with a specific loan amount. <strong>This is what sellers want to see.</strong></div>
+      </div>
+    </div>
+    <div class="content-card">
+      <div class="cc-label">Rate Shopping Strategy</div>
+      <div class="cc-title">Shop 2–3 Lenders Without Hurting Your Credit</div>
+      <div class="cc-body">Multiple mortgage inquiries within a <strong>45-day window count as a single hard pull</strong> on your credit report. This is a federal rule (FICO groups mortgage inquiries). You can — and should — shop around.</div>
+      <div class="checklist" style="margin-top:16px">
+        <div class="check-item"><div class="check-icon">1</div>Apply to 2–3 lenders within the same 45-day window</div>
+        <div class="check-item"><div class="check-icon">2</div>Compare Loan Estimates on the same loan type and amount</div>
+        <div class="check-item"><div class="check-icon">3</div>Look at APR, not just rate — it includes fees</div>
+        <div class="check-item"><div class="check-icon">4</div>Choose the lender with the best combination of rate + speed</div>
+      </div>
+    </div>
+    <div class="tip-box">
+      <div class="warn-icon">💡</div>
+      <div class="tip-body"><strong>Rate Hero advantage:</strong> Our average close is 21 days. When you're competing against multiple offers, a faster close is a real edge — sellers care about certainty, not just price.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ STEP 3 -->
+<div class="page step-page">
+  <div class="step-accent green"></div>
+  <div class="step-header">
+    <div class="step-num-bg">03</div>
+    <div class="step-pill green">Step 03 · House Hunting</div>
+    <div class="step-title">FIND AN AGENT.<br>START<br>SHOPPING.</div>
+    <div class="step-sub">Your pre-approval is your ceiling — but don't buy at your ceiling.</div>
+  </div>
+  <div class="step-body">
+    <div class="content-card">
+      <div class="cc-label">The Real Monthly Cost</div>
+      <div class="cc-title">Your Lender's Number Is Just the Start</div>
+      <div class="cc-body">The payment your lender quotes is principal + interest only. Your actual monthly cost includes four more expenses:</div>
+      <div style="margin-top:14px">
+        <div class="data-row"><div class="dr-key">Principal + Interest</div><div class="dr-val blue">Quoted by lender</div></div>
+        <div class="data-row"><div class="dr-key">Property Taxes</div><div class="dr-val amber">Varies by county — often 1–2% of value/year</div></div>
+        <div class="data-row"><div class="dr-key">Homeowner's Insurance</div><div class="dr-val">~$100–300/month typical</div></div>
+        <div class="data-row"><div class="dr-key">HOA Dues (if applicable)</div><div class="dr-val">$0 to $800+/month</div></div>
+        <div class="data-row"><div class="dr-key">PMI (if <20% down)</div><div class="dr-val red">0.5–1.5% of loan/year</div></div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="content-card amber">
+        <div class="cc-label">Choose Your Agent Carefully</div>
+        <div class="cc-title">Not All Agents Know First-Time Buyers</div>
+        <div class="cc-body">Ask specifically about their first-time buyer experience. A good agent explains the process, sets realistic expectations, and knows how to write a strong offer — not just show houses.</div>
+      </div>
+      <div class="content-card">
+        <div class="cc-label">Making an Offer</div>
+        <div class="cc-title">Your Agent Will Guide You Through This</div>
+        <div class="cc-body">The offer includes price, earnest money deposit, contingencies (inspection, financing, appraisal), and a proposed closing date. Your pre-approval letter accompanies every offer.</div>
+      </div>
+    </div>
+    <div class="pull-quote">
+      <div class="pq-text">"Don't max out your pre-approval. Leave room for the taxes, insurance, HOA, and that dishwasher that breaks three weeks after you move in."</div>
+      <div class="pq-attr">— Practical homebuying advice that almost never shows up in the glossy guides</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ STEP 4 -->
+<div class="page step-page alt">
+  <div class="step-accent amber"></div>
+  <div class="step-header">
+    <div class="step-num-bg amber">04</div>
+    <div class="step-pill amber">Step 04 · Under Contract</div>
+    <div class="step-title">OFFER ACCEPTED.<br>NOW THE<br>CLOCK STARTS.</div>
+    <div class="step-sub">Once your offer is accepted, you have deadlines. Miss them and you could lose your earnest money.</div>
+  </div>
+  <div class="step-body">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-content">
+          <div class="tl-title">Inspection Contingency (typically 7–10 days)</div>
+          <div class="tl-body">Hire a licensed inspector. They'll review structure, roof, systems, plumbing, electrical. The report is yours — use it to negotiate repairs or credits, or walk away if the issues are serious.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber">2</div>
+        <div class="tl-content">
+          <div class="tl-title">Formal Loan Application + Rate Lock</div>
+          <div class="tl-body">Go back to your lender immediately to formally apply. This is when you decide to lock your rate or float. Rate locks typically last 30–60 days — make sure it covers your closing date.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-content">
+          <div class="tl-title">Appraisal (ordered by lender, typically 1–2 weeks)</div>
+          <div class="tl-body">Your lender orders this — you can't choose the appraiser. If the appraisal comes in below purchase price, you have options: negotiate with the seller, make up the difference in cash, or walk away.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot green">4</div>
+        <div class="tl-content">
+          <div class="tl-title">Title Search + Homeowner's Insurance</div>
+          <div class="tl-body">Title company confirms clear ownership. Shop for homeowner's insurance now — you'll need a binder before closing. Don't wait until the week before.</div>
+        </div>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="warn-icon">⚠️</div>
+      <div class="warn-body"><strong>Don't waive your inspection contingency.</strong> In competitive markets, buyers feel pressure to do this. Understand what you're giving up — you lose the right to negotiate based on inspection findings or back out without losing your earnest money.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ STEP 5 -->
+<div class="page step-page">
+  <div class="step-accent"></div>
+  <div class="step-header">
+    <div class="step-num-bg">05</div>
+    <div class="step-pill">Step 05 · Financing Review</div>
+    <div class="step-title">UNDERWRITING.<br>IT FEELS LIKE<br>NOTHING. IT'S NOT.</div>
+    <div class="step-sub">The underwriter is reviewing everything. This is the part where your behavior matters most.</div>
+  </div>
+  <div class="step-body">
+    <div class="content-card">
+      <div class="cc-label">What Underwriting Is</div>
+      <div class="cc-title">Your Entire Financial Picture Under a Microscope</div>
+      <div class="cc-body">The underwriter independently verifies everything your loan officer submitted — pay stubs, tax returns, bank statements, employment, assets. They're looking for anything that doesn't add up.</div>
+    </div>
+    <div class="two-col">
+      <div class="content-card red">
+        <div class="cc-label">🚫 DO NOT During Underwriting</div>
+        <div class="cc-title">These Can Kill Your Loan</div>
+        <div class="checklist">
+          <div class="check-item"><div class="check-icon red">✗</div>Make large purchases (car, furniture, appliances)</div>
+          <div class="check-item"><div class="check-icon red">✗</div>Open new credit cards or lines of credit</div>
+          <div class="check-item"><div class="check-icon red">✗</div>Change jobs or become self-employed</div>
+          <div class="check-item"><div class="check-icon red">✗</div>Co-sign on anyone else's loan</div>
+          <div class="check-item"><div class="check-icon red">✗</div>Move large sums of money without explanation</div>
+        </div>
+      </div>
+      <div class="content-card green">
+        <div class="cc-label">✓ DO During Underwriting</div>
+        <div class="cc-title">Stay the Course</div>
+        <div class="checklist">
+          <div class="check-item"><div class="check-icon green">✓</div>Respond to document requests immediately</div>
+          <div class="check-item"><div class="check-icon green">✓</div>Keep all accounts exactly as they are</div>
+          <div class="check-item"><div class="check-icon green">✓</div>Stay employed at your current job</div>
+          <div class="check-item"><div class="check-icon green">✓</div>Save all financial paperwork</div>
+          <div class="check-item"><div class="check-icon green">✓</div>Answer your phone — lenders need quick replies</div>
+        </div>
+      </div>
+    </div>
+    <div class="tip-box">
+      <div class="warn-icon">💡</div>
+      <div class="tip-body">Underwriters issue <strong>"conditions"</strong> — additional items needed before final approval. Responding within hours instead of days can shave a week off your closing timeline. Be responsive.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ STEP 6 -->
+<div class="page step-page alt">
+  <div class="step-accent green"></div>
+  <div class="step-header">
+    <div class="step-num-bg">06</div>
+    <div class="step-pill green">Step 06 · Final Approval</div>
+    <div class="step-title">CLEAR TO<br>CLOSE.<br>ALMOST THERE.</div>
+    <div class="step-sub">When underwriting is satisfied, you'll get the three most important words in homebuying.</div>
+  </div>
+  <div class="step-body">
+    <div class="content-card green">
+      <div class="cc-label">What Clear to Close Means</div>
+      <div class="cc-title">"CTC" — Every Condition Has Been Satisfied</div>
+      <div class="cc-body">Your loan is fully approved. The lender has everything they need. Closing can be scheduled. This is the point where you start getting excited — it's real now.</div>
+    </div>
+    <div class="content-card">
+      <div class="cc-label">The Closing Disclosure (CD)</div>
+      <div class="cc-title">Read Every Line — 3 Business Days Before Closing</div>
+      <div class="cc-body">Federal law requires lenders to provide your CD at least 3 business days before closing. It shows your final loan terms, monthly payment, and exact cash to close. Compare it to your original Loan Estimate.</div>
+      <div style="margin-top:16px">
+        <div class="data-row"><div class="dr-key">Loan amount</div><div class="dr-val blue">Should match LE</div></div>
+        <div class="data-row"><div class="dr-key">Interest rate</div><div class="dr-val">Should match your lock</div></div>
+        <div class="data-row"><div class="dr-key">Monthly payment</div><div class="dr-val">May slightly differ from LE</div></div>
+        <div class="data-row"><div class="dr-key">Closing costs</div><div class="dr-val amber">Compare to LE — some can change, some can't</div></div>
+        <div class="data-row"><div class="dr-key">Cash to close</div><div class="dr-val">Final number — have this ready</div></div>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="warn-icon">⚠️</div>
+      <div class="warn-body"><strong>Flag anything that looks different before closing day.</strong> Once you sign, it's done. Call your loan officer the day you receive the CD — not the day before closing.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ STEP 7 -->
+<div class="page step-page">
+  <div class="step-accent amber"></div>
+  <div class="step-header">
+    <div class="step-num-bg amber">07</div>
+    <div class="step-pill amber">Step 07 · Closing Day</div>
+    <div class="step-title">CLOSING<br>DAY.<br>YOU OWN IT.</div>
+    <div class="step-sub">The final step. Bring what they ask for, sign what they put in front of you, and get your keys.</div>
+  </div>
+  <div class="step-body">
+    <div class="two-col">
+      <div class="content-card green">
+        <div class="cc-label">Bring to Closing</div>
+        <div class="cc-title">What You Need at the Table</div>
+        <div class="checklist">
+          <div class="check-item"><div class="check-icon green">✓</div>Government-issued photo ID</div>
+          <div class="check-item"><div class="check-icon green">✓</div>Cashier's check or wire for cash to close</div>
+          <div class="check-item"><div class="check-icon green">✓</div>Your Closing Disclosure for reference</div>
+          <div class="check-item"><div class="check-icon green">✓</div>Any outstanding documents requested</div>
+        </div>
+      </div>
+      <div class="content-card red">
+        <div class="cc-label">Do Not Bring</div>
+        <div class="cc-title">These Will Not Work</div>
+        <div class="checklist">
+          <div class="check-item"><div class="check-icon red">✗</div>Personal checks (not accepted)</div>
+          <div class="check-item"><div class="check-icon red">✗</div>Cash (title companies don't accept physical cash)</div>
+          <div class="check-item"><div class="check-icon red">✗</div>Business checks (typically not accepted)</div>
+        </div>
+        <div class="warn-box" style="margin-top:14px;padding:12px 16px">
+          <div class="warn-icon" style="font-size:16px">⚠️</div>
+          <div class="warn-body" style="font-size:13px">Wire your funds <strong>the day before</strong> closing if possible — give it time to arrive.</div>
+        </div>
+      </div>
+    </div>
+    <div class="content-card">
+      <div class="cc-label">What Happens at Closing</div>
+      <div class="cc-title">Typically 1–2 Hours of Signing</div>
+      <div class="cc-body">You'll sign the deed of trust, promissory note, closing disclosure acknowledgment, and a stack of other documents. The title company guides you through all of it. When the funds are disbursed and the deed is recorded — it's yours. You get the keys.</div>
+    </div>
+    <div class="pull-quote">
+      <div class="pq-text">"The stack of documents at closing looks intimidating. It isn't. Your loan officer and title agent will walk you through every page. Your job is to show up, sign, and celebrate."</div>
+      <div class="pq-attr">— Rate Hero · NMLS #2822806</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CONCLUSION / WHAT NOBODY TELLS YOU -->
+<div class="page concl-page">
+  <div class="concl-logo">RATE <span>HERO</span></div>
+  <div class="concl-eyebrow">First-Time Homebuyer Road Map</div>
+  <div class="concl-title">WHAT NOBODY<br>TELLS<br>FIRST-TIME BUYERS.</div>
+
+  <div class="nobody-tells">
+    <div class="nt-title">Three Things That Surprise Almost Everyone</div>
+    <div class="nt-item"><div class="nt-icon">→</div><div>Your <strong>first mortgage payment isn't due the month after closing</strong> — it's typically due the first of the month after that. You get a breathing window.</div></div>
+    <div class="nt-item"><div class="nt-icon">→</div><div>Your <strong>escrow payment will likely adjust after year one</strong> once your lender reconciles actual taxes and insurance costs against what was estimated.</div></div>
+    <div class="nt-item"><div class="nt-icon">→</div><div><strong>PMI doesn't cancel automatically</strong> in most cases. Once you hit 20% equity, you have to actively request cancellation in writing.</div></div>
+  </div>
+
+  <a href="https://goratehero.com" class="concl-cta">Get Pre-Approved at goratehero.com →</a>
+
+  <div class="concl-contact">
+    <p>Sean Davoodian · NMLS #1252107</p>
+    <strong>(747) 308-1635 · hello@goratehero.com</strong>
+    <p style="margin-top:24px;font-size:11px;opacity:.4">Rate Hero, Inc. · NMLS #2822806 · Equal Housing Lender · Available in 30+ States<br>Not a commitment to lend. Programs subject to approval. Terms and conditions apply.</p>
+  </div>
+</div>
+
+</body>
+</html>

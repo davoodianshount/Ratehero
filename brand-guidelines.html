@@ -3,1075 +3,870 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Short-Term Rental Playbook — Rate Hero</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+<title>Rate Hero — Brand Guidelines</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:     #F8FAFF;
-  --bg2:    #FFFFFF;
-  --bg3:    #EEF2FF;
-  --bg4:    #F1F5FD;
-  --navy:   #F8FAFF;
-  --navy2:  #EEF2FF;
-  --navy3:  #F1F5FD;
-  --dk:     #F8FAFF;
-  --dk2:    #EEF2FF;
-  --dk3:    #F1F5FD;
-  --blue:   #2563EB;
-  --blue2:  #3B82F6;
-  --blue3:  #1D4ED8;
-  --teal:   #2563EB;
-  --amber:  #E8920A;
-  --amber2: #FCD34D;
-  --gold:   #E8920A;
-  --gold2:  #F5B731;
-  --green:  #16a34a;
-  --green2: #4ade80;
-  --red:    #DC2626;
-  --w:      #0F172A;
-  --w80:    #374151;
-  --w55:    #6B7280;
-  --w50:    #6B7280;
-  --w25:    #9CA3AF;
-  --card:   rgba(37,99,235,0.04);
-  --cardb:  rgba(37,99,235,0.08);
-  --border: rgba(0,0,0,0.09);
-  --card-sh:0 4px 20px rgba(0,0,0,0.07),0 1px 4px rgba(0,0,0,0.04);
-  --fd:'Bebas Neue',sans-serif;
-  --fb:'Plus Jakarta Sans',sans-serif;
+  --navy:#080E1A;--navy2:#0D1526;--navy3:#111D35;--navy4:#162040;--card:#0F1B30;
+  --blue:#3B82F6;--blue2:#3B82F6;--blue3:#1D4ED8;
+  --amber:#F5B731;--amber2:#E8920A;
+  --w:#FFFFFF;--w80:rgba(255,255,255,0.8);--w55:rgba(255,255,255,0.55);--w25:rgba(255,255,255,0.25);
+  --bd:rgba(255,255,255,0.08);--bdb:rgba(37,99,235,0.25);
+  --fd:'Bebas Neue',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--bg);overflow-x:hidden}
+body{font-family:var(--fb);background:#f4f5f7;color:var(--navy);overflow-x:hidden}
 
-/* ── PAGE SHELL ── */
-.page{width:850px;min-height:1100px;margin:0 auto 0;position:relative;overflow:hidden}
-@media screen{body{padding:40px 20px}.page{box-shadow:0 24px 80px rgba(0,0,0,0.3);margin-bottom:32px}}
-@media print{body{background:#fff}.page{width:100%;margin:0;page-break-after:always}}
+/* ── PAGE LAYOUT ── */
+.page{width:850px;margin:0 auto 32px;position:relative;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.18)}
+@media screen{body{padding:40px 20px;background:#e8e8e4}}
+@media print {
+  /* Page setup — Letter size, no margins so content fills page */
+  @page {
+    size: letter;
+    margin: 0;
+  }
+
+  /* Hide browser UI artifacts */
+  body {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Each .page div becomes one printed page */
+  .page {
+    width: 850px !important;
+    min-height: 1100px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* Last page — no trailing blank page */
+  .page:last-of-type {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Never break inside a page */
+  .page * {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Hide nav, skip links, and any screen-only UI */
+  nav,
+  .skip-link,
+  .doc-nav,
+  footer,
+  .screen-only {
+    display: none !important;
+  }
+
+  /* Force background colors and images to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Remove screen padding on body wrapper */
+  body > .page:first-child {
+    margin-top: 0 !important;
+  }
+}.page{margin:0;width:100%;box-shadow:none;page-break-after:always}}
+
+/* ── SHARED ── */
+.section-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.section-tag.light{color:var(--blue2)}
+.section-h{font-family:var(--fd);font-size:56px;letter-spacing:2px;line-height:.9;margin-bottom:6px}
+.section-sub{font-size:15px;line-height:1.75;max-width:540px}
 
 /* ── COVER ── */
-.cover{background:var(--dk);min-height:1100px;display:flex;flex-direction:column;position:relative;overflow:hidden}
-.cv-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.07) 1px,transparent 1px);background-size:55px 55px}
-.cv-glow1{position:absolute;top:-120px;right:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.18),transparent 70%)}
-.cv-glow2{position:absolute;bottom:-100px;left:-60px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.1),transparent 70%)}
-.cv-top{padding:52px 60px 0;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
-.cv-logo{font-family:var(--fd);font-size:36px;letter-spacing:6px;color:var(--w)}
-.cv-logo span{color:var(--blue2)}
-.cv-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.4);color:var(--blue2);padding:6px 16px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-.cv-hero{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 60px 40px;position:relative;z-index:2}
-.cv-eyebrow{font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--blue2);margin-bottom:18px}
-.cv-title{font-family:var(--fd);font-size:96px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:6px}
-.cv-title-em{color:var(--blue3)}
-.cv-sub{font-family:var(--fd);font-size:32px;letter-spacing:3px;color:var(--amber2);margin-bottom:28px}
-.cv-desc{font-size:17px;color:var(--w55);line-height:1.8;max-width:480px;margin-bottom:36px}
-.cv-pills{display:flex;gap:10px;flex-wrap:wrap}
-.cv-pill{background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.28);color:var(--blue3);padding:6px 14px;border-radius:99px;font-size:12px;font-weight:700}
-.cv-pill.am{background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);color:var(--amber2)}
-.cv-bottom{padding:28px 60px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;position:relative;z-index:2}
-.cv-by{font-size:13px;color:var(--w55)}
-.cv-by strong{color:var(--w);font-weight:700}
-.cv-contact{text-align:right;font-size:12px;color:var(--w55)}
-.cv-contact strong{color:var(--blue2);font-size:14px}
+.cover{background:var(--navy);min-height:1100px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.cv-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.06) 1px,transparent 1px);background-size:56px 56px}
+.cv-glow{position:absolute;top:-150px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.15),transparent 70%);pointer-events:none}
+.cv-top{padding:52px 60px 0;display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
+.cv-logo{font-family:var(--fd);font-size:36px;letter-spacing:6px;color:var(--w);display:flex;align-items:center;gap:10px}
+.cv-logo-txt span{color:var(--blue2)}
+.cv-doc-type{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--w55);border:1px solid rgba(255,255,255,0.15);padding:6px 16px;border-radius:99px}
+.cv-hero{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 60px;position:relative;z-index:2}
+.cv-hero-tag{font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--blue2);margin-bottom:22px}
+.cv-title{font-family:var(--fd);font-size:96px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:20px}
+.cv-title em{color:var(--blue2);font-style:normal}
+.cv-desc{font-size:18px;color:var(--w55);line-height:1.8;max-width:440px;margin-bottom:40px}
+.cv-meta-row{display:flex;gap:40px;flex-wrap:wrap}
+.cv-meta{font-size:12px}
+.cv-meta-label{color:var(--w25);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.cv-meta-val{color:var(--w80);font-weight:700}
+.cv-bottom{padding:32px 60px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;flex-wrap:wrap;gap:10px}
+.cv-bottom p{font-size:11px;color:var(--w25)}
 
-/* ── TOC ── */
-.toc-page{background:var(--w);padding:80px 70px;min-height:1100px;display:flex;flex-direction:column;justify-content:center}
-.toc-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-.toc-h{font-family:var(--fd);font-size:62px;letter-spacing:2px;color:var(--navy);margin-bottom:10px;line-height:.88}
-.toc-intro{font-size:15px;color:#6b7a8d;line-height:1.7;max-width:540px;margin-bottom:36px}
-.toc-item{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #e8eeec}
-.toc-item:last-child{border-bottom:none}
-.toc-num{font-family:var(--fd);font-size:28px;color:var(--blue);min-width:34px;line-height:1}
-.toc-info{flex:1}
-.toc-label{font-size:16px;font-weight:700;color:var(--navy)}
-.toc-sub{font-size:12px;color:#9ca3af;margin-top:1px}
-.toc-dot{flex:1;border-top:1px dashed #d1dcd8;margin:0 14px}
-.toc-pg{font-family:var(--fd);font-size:20px;color:rgba(7,20,18,0.25)}
+/* ── SECTION PAGES ── */
+.sect{background:var(--w);min-height:1100px;padding:76px 70px;position:relative}
+.sect.dark{background:var(--navy);min-height:1100px}
+.sect.split{display:grid;grid-template-columns:1fr 1fr;min-height:1100px}
+.sect-left{padding:76px 52px;background:var(--navy);display:flex;flex-direction:column;justify-content:center}
+.sect-right{padding:76px 52px;background:var(--w);display:flex;flex-direction:column;justify-content:center}
 
-/* ── INTRO ── */
-.intro-page{background:var(--dk2);min-height:1100px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;padding:80px 64px;position:relative;overflow:hidden}
-.intro-page::after{content:'';position:absolute;top:-180px;right:-180px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.1),transparent 70%);pointer-events:none}
-.ilabel{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue2);margin-bottom:14px}
-.ih1{font-family:var(--fd);font-size:66px;letter-spacing:2px;color:var(--w);line-height:.9;margin-bottom:22px}
-.ibody{font-size:16px;color:var(--w80);line-height:1.85;margin-bottom:20px}
-.ipull{border-left:3px solid var(--blue);padding:18px 22px;background:rgba(37,99,235,0.08);border-radius:0 12px 12px 0}
-.ipull p{font-size:18px;font-weight:700;color:var(--w);font-style:italic;line-height:1.5}
-.istat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.istat{background:rgba(255,255,255,0.04);border:1px solid rgba(37,99,235,0.2);border-radius:14px;padding:22px;text-align:center}
-.istat-val{font-family:var(--fd);font-size:42px;color:var(--blue2);line-height:1;margin-bottom:4px}
-.istat-label{font-size:12px;color:var(--w55);font-weight:600;line-height:1.4}
+/* ── COLOR SWATCHES ── */
+.swatch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.swatch{border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.swatch-color{height:100px}
+.swatch-info{padding:12px 14px;background:white;border:1px solid #e8e8e8;border-top:none;border-radius:0 0 12px 12px}
+.swatch-name{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:2px}
+.swatch-hex{font-size:12px;color:#6b7a8d;font-family:monospace;margin-bottom:2px}
+.swatch-use{font-size:11px;color:#9ca3af}
 
-/* ── PROGRAM / SCENARIO PAGES ── */
-.prog-page{min-height:1100px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-.pl{padding:68px 52px;display:flex;flex-direction:column;justify-content:center}
-.pr{display:flex;align-items:center;justify-content:center;padding:52px;position:relative}
-.dark .pl{background:var(--dk)}
-.dark .pr{background:var(--dk3)}
-.light .pl{background:var(--w)}
-.light .pr{background:#f0fdfb}
-.amber-bg .pl{background:var(--dk)}
-.amber-bg .pr{background:#080F1E}
+/* ── TYPOGRAPHY ── */
+.type-specimen{margin-top:32px;display:flex;flex-direction:column;gap:28px}
+.type-row{padding:24px;border-radius:12px;background:#f8f9fa;border:1px solid #e8ecf0}
+.type-sample{margin-bottom:8px}
+.type-meta{display:flex;gap:20px;flex-wrap:wrap}
+.type-tag{font-size:11px;color:#9ca3af;font-weight:600;display:flex;gap:5px;align-items:center}
+.type-tag span{background:#e8ecf0;padding:2px 8px;border-radius:4px;font-family:monospace;color:var(--navy);font-size:10px}
 
-.pnum{font-family:var(--fd);font-size:88px;color:rgba(37,99,235,0.1);line-height:1;margin-bottom:-14px}
-.ptag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue2);margin-bottom:6px}
-.dark .ptag{color:var(--blue2)}
-.light .ptag{color:var(--blue)}
-.pbadge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
-.pbadge-blue{background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.35);color:var(--blue2)}
-.pbadge-amber{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);color:var(--amber2)}
-.pbadge-green{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#86efac}
-.ptitle{font-family:var(--fd);font-size:50px;letter-spacing:2px;line-height:.93;margin-bottom:16px}
-.dark .ptitle{color:var(--w)}
-.light .ptitle{color:var(--navy)}
-.pwhat{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:7px;margin-top:14px}
-.dark .pwhat{color:var(--blue2)}
-.light .pwhat{color:var(--blue)}
-.pdesc{font-size:14px;line-height:1.82;margin-bottom:20px}
-.dark .pdesc{color:var(--w80)}
-.light .pdesc{color:#374151}
-.pdesc strong{font-weight:700}
-.dark .pdesc strong{color:var(--w)}
-.light .pdesc strong{color:var(--navy)}
-.puses-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:9px}
-.dark .puses-title{color:var(--blue2)}
-.light .puses-title{color:var(--blue)}
-.puse{display:flex;gap:10px;margin-bottom:11px;align-items:flex-start}
-.puse-icon{width:24px;height:24px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px}
-.puse-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-.dark .puse-label{color:var(--w)}
-.light .puse-label{color:var(--navy)}
-.puse-body{font-size:13px;line-height:1.55}
-.dark .puse-body{color:var(--w55)}
-.light .puse-body{color:#6b7a8d}
-.ex-box{border-radius:13px;padding:18px;margin-top:4px}
-.dark .ex-box{background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.22)}
-.light .ex-box{background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.18)}
-.ex-label{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
-.dark .ex-label{color:var(--blue2)}
-.light .ex-label{color:var(--blue)}
-.ex-text{font-size:13px;font-style:italic;line-height:1.7}
-.dark .ex-text{color:var(--w80)}
-.light .ex-text{color:var(--navy)}
+/* ── LOGO SECTION ── */
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.logo-box{border-radius:14px;padding:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;position:relative;min-height:180px}
+.logo-box.dark-bg{background:var(--navy);border:1px solid var(--bd)}
+.logo-box.light-bg{background:#f0f4ff;border:1px solid rgba(37,99,235,0.15)}
+.logo-box.gray-bg{background:#EAECEF;border:1px solid #d0d4da}
+.logo-box.white-bg{background:white;border:1px solid #e8ecf0}
+.logo-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#9ca3af;position:absolute;bottom:12px;right:14px}
+.logo-wordmark{font-family:var(--fd);font-size:42px;letter-spacing:5px;display:flex;align-items:center;gap:10px}
+.logo-wordmark.on-dark{color:var(--w)}
+.logo-wordmark.on-dark span{color:var(--blue2)}
+.logo-wordmark.on-light{color:var(--navy)}
+.logo-wordmark.on-light span{color:var(--blue)}
 
-/* ── SCENARIO PAGES (full-width cards) ── */
-.scenario-page{background:var(--dk2);min-height:1100px;padding:72px 64px;position:relative;overflow:hidden}
-.scenario-page::before{content:'';position:absolute;bottom:-120px;right:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.08),transparent 70%);pointer-events:none}
-.sc-header{margin-bottom:40px}
-.sc-num{font-family:var(--fd);font-size:80px;color:rgba(37,99,235,0.1);line-height:1;margin-bottom:-10px}
-.sc-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue2);margin-bottom:6px}
-.sc-title{font-family:var(--fd);font-size:54px;letter-spacing:2px;color:var(--w);line-height:.9;margin-bottom:10px}
-.sc-sub{font-size:16px;color:var(--w55);line-height:1.7;max-width:600px}
-.sc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:36px}
-.sc-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;position:relative;overflow:hidden}
-.sc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue3))}
-.sc-card.amber::before{background:linear-gradient(90deg,var(--amber),var(--amber2))}
-.sc-card.green::before{background:linear-gradient(90deg,#16a34a,#4ade80)}
-.sc-card-icon{font-size:22px;margin-bottom:10px}
-.sc-card-title{font-size:14px;font-weight:800;color:var(--w);margin-bottom:6px}
-.sc-card-body{font-size:13px;color:var(--w55);line-height:1.65}
-.sc-card-val{font-family:var(--fd);font-size:32px;color:var(--blue2);line-height:1;margin-top:8px}
-.sc-card.amber .sc-card-val{color:var(--amber2)}
-.sc-card.green .sc-card-val{color:#4ade80}
+/* ── SPACING ── */
+.spacing-row{display:flex;align-items:flex-end;gap:20px;margin-top:36px;flex-wrap:wrap}
+.spacing-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.spacing-bar{background:var(--blue);border-radius:4px;width:40px}
+.spacing-label{font-size:11px;font-weight:700;color:var(--navy);font-family:monospace}
+.spacing-val{font-size:10px;color:#9ca3af}
 
-/* ── SCENARIO DETAIL (2-col) ── */
-.sc-detail{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
-.sc-detail-box{background:rgba(255,255,255,0.03);border:1px solid rgba(37,99,235,0.18);border-radius:14px;padding:22px}
-.sc-detail-box.amber-border{border-color:rgba(245,158,11,0.2)}
-.sc-d-label{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--blue2);margin-bottom:10px}
-.sc-d-label.amber{color:var(--amber2)}
-.sc-d-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
-.sc-d-row:last-child{border-bottom:none}
-.sc-d-key{font-size:12px;color:var(--w55)}
-.sc-d-val{font-size:13px;font-weight:700;color:var(--w80)}
-.sc-d-val.blue{color:var(--blue2)}
-.sc-d-val.amber{color:var(--amber2)}
-.sc-d-val.green{color:#4ade80}
-.sc-d-val.red{color:#f87171}
-.sc-result{background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.3);border-radius:12px;padding:18px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.sc-result.amber{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.25)}
-.sc-result-label{font-size:13px;font-weight:700;color:var(--blue2)}
-.sc-result.amber .sc-result-label{color:var(--amber2)}
-.sc-result-val{font-family:var(--fd);font-size:28px;color:var(--blue2);letter-spacing:1px}
-.sc-result.amber .sc-result-val{color:var(--amber2)}
+/* ── DO / DON'T ── */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.rule-card{border-radius:12px;padding:22px;position:relative;overflow:hidden}
+.rule-card.do{background:#f0fdf4;border:1px solid #bbf7d0}
+.rule-card.dont{background:#fff5f5;border:1px solid #fecaca}
+.rule-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.rule-card.do::before{background:#22c55e}
+.rule-card.dont::before{background:#ef4444}
+.rule-label{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.rule-card.do .rule-label{color:#16a34a}
+.rule-card.dont .rule-label{color:#dc2626}
+.rule-text{font-size:13px;color:#374151;line-height:1.65}
+.rule-text strong{font-weight:700;color:var(--navy)}
 
-/* ── MISTAKES ── */
-.mistakes-page{background:var(--dk);min-height:1100px;padding:80px 68px;position:relative;overflow:hidden}
-.mistakes-page::before{content:'';position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;border-radius:50%;background:rgba(37,99,235,0.06);pointer-events:none}
-.mg{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
-.mc{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px;position:relative;overflow:hidden}
-.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue)}
-.mc-icon{font-size:26px;margin-bottom:10px}
-.mc-title{font-size:14px;font-weight:800;color:var(--w);margin-bottom:7px}
-.mc-body{font-size:13px;color:var(--w55);line-height:1.65}
+/* ── VOICE / TONE ── */
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.voice-card{background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.15);border-radius:14px;padding:24px}
+.dark .voice-card{background:rgba(37,99,235,0.08);border-color:rgba(37,99,235,0.22)}
+.voice-card-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px}
+.dark .voice-card-title{color:var(--w)}
+.voice-card-sub{font-size:12px;color:#9ca3af;margin-bottom:12px}
+.voice-example{font-size:13px;color:#374151;font-style:italic;line-height:1.65;padding:10px 14px;background:white;border-radius:8px;border-left:3px solid var(--blue)}
+.dark .voice-example{background:rgba(255,255,255,0.05);color:var(--w80);border-color:var(--blue2)}
 
-/* ── CONCLUSION ── */
-.concl{background:var(--dk);min-height:1100px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 70px;position:relative;overflow:hidden}
-.concl::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(37,99,235,0.15),transparent),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(245,158,11,0.07),transparent)}
-.concl-logo{font-family:var(--fd);font-size:44px;letter-spacing:8px;color:var(--w);position:relative;z-index:1;margin-bottom:6px}
-.concl-logo span{color:var(--blue2)}
-.concl-title{font-family:var(--fd);font-size:66px;letter-spacing:2px;color:var(--w);line-height:.9;position:relative;z-index:1;margin:36px 0 20px}
-.concl-body{font-size:17px;color:rgba(255,255,255,0.75);line-height:1.82;max-width:500px;position:relative;z-index:1;margin-bottom:44px}
-.concl-cta{background:var(--blue);color:var(--w);padding:17px 42px;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;position:relative;z-index:1;display:inline-block}
-.concl-contact{margin-top:34px;position:relative;z-index:1}
-.concl-contact p{font-size:13px;color:rgba(255,255,255,0.48);margin-bottom:4px}
-.concl-contact strong{color:var(--w);font-size:15px}
+/* ── COMPONENTS ── */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.comp-card{background:#f8f9fa;border:1px solid #e8ecf0;border-radius:14px;padding:24px}
+.comp-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#9ca3af;margin-bottom:14px}
+.btn-demo{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-family:var(--fb);font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;margin-right:10px;margin-bottom:10px}
+.btn-primary{background:var(--blue);color:white}
+.btn-outline{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+.pill-demo{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;font-size:11px;font-weight:700;margin-right:8px;margin-bottom:8px}
+.pill-blue{background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.3);color:var(--blue)}
+.pill-amber{background:rgba(245,183,49,0.12);border:1px solid rgba(245,183,49,0.35);color:#B45309}
+.card-demo{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.card-demo::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent)}
 
-/* ── LIGHT THEME: COVER ── */
-.cover{background:linear-gradient(145deg,#0F1E38 0%,#1A3A8F 55%,#2563EB 100%) !important}
-.cv-grid{background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px) !important}
-.cv-logo{color:#fff !important}
-.cv-logo span{color:#FCD34D !important}
-.cv-badge{background:rgba(255,255,255,0.12) !important;border-color:rgba(255,255,255,0.25) !important;color:#fff !important}
-.cv-eyebrow{color:rgba(255,255,255,0.7) !important}
-.cv-title{color:#fff !important}
-.cv-title em,.cv-title-em{color:#FCD34D !important}
-.cv-sub{color:rgba(255,255,255,0.65) !important}
-.cv-desc{color:rgba(255,255,255,0.78) !important}
-.cv-pill{background:rgba(255,255,255,0.1) !important;border-color:rgba(255,255,255,0.22) !important;color:#fff !important}
-.cv-pill.am{background:rgba(245,183,49,0.15) !important;border-color:rgba(245,183,49,0.35) !important;color:#FCD34D !important}
-.cv-bottom{border-top-color:rgba(255,255,255,0.1) !important}
-.cv-by{color:rgba(255,255,255,0.55) !important}
-.cv-by strong{color:#fff !important}
-.cv-contact{color:rgba(255,255,255,0.55) !important}
-.cv-contact strong{color:#FCD34D !important}
+/* ── CONTACT / BACK ── */
+.back{background:var(--navy2);min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px;position:relative;overflow:hidden}
+.back::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(37,99,235,0.12),transparent)}
 
-/* ── LIGHT THEME: BODY + BASE ── */
-body{background:var(--bg) !important;color:var(--w) !important}
-body::before{background-image:linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px) !important}
+/* ── FIX: var(--navy) used as text color = now white on light bg ── */
+body { color: #0F172A !important; }
+.toc-heading, .toc-label, .toc-intro { color: #0F172A !important; }
+.toc-sub { color: #6B7280 !important; }
+.prog-page.light .prog-title { color: #0F172A !important; }
+.prog-page.light .prog-use-label { color: #0F172A !important; }
+.prog-page.light .example-text { color: #374151 !important; }
+.prog-page.light .prog-left { background: #ffffff !important; }
 
-/* ── LIGHT THEME: TOC ── */
-.toc-page{background:#fff !important}
-.toc-tag{color:var(--blue) !important}
-.toc-h{color:#0F172A !important}
-.toc-intro{color:#4B5563 !important}
-.toc-label{color:#0F172A !important}
-.toc-num{color:var(--blue) !important}
-.toc-item{border-bottom-color:#e5e7eb !important}
+/* ── FIX: var(--w) used as background = now dark bg ── */
+.toc-page { background: #ffffff !important; }
+.prog-page.light .prog-left { background: #ffffff !important; }
 
-/* ── LIGHT THEME: INTRO / TWO-COL PAGES ── */
-.intro-page{background:#fff !important}
-.intro-left{background:#F1F5FD !important}
-.intro-right{background:#fff !important}
-.ilabel{color:var(--blue) !important}
-.ih1{color:#0F172A !important}
-.ibody{color:#374151 !important}
-.ipull{background:rgba(37,99,235,0.06) !important;border-left-color:var(--blue) !important}
-.ipull p{color:#0F172A !important}
-.r-label{color:var(--blue) !important}
-.r-h2{color:#0F172A !important}
-.r-body{color:#374151 !important}
-.stat-box{background:#F1F5FD !important;border-color:rgba(37,99,235,0.15) !important}
-.stat-val{color:var(--blue) !important}
-.stat-lbl{color:#6B7280 !important}
+/* ── FIX: intro section headings ── */
+.intro-h1 { color: #0F172A !important; }
+.intro-body { color: #374151 !important; }
+.intro-sub { color: #374151 !important; }
 
-/* ── LIGHT THEME: DARK SECTION PAGES → LIGHT ── */
-.steps-page,.qualify-page,.programs-page,.road-page,.letters-page,
-.scenario-page,.sc-page,.mistakes-page,.exit-page,.switch-page,
-.numbers-page,.matrix-page,.progs-page,.dark-bg{
-  background:var(--bg3) !important
-}
+/* ── FIX: mistakes/cards text ── */
+.mistake-title { color: #0F172A !important; }
+.mistake-body { color: #4B5563 !important; }
+.mc-title { color: #0F172A !important; }
+.mc-body { color: #4B5563 !important; }
 
-/* ── LIGHT THEME: WHITE/LIGHT PAGES ── */
-.what-page,.promise-page,.loans-page,.how-page,.compare-page,.voice-example{
-  background:#fff !important
-}
+/* ── FIX: section headings on light pages ── */
+.sect h1, .sect h2, .sect h3 { color: #0F172A !important; }
+.sect p, .sect li { color: #374151 !important; }
+.sect-left h2, .sect-right h2 { color: #0F172A !important; }
+.sect-left p, .sect-right p { color: #374151 !important; }
+.sect-left li, .sect-right li { color: #374151 !important; }
+.prog-left h2, .prog-left p, .prog-left li { color: #0F172A !important; }
+.prog-right h2, .prog-right p { color: #0F172A !important; }
 
-/* ── LIGHT THEME: SECTION LABELS + HEADINGS ── */
-.pg-tag{color:var(--blue) !important}
-.pg-h1{color:#0F172A !important}
-.pg-sub{color:#374151 !important}
-.pg-tag-l{color:var(--blue) !important}
-.pg-h1-l{color:#0F172A !important}
-.pg-sub-l{color:#374151 !important}
-.wh-tag{color:var(--blue) !important}
-.wh-h1{color:#0F172A !important}
-.wh-intro{color:#374151 !important}
-h1,h2,h3{color:#0F172A}
-p{color:#374151}
+/* TOC number and items */
+.toc-num { color: var(--blue) !important; }
+.toc-pg { color: #9CA3AF !important; }
+.toc-item { border-bottom-color: #E5E7EB !important; }
 
-/* ── LIGHT THEME: CARDS ── */
-.sc-card,.prog-card,.req-card,.path-card,.how-card,
-.exit-card,.promise-card,.loan-card,.step-card,
-.mc,.story,.letter-row{
-  background:#fff !important;
-  border-color:rgba(0,0,0,0.09) !important;
-  box-shadow:0 2px 8px rgba(0,0,0,0.06) !important;
-}
-/* keep dark cards with colored borders */
-.sc-card::before,.prog-card::before,.req-card::before,.path-card::before,
-.how-card::before,.exit-card::before,.promise-card::before,.loan-card::before,
-.exit-card::before,.mc::before,.story::before{opacity:1 !important}
+/* Conclusion stays dark with white text */
+.conclusion-page { background: linear-gradient(145deg,#0F1E38 0%,#1A3A8F 55%,#2563EB 100%) !important; }
+.conclusion-page * { color: rgba(255,255,255,0.85) !important; }
+.conclusion-page h1, .conclusion-page h2, .conclusion-page strong { color: #ffffff !important; }
+.conclusion-cta { background: #ffffff !important; color: var(--blue) !important; }
 
-/* Card text */
-.sc-icon,.prog-icon,.req-icon,.path-icon,.how-icon,.ec-icon,.mc-icon,.story-icon,.pc-icon,.lc-icon{color:inherit}
-.sc-title,.prog-name,.req-title,.path-name,.how-title,.ec-title,.mc-title,.story-title,.pc-title,.lc-name{color:#0F172A !important}
-.sc-body,.prog-desc,.req-body,.path-desc,.how-body,.ec-body,.mc-body,.story-body,.pc-body,.lc-body{color:#4B5563 !important}
-.prog-tag,.path-who,.ec-tag,.lc-tag{color:var(--blue) !important}
-.letter-word{color:#0F172A !important}
-.letter-body{color:#374151 !important}
-.letter-highlight{color:var(--blue) !important}
-
-/* Numeric values in cards */
-.req-val,.how-stat,.tier-score,.istat-val,.hsc-num,.pstat-num{color:var(--blue) !important}
-.sc-val,.df-val{color:#374151 !important}
-.sc-val.blue,.df-val.blue,.sc-rval,.sc-result-val{color:var(--blue) !important}
-.sc-val.amber,.df-val.amber{color:var(--amber) !important}
-.sc-val.green,.df-val.green{color:var(--green) !important}
-.sc-val.red,.df-val.red{color:var(--red) !important}
-.sc-key,.df-key{color:#6B7280 !important}
-.sc-row{border-bottom-color:rgba(0,0,0,0.07) !important}
-.sc-d-key{color:#6B7280 !important}
-.sc-d-val{color:#0F172A !important}
-
-/* Step rows */
-.step-row{background:transparent !important}
-.step-num{color:var(--blue) !important;opacity:.7}
-.step-title{color:#0F172A !important}
-.step-body{color:#4B5563 !important}
-.step-badge{background:rgba(37,99,235,0.07) !important;border-color:rgba(37,99,235,0.2) !important;color:var(--blue) !important}
-.step-divider{background:rgba(37,99,235,0.15) !important}
-.road-step{border-bottom-color:rgba(0,0,0,0.07) !important}
-.road-title{color:#0F172A !important}
-.road-body{color:#4B5563 !important}
-.road-tip{background:rgba(37,99,235,0.07) !important;border-color:rgba(37,99,235,0.18) !important;color:var(--blue) !important}
-
-/* Formula box stays dark */
-.formula-box{background:#0F1E38 !important;border-color:rgba(37,99,235,0.2) !important}
-.formula-num{color:#fff !important}
-.formula-num span{color:rgba(255,255,255,0.55) !important}
-.formula-div,.formula-eq{color:var(--blue2) !important}
-.formula-result{color:var(--blue2) !important}
-.formula-result span{color:rgba(255,255,255,0.55) !important}
-.formula-label{color:var(--blue2) !important}
-
-/* BRRRR letters */
-.letter-big{color:var(--amber) !important}
-.letters-page .pg-h1{color:#0F172A !important}
-
-/* Deal flow box stays dark */
-.deal-flow{background:#0F1E38 !important}
-.df-label,.df-title{color:var(--blue2) !important}
-.df-row{border-bottom-color:rgba(255,255,255,0.06) !important}
-.df-key,.df-val{color:rgba(255,255,255,0.7) !important}
-.df-row.total .df-key{color:#fff !important}
-
-/* Key metrics */
-.key-metrics .km{background:#F1F5FD !important;border-color:rgba(37,99,235,0.15) !important}
-.km-val{color:var(--blue) !important}
-.km-val.green{color:var(--green) !important}
-.km-val.amber{color:var(--amber) !important}
-.km-lbl{color:#6B7280 !important}
-
-/* Tier boxes */
-.tier.green{background:rgba(22,163,74,0.06) !important;border-color:rgba(22,163,74,0.2) !important}
-.tier.blue{background:rgba(37,99,235,0.06) !important;border-color:rgba(37,99,235,0.2) !important}
-.tier.amber{background:rgba(232,146,10,0.06) !important;border-color:rgba(232,146,10,0.2) !important}
-.tier-label{color:#0F172A !important}
-.tier-body{color:#6B7280 !important}
-
-/* Section tags / badges */
-.section-tag,.stag,.pbadge,.step-pill{background:rgba(37,99,235,0.08) !important;border-color:rgba(37,99,235,0.2) !important;color:var(--blue) !important}
-.pbadge-blue{background:rgba(37,99,235,0.08) !important;border-color:rgba(37,99,235,0.2) !important;color:var(--blue) !important}
-.pbadge-amber{background:rgba(232,146,10,0.08) !important;border-color:rgba(232,146,10,0.2) !important;color:var(--amber) !important}
-.pbadge-green{background:rgba(22,163,74,0.08) !important;border-color:rgba(22,163,74,0.2) !important;color:var(--green) !important}
-
-/* Scenario page dark accent boxes */
-.sc-result{background:rgba(37,99,235,0.07) !important;border-color:rgba(37,99,235,0.2) !important}
-.sc-result-label{color:var(--blue) !important}
-.sc-result-val{color:var(--blue) !important}
-.sc-result.amber{background:rgba(232,146,10,0.07) !important;border-color:rgba(232,146,10,0.2) !important}
-.sc-result.amber .sc-result-label,.sc-result.amber .sc-result-val{color:var(--amber) !important}
-.sc-result.green{background:rgba(22,163,74,0.07) !important;border-color:rgba(22,163,74,0.2) !important}
-.sc-result.green .sc-result-label,.sc-result.green .sc-result-val{color:var(--green) !important}
-.sc-rlabel{color:var(--blue) !important}
-.sc-rval{color:var(--blue) !important}
-.sc-card.amber .sc-rlabel,.sc-card.amber .sc-rval{color:var(--amber) !important}
-.sc-card.green .sc-rlabel,.sc-card.green .sc-rval{color:var(--green) !important}
-
-/* Pull quotes */
-.pull-quote{background:#0F1E38 !important}
-.pq-text{color:#fff !important}
-.pq-attr{color:var(--blue2) !important}
-
-/* Comparison table */
-.compare-table{border-color:rgba(0,0,0,0.09) !important;box-shadow:0 4px 20px rgba(0,0,0,0.07) !important}
-.ct-header .ct-h:first-child{background:var(--bg3) !important;color:#6B7280 !important}
-.ct-h.rh{background:var(--blue) !important;color:#fff !important}
-.ct-h.bank{background:var(--bg4) !important;color:#9CA3AF !important}
-.ct-row:nth-child(even){background:#fff !important}
-.ct-row:nth-child(odd){background:var(--bg4) !important}
-.ct-label{color:#0F172A !important}
-.ct-rh{color:var(--green) !important;background:rgba(22,163,74,0.04) !important}
-.ct-bank{color:var(--red) !important}
-
-/* Prog matrix */
-.pm-header{background:#0F1E38 !important}
-.pm-row:nth-child(even){background:#f9fafb !important}
-.pm-row:nth-child(odd){background:#fff !important}
-.pm-name{color:#0F172A !important}
-.pm-sub{color:#6B7280 !important}
-.pm-cell{color:#374151 !important}
-.pm-cell.check{color:var(--green) !important}
-.pm-cell.x{color:var(--red) !important}
-.pm-cell.maybe{color:var(--amber) !important}
-
-/* Story cards */
-.story{background:#fff !important;border-color:rgba(0,0,0,0.09) !important}
-.story::before{background:var(--blue) !important}
-.story-title{color:#0F172A !important}
-.story-what{color:var(--blue) !important}
-.story-body{color:#374151 !important}
-.story-result{background:rgba(22,163,74,0.08) !important;border-color:rgba(22,163,74,0.25) !important;color:var(--green) !important}
-
-/* Trust bar */
-.trust-bar{background:var(--bg3) !important;border-color:rgba(0,0,0,0.07) !important}
-
-/* Timing / warning box */
-.timing-box{background:rgba(37,99,235,0.06) !important;border-color:rgba(37,99,235,0.2) !important}
-.tb-label{color:var(--blue) !important}
-.tb-body{color:#374151 !important}
-
-/* STR playbook specific */
-.prog-page.dark .pl,.prog-page.dark .pr{background:var(--bg3) !important}
-.prog-page.light .pl{background:#fff !important}
-.prog-page.light .pr{background:#F0FDF8 !important}
-.dark .ptag,.dark .pnum,.dark .pwhat,.dark .puses-title,.dark .ex-label{color:var(--blue) !important}
-.dark .ptitle{color:#0F172A !important}
-.dark .pdesc{color:#374151 !important}
-.dark .pdesc strong{color:#0F172A !important}
-.dark .puse-label{color:#0F172A !important}
-.dark .puse-body{color:#6B7280 !important}
-.dark .ex-box{background:rgba(37,99,235,0.05) !important;border-color:rgba(37,99,235,0.15) !important}
-.dark .ex-text{color:#0F172A !important}
-.light .ptag,.light .pwhat,.light .puses-title{color:var(--blue) !important}
-.light .ptitle{color:#0F172A !important}
-.sc-card,.sc-card.amber,.sc-card.green{background:#fff !important;border-color:rgba(0,0,0,0.09) !important}
-.sc-card-title{color:#0F172A !important}
-.sc-card-body{color:#6B7280 !important}
-.istat{background:rgba(37,99,235,0.05) !important;border-color:rgba(37,99,235,0.15) !important}
-.istat-val{color:var(--blue) !important}
-.istat-label{color:#6B7280 !important}
-
-/* Creative financing sections */
-.sect-left{background:var(--bg3) !important}
-.sect-right{background:#fff !important}
-.prog-left{background:var(--bg4) !important}
-.prog-right{background:#fff !important}
-.white-bg{background:#fff !important}
-[class*="page"]:not(.cover):not(.cta-page):not(.concl) h2{color:#0F172A !important}
-[class*="page"]:not(.cover):not(.cta-page):not(.concl) p:not(.cv-desc):not(.cv-by){color:#374151}
-
-/* Footer / doc footer */
-.doc-footer{background:var(--bg3) !important;border-top-color:rgba(0,0,0,0.08) !important}
-.doc-footer p,.doc-footer a,.doc-footer span{color:#6B7280 !important}
-
-/* CONCLUSION / CTA PAGE stays blue gradient */
-.concl,.cta-page,.conclusion-page{background:linear-gradient(145deg,#0F1E38 0%,#1A3A8F 55%,#2563EB 100%) !important}
-.concl::before,.cta-page::before{background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px) !important}
-.concl-logo,.cta-logo{color:#fff !important}
-.concl-logo span,.cta-logo span{color:#FCD34D !important}
-.concl-title,.cta-title{color:#fff !important}
-.concl-body,.cta-body{color:rgba(255,255,255,0.78) !important}
-.concl-cta,.cta-btn{background:#fff !important;color:var(--blue) !important;box-shadow:0 8px 32px rgba(0,0,0,0.2) !important}
-.concl-contact p,.cta-contact p{color:rgba(255,255,255,0.5) !important}
-.concl-contact strong,.cta-contact strong{color:#fff !important}
-.cal-box{background:rgba(255,255,255,0.1) !important;border-color:rgba(255,255,255,0.2) !important}
-.cal-box p{color:rgba(255,255,255,0.6) !important}
-.cal-box a{color:#FCD34D !important}
 </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:#2563EB;color:#fff;padding:8px 16px;z-index:10001;font-weight:700;text-decoration:none;border-radius:0 0 6px 0;transition:top .2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 
-<!-- ════════════════════════════════════════ COVER -->
+<!-- ════════════════════════════════ COVER -->
 <div class="page cover">
   <div class="cv-grid"></div>
-  <div class="cv-glow1"></div>
-  <div class="cv-glow2"></div>
+  <div class="cv-glow"></div>
   <div class="cv-top">
-    <div class="cv-logo">RATE <span>HERO</span></div>
-    <div class="cv-badge">🏖️ Investor Financing Guide</div>
+    <div class="cv-logo">
+      <svg width="26" height="36" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="b0" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+        <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#b0)"/>
+      </svg>
+      <span class="cv-logo-txt">RATE <span>HERO</span></span>
+    </div>
+    <div class="cv-doc-type">Brand Guidelines v1.0</div>
   </div>
   <div class="cv-hero">
-    <div class="cv-eyebrow">The Investor's Complete Guide to</div>
-    <div class="cv-title">SHORT-<br>TERM<br><span class="cv-title-em">RENTAL</span></div>
-    <div class="cv-sub">THE PLAYBOOK</div>
-    <div class="cv-desc">Airbnb, VRBO, and vacation rental financing — how to qualify, what programs exist, and real scenarios that show exactly how the numbers work.</div>
-    <div class="cv-pills">
-      <div class="cv-pill">📊 AirDNA Qualification</div>
-      <div class="cv-pill">🏖️ DSCR STR Loans</div>
-      <div class="cv-pill am">💰 No Income Docs</div>
-      <div class="cv-pill">🔄 Portfolio Expansion</div>
-      <div class="cv-pill am">🏠 Bank Stmt + STR</div>
+    <div class="cv-hero-tag">Official Brand Standards</div>
+    <div class="cv-title">BRAND<br>GUIDE<br><em>LINES</em></div>
+    <div class="cv-desc">Everything you need to represent Rate Hero consistently — colors, typography, logo usage, voice, and component patterns.</div>
+    <div class="cv-meta-row">
+      <div class="cv-meta"><div class="cv-meta-label">Company</div><div class="cv-meta-val">Rate Hero, Inc.</div></div>
+      <div class="cv-meta"><div class="cv-meta-label">NMLS</div><div class="cv-meta-val">#2822806</div></div>
+      <div class="cv-meta"><div class="cv-meta-label">Website</div><div class="cv-meta-val">goratehero.com</div></div>
+      <div class="cv-meta"><div class="cv-meta-label">Version</div><div class="cv-meta-val">1.0 · 2026</div></div>
     </div>
   </div>
 
-  <!-- Wave / horizon illustration -->
-  <svg viewBox="0 0 850 140" xmlns="http://www.w3.org/2000/svg" fill="none" style="position:absolute;bottom:56px;left:0;width:100%;opacity:0.4;z-index:1">
-    <path d="M0 80 Q212 20 425 80 Q637 140 850 80 L850 140 L0 140 Z" fill="rgba(37,99,235,0.15)"/>
-    <path d="M0 95 Q212 40 425 95 Q637 150 850 95 L850 140 L0 140 Z" fill="rgba(37,99,235,0.1)"/>
-    <!-- Palm / destination silhouettes -->
-    <rect x="120" y="60" width="4" height="50" fill="rgba(37,99,235,0.3)" rx="2"/>
-    <ellipse cx="122" cy="55" rx="18" ry="12" fill="rgba(37,99,235,0.25)"/>
-    <rect x="700" y="50" width="4" height="60" fill="rgba(37,99,235,0.3)" rx="2"/>
-    <ellipse cx="702" cy="44" rx="20" ry="13" fill="rgba(37,99,235,0.22)"/>
-    <!-- House silhouettes -->
-    <polygon points="350,70 370,50 390,70" fill="rgba(37,99,235,0.2)"/>
-    <rect x="352" y="70" width="36" height="22" fill="rgba(37,99,235,0.15)"/>
-    <polygon points="500,65 524,42 548,65" fill="rgba(37,99,235,0.18)"/>
-    <rect x="502" y="65" width="44" height="25" fill="rgba(37,99,235,0.12)"/>
+  <!-- Decorative city skyline -->
+  <svg viewBox="0 0 850 110" xmlns="http://www.w3.org/2000/svg" fill="none" style="position:absolute;bottom:56px;left:0;width:100%;z-index:1;opacity:0.18">
+    <rect x="340" y="20" width="48" height="90" fill="#2563EB" rx="2"/>
+    <rect x="346" y="10" width="36" height="16" fill="#3B82F6" rx="1"/>
+    <rect x="362" y="0" width="4" height="14" fill="#3B82F6"/>
+    <rect x="200" y="44" width="40" height="66" fill="#2563EB" rx="2"/>
+    <rect x="410" y="36" width="44" height="74" fill="#2563EB" rx="2"/>
+    <rect x="120" y="56" width="36" height="54" fill="#2563EB" rx="2"/>
+    <rect x="480" y="50" width="38" height="60" fill="#2563EB" rx="2"/>
+    <rect x="560" y="42" width="32" height="68" fill="#2563EB" rx="2"/>
+    <rect x="640" y="60" width="30" height="50" fill="#2563EB" rx="2"/>
+    <rect x="70" y="70" width="28" height="40" fill="#2563EB" rx="2"/>
+    <rect x="700" y="54" width="34" height="56" fill="#2563EB" rx="2"/>
+    <line x1="0" y1="110" x2="850" y2="110" stroke="#2563EB" stroke-width="0.8"/>
   </svg>
 
   <div class="cv-bottom">
-    <div class="cv-by">By <strong>Sean Davoodian</strong> · NMLS #1252107</div>
-    <div class="cv-contact">
-      <p>hello@ratehero.com</p>
-      <strong>(747) 308-1635 · goratehero.com</strong>
-    </div>
+    <p>Confidential · Internal & Partner Use Only</p>
+    <p>Rate Hero, Inc. · NMLS #2822806 · (747) 308-1635 · goratehero.com</p>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════ TOC -->
-<div class="page toc-page">
-  <div>
-    <div class="toc-tag">What's Inside</div>
-    <div class="toc-h">TABLE OF<br>CONTENTS</div>
-    <div class="toc-intro">Everything you need to understand STR financing — from how lenders calculate income to real deal scenarios with exact numbers.</div>
+<!-- ════════════════════════════════ BRAND STORY -->
+<div class="page sect">
+  <div class="section-tag">01 · Who We Are</div>
+  <div class="section-h" style="color:var(--navy)">BRAND<br>STORY</div>
+  <div style="width:60px;height:3px;background:var(--blue);margin:16px 0 28px;border-radius:2px"></div>
 
-    <div class="toc-item">
-      <div class="toc-num">01</div>
-      <div class="toc-info"><div class="toc-label">Why STR Financing Is Different</div><div class="toc-sub">How lenders think about vacation rental income</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">03</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">02</div>
-      <div class="toc-info"><div class="toc-label">The 3 Ways to Document STR Income</div><div class="toc-sub">AirDNA · Platform history · Bank deposits</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">04</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">03</div>
-      <div class="toc-info"><div class="toc-label">DSCR STR Loans — How They Qualify</div><div class="toc-sub">The formula, the thresholds, the LTV options</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">05</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">04</div>
-      <div class="toc-info"><div class="toc-label">Scenario 1: First STR Purchase</div><div class="toc-sub">New host, no rental history, using AirDNA projections</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">06</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">05</div>
-      <div class="toc-info"><div class="toc-label">Scenario 2: Cash-Out Refinance on Existing STR</div><div class="toc-sub">12-month platform history, recycling equity for next deal</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">07</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">06</div>
-      <div class="toc-info"><div class="toc-label">Scenario 3: Self-Employed Host</div><div class="toc-sub">When STR income + bank statements work together</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">08</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">07</div>
-      <div class="toc-info"><div class="toc-label">Scenario 4: Portfolio Expansion</div><div class="toc-sub">Scaling from 1 STR to 5 — how each deal funds the next</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">09</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">08</div>
-      <div class="toc-info"><div class="toc-label">STR Financing Mistakes to Avoid</div><div class="toc-sub">The errors that kill deals before they start</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">10</div>
-    </div>
-    <div class="toc-item">
-      <div class="toc-num">09</div>
-      <div class="toc-info"><div class="toc-label">Next Steps with Rate Hero</div><div class="toc-sub">How to get started today</div></div>
-      <div class="toc-dot"></div><div class="toc-pg">11</div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ INTRO -->
-<div class="page intro-page">
-  <div>
-    <div class="ilabel">Section 01 · Introduction</div>
-    <div class="ih1">WHY STR<br>FINANCING<br>IS DIFFERENT</div>
-    <div class="ibody">Short-term rental income is real, documented, and often dramatically higher than long-term rent — but conventional lenders don't know how to evaluate it. They look at your tax return, see a rental property with aggressive depreciation and expenses, and reject the loan.</div>
-    <div class="ibody">DSCR programs for STR were built specifically for this scenario. The lender qualifies the property on its projected or actual short-term rental income — not your personal tax return, not your W-2, not your Schedule E.</div>
-    <div class="ipull">
-      <p>"The STR that generates $6,000/month on Airbnb can look like a $0 income property on a tax return. DSCR fixes that."</p>
-    </div>
-  </div>
-  <div class="istat-grid">
-    <div class="istat">
-      <div class="istat-val">2–3×</div>
-      <div class="istat-label">Typical STR gross revenue vs long-term rent on the same property</div>
-    </div>
-    <div class="istat">
-      <div class="istat-val">$0</div>
-      <div class="istat-label">Personal income required to qualify a DSCR STR loan</div>
-    </div>
-    <div class="istat">
-      <div class="istat-val">85%</div>
-      <div class="istat-label">Maximum LTV available on STR purchase transactions</div>
-    </div>
-    <div class="istat">
-      <div class="istat-val">21</div>
-      <div class="istat-label">Day average close time at Rate Hero on STR DSCR loans</div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ 3 WAYS TO DOCUMENT -->
-<div class="page prog-page dark">
-  <div class="pl">
-    <div class="pnum">02</div>
-    <div class="ptag">Income Documentation</div>
-    <div class="ptitle">THE 3 WAYS<br>TO PROVE<br>STR INCOME</div>
-    <div class="pwhat">Why This Matters</div>
-    <div class="pdesc">Lenders can't put "probably rents for $5K/month on Airbnb" on a loan. They need a documented, third-party verified income figure. Three approved methods exist — and when multiple sources are submitted, the <strong>lowest figure is used</strong> to qualify.</div>
-    <div class="puses-title">The Three Methods</div>
-    <div class="puse">
-      <div class="puse-icon">📊</div>
-      <div>
-        <div class="puse-label">Method 1 — AirDNA Rentalizer</div>
-        <div class="puse-body">For purchase transactions where no rental history exists. The AirDNA Property Earning Potential Report projects 12-month gross revenue. Requirements: market score <strong>60 or higher</strong>, minimum 3 comparable properties, forecast dated within 90 days. A 20% vacancy factor is applied unless the appraiser documents a specific occupancy rate.</div>
-      </div>
-    </div>
-    <div class="puse">
-      <div class="puse-icon">📋</div>
-      <div>
-        <div class="puse-label">Method 2 — 12-Month Platform History</div>
-        <div class="puse-body">The Airbnb, VRBO, or property management platform provides a 12-month statement identifying the property, showing rents collected, and itemizing all vendor or management fees. <strong>Qualifying income is net of all fees.</strong> Primary method for refinance transactions.</div>
-      </div>
-    </div>
-    <div class="puse">
-      <div class="puse-icon">🏦</div>
-      <div>
-        <div class="puse-label">Method 3 — Bank Statement Deposits</div>
-        <div class="puse-body">12 months of bank statements showing STR deposits, supported by rental records for the property. When used alongside AirDNA or platform history, the lowest of all income figures is the qualifying number.</div>
-      </div>
-    </div>
-  </div>
-  <div class="pr">
-    <div style="width:100%">
-      <!-- Income Source Comparison Visual -->
-      <svg viewBox="0 0 260 322" xmlns="http://www.w3.org/2000/svg" fill="none" style="width:100%;max-width:240px;margin:0 auto;display:block;margin-bottom:20px">
-        <rect width="260" height="322" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(37,99,235,0.2)" stroke-width="1"/>
-        <text x="130" y="22" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(59,130,246,0.7)" letter-spacing=".12em">INCOME SOURCE COMPARISON</text>
-        <!-- Property header -->
-        <rect x="16" y="30" width="228" height="26" rx="7" fill="rgba(37,99,235,0.15)" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
-        <text x="130" y="47" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="rgba(59,130,246,0.9)">🏖️ Beachfront 3BR / Destin, FL</text>
-        <!-- Method 1: y=64, height=70 → title@79, sub@94, number@117 -->
-        <rect x="16" y="64" width="228" height="70" rx="9" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <text x="26" y="79" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(59,130,246,0.7)">METHOD 1 — AirDNA</text>
-        <text x="26" y="93" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" fill="rgba(255,255,255,0.35)">Market score 84 · 3 comps · 12-mo forecast</text>
-        <text x="242" y="121" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="24" fill="#60A5FA">$5,840/mo</text>
-        <!-- Method 2: y=142, height=70 → title@157, sub@171, number@199 -->
-        <rect x="16" y="142" width="228" height="70" rx="9" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <text x="26" y="157" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(59,130,246,0.7)">METHOD 2 — Airbnb 12-mo Statement</text>
-        <text x="26" y="171" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" fill="rgba(255,255,255,0.35)">Actual gross · net of 3% host fee</text>
-        <text x="242" y="199" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="24" fill="#60A5FA">$6,210/mo</text>
-        <!-- Method 3: y=220, height=70 → title@235, sub@249, number@277 -->
-        <rect x="16" y="220" width="228" height="70" rx="9" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <text x="26" y="235" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(59,130,246,0.7)">METHOD 3 — Bank Deposits</text>
-        <text x="26" y="249" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" fill="rgba(255,255,255,0.35)">12-mo deposits w/ rental records</text>
-        <text x="242" y="277" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="24" fill="#60A5FA">$6,050/mo</text>
-        <!-- Qualifying = lowest: y=298, height=16 -->
-        <rect x="16" y="298" width="228" height="16" rx="5" fill="rgba(37,99,235,0.2)"/>
-        <text x="22" y="310" font-family="'Plus Jakarta Sans',sans-serif" font-size="8.5" font-weight="700" fill="rgba(59,130,246,0.85)">QUALIFYING INCOME (lowest) →</text>
-        <text x="242" y="310" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="15" fill="#60A5FA">$5,840/mo</text>
-      </svg>
-      <div class="ex-box">
-        <div class="ex-label">📌 Key Rule</div>
-        <div class="ex-text">"When you submit multiple income sources, the lender always uses the lowest figure. Don't volunteer extra documentation that might lower your qualifying income — work with your advisor on which single method produces the best result."</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ DSCR STR FORMULA -->
-<div class="page prog-page light">
-  <div class="pl">
-    <div class="pnum" style="color:rgba(37,99,235,0.1)">03</div>
-    <div class="ptag">DSCR STR Loan Structure</div>
-    <div class="ptitle">HOW DSCR<br>STR LOANS<br>QUALIFY</div>
-    <div class="pwhat">The Formula</div>
-    <div class="pdesc"><strong>DSCR = Net Qualifying STR Income ÷ PITIA</strong><br>The net qualifying income is the documented STR income after the vacancy factor is applied. A DSCR of 1.0 means rent exactly covers the payment. Above 1.0 means positive cash flow from the lender's perspective.</div>
-    <div class="puses-title">Program Parameters</div>
-    <div class="puse">
-      <div class="puse-icon" style="background:var(--blue)">📈</div>
-      <div>
-        <div class="puse-label">DSCR Thresholds</div>
-        <div class="puse-body"><strong>1.25+</strong> Strong — best rates, highest LTV. <strong>1.0–1.24</strong> Standard — qualifies at full program. <strong>0.75–0.99</strong> Sub-1.0 programs available. <strong>Below 0.75</strong> No-ratio option up to 80% LTV.</div>
-      </div>
-    </div>
-    <div class="puse">
-      <div class="puse-icon" style="background:var(--blue)">🏠</div>
-      <div>
-        <div class="puse-label">Property Types</div>
-        <div class="puse-body">SFR, 2–4 units, and condominiums (must verify HOA allows STR). 5–10 unit multifamily not typically eligible for STR qualification. Condotels excluded.</div>
-      </div>
-    </div>
-    <div class="puse">
-      <div class="puse-icon" style="background:var(--blue)">⚠️</div>
-      <div>
-        <div class="puse-label">Vacancy Factor</div>
-        <div class="puse-body">A default <strong>20% vacancy factor</strong> is applied to STR income unless the appraiser provides a specific occupancy rate. AirDNA projections also use revenue = daily rate × occupancy rate from the report.</div>
-      </div>
-    </div>
-    <div class="puse">
-      <div class="puse-icon" style="background:var(--blue)">🔍</div>
-      <div>
-        <div class="puse-label">HOA Due Diligence</div>
-        <div class="puse-body">Always review CC&Rs and HOA rules before applying. A condo or community that prohibits short-term rentals disqualifies the STR loan at the property level — no lender can override the HOA.</div>
-      </div>
-    </div>
-  </div>
-  <div class="pr" style="background:#f0fdfb;flex-direction:column;gap:18px">
-    <!-- DSCR Calculator -->
-    <svg viewBox="0 0 260 268" xmlns="http://www.w3.org/2000/svg" fill="none" style="width:100%;max-width:240px">
-      <rect width="260" height="268" rx="14" fill="rgba(37,99,235,0.05)"/>
-      <!-- Row 1: y=14, height=86 — label@28, big number@58, vacancy row@74 -->
-      <rect x="18" y="14" width="224" height="86" rx="9" fill="white"/>
-      <text x="28" y="28" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(37,99,235,0.65)">GROSS STR INCOME (AirDNA)</text>
-      <text x="242" y="58" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="28" fill="#2563EB">$5,200<tspan font-size="14">/mo</tspan></text>
-      <line x1="18" y1="68" x2="242" y2="68" stroke="rgba(37,99,235,0.08)" stroke-width="1"/>
-      <text x="28" y="82" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" fill="rgba(37,99,235,0.45)">Minus 20% vacancy factor</text>
-      <text x="242" y="82" text-anchor="end" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(200,50,50,0.65)">−$1,040</text>
-      <!-- Net income strip: y=108 height=22 -->
-      <rect x="18" y="108" width="224" height="22" rx="5" fill="rgba(37,99,235,0.07)"/>
-      <text x="28" y="123" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(37,99,235,0.65)">Net Qualifying Income</text>
-      <text x="242" y="123" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="17" fill="#2563EB">$4,160/mo</text>
-      <!-- Divider label -->
-      <text x="130" y="147" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="800" fill="rgba(37,99,235,0.28)">÷ PITIA</text>
-      <!-- Row 2: y=154, height=68 — label@169, sub@183, big number@208 -->
-      <rect x="18" y="154" width="224" height="68" rx="9" fill="white"/>
-      <text x="28" y="169" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="700" fill="rgba(37,99,235,0.65)">MONTHLY PITIA</text>
-      <text x="28" y="183" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" fill="rgba(37,99,235,0.4)">Principal + Interest + Tax + Insurance + HOA</text>
-      <text x="242" y="208" text-anchor="end" font-family="'Bebas Neue',sans-serif" font-size="28" fill="#2563EB">$2,950<tspan font-size="14">/mo</tspan></text>
-      <!-- Result bar: y=230 height=30 -->
-      <rect x="18" y="228" width="224" height="30" rx="9" fill="rgba(37,99,235,0.15)"/>
-      <text x="130" y="248" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="17" fill="#2563EB">DSCR 1.41 — STR QUALIFIES ✓</text>
-    </svg>
-    <div class="ex-box" style="width:100%">
-      <div class="ex-label">📋 Example</div>
-      <div class="ex-text">"Mountain cabin purchase. AirDNA market score 78, $5,200/mo gross. After 20% vacancy: $4,160. PITIA $2,950. DSCR 1.41 — strong approval, best program rates."</div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ SCENARIO 1 -->
-<div class="page scenario-page">
-  <div class="sc-header">
-    <div class="sc-num">04</div>
-    <div class="sc-tag">Scenario 1 · New Purchase · No Rental History</div>
-    <div class="sc-title">FIRST STR PURCHASE<br>USING AIRDNA</div>
-    <div class="sc-sub">The most common STR financing scenario — buying a vacation rental property with no existing rental history. AirDNA projections carry the entire income qualification.</div>
-  </div>
-  <div class="sc-grid">
-    <div class="sc-card">
-      <div class="sc-card-icon">🏡</div>
-      <div class="sc-card-title">The Property</div>
-      <div class="sc-card-body">3-bedroom beach house, Gulf Coast, FL. No prior Airbnb listing. Appraiser orders AirDNA Rentalizer.</div>
-      <div class="sc-card-val">$520,000</div>
-    </div>
-    <div class="sc-card amber">
-      <div class="sc-card-icon">📊</div>
-      <div class="sc-card-title">AirDNA Result</div>
-      <div class="sc-card-body">Market score 81. $6,100/mo gross projection. After 20% vacancy factor: $4,880/mo net qualifying income.</div>
-      <div class="sc-card-val" style="color:var(--amber2)">$4,880/mo</div>
-    </div>
-    <div class="sc-card green">
-      <div class="sc-card-icon">✅</div>
-      <div class="sc-card-title">DSCR Result</div>
-      <div class="sc-card-body">PITIA: $3,240/mo. DSCR = 4,880 ÷ 3,240 = 1.51. Qualifies under best-rate program tier.</div>
-      <div class="sc-card-val">DSCR 1.51</div>
-    </div>
-  </div>
-  <div class="sc-detail">
-    <div class="sc-detail-box">
-      <div class="sc-d-label">Loan Structure</div>
-      <div class="sc-d-row"><div class="sc-d-key">Purchase Price</div><div class="sc-d-val">$520,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Down Payment (20%)</div><div class="sc-d-val">$104,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Loan Amount</div><div class="sc-d-val blue">$416,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Rate (30yr fixed)</div><div class="sc-d-val">7.875%</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Monthly P&I</div><div class="sc-d-val">$3,015</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Taxes + Insurance</div><div class="sc-d-val">$225</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Total PITIA</div><div class="sc-d-val blue">$3,240</div></div>
-    </div>
-    <div class="sc-detail-box amber-border">
-      <div class="sc-d-label amber">AirDNA Qualification</div>
-      <div class="sc-d-row"><div class="sc-d-key">AirDNA Market Score</div><div class="sc-d-val amber">81 / 100</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Gross Monthly Projection</div><div class="sc-d-val">$6,100</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Vacancy Factor Applied</div><div class="sc-d-val red">−20% (−$1,220)</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Net Qualifying Income</div><div class="sc-d-val green">$4,880</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">DSCR Ratio</div><div class="sc-d-val green">1.51 ✓</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Comparable Properties</div><div class="sc-d-val">4 (minimum 3)</div></div>
-    </div>
-  </div>
-  <div class="sc-result">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
     <div>
-      <div class="sc-result-label">Outcome</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:3px">No income docs. No W-2. No tax returns. Closed in LLC.</div>
+      <p style="font-size:17px;line-height:1.85;color:#374151;margin-bottom:20px">Rate Hero exists because the mortgage industry was built to serve banks — not borrowers. We built a different kind of lending experience: one that works for the self-employed, the investor, the business owner, and anyone the big banks ignore.</p>
+      <p style="font-size:17px;line-height:1.85;color:#374151;margin-bottom:28px">We leverage our in-house expertise and deep lender relationships to find the right program for each individual — not the program that's easiest to approve. The lightning bolt isn't just a logo. It's a signal: fast, sharp, and built for people who don't have time for the ordinary.</p>
+      <div style="border-left:3px solid var(--blue);padding:18px 22px;background:#f0f4ff;border-radius:0 12px 12px 0">
+        <p style="font-size:18px;font-weight:700;font-style:italic;color:var(--navy);line-height:1.5">"Your Income. Your Rules. Our Rates."</p>
+      </div>
     </div>
-    <div class="sc-result-val">APPROVED — 21 DAYS</div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="background:#f8f9fa;border:1px solid #e8ecf0;border-radius:14px;padding:22px;border-left:3px solid var(--blue)">
+        <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:6px">Mission</div>
+        <p style="font-size:15px;color:#374151;line-height:1.7">Make every borrower feel like the most important client in the room — then close their loan faster than they thought possible.</p>
+      </div>
+      <div style="background:#f8f9fa;border:1px solid #e8ecf0;border-radius:14px;padding:22px;border-left:3px solid var(--amber)">
+        <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#B45309;margin-bottom:6px">Vision</div>
+        <p style="font-size:15px;color:#374151;line-height:1.7">A world where self-employment, write-offs, and non-traditional income never prevent someone from building real estate wealth.</p>
+      </div>
+      <div style="background:#f8f9fa;border:1px solid #e8ecf0;border-radius:14px;padding:22px;border-left:3px solid #22C55E">
+        <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#16a34a;margin-bottom:6px">Values</div>
+        <p style="font-size:15px;color:#374151;line-height:1.7">Speed · Transparency · Expertise · No B.S. · Results over promises.</p>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════ SCENARIO 2 -->
-<div class="page scenario-page">
-  <div class="sc-header">
-    <div class="sc-num">05</div>
-    <div class="sc-tag">Scenario 2 · Cash-Out Refinance · Existing STR</div>
-    <div class="sc-title">PULLING EQUITY FROM<br>AN ACTIVE AIRBNB</div>
-    <div class="sc-sub">The investor has been operating a profitable Airbnb for 2 years. The property has appreciated. They want to cash out equity and use it as a down payment on a second STR — without selling and without showing personal income.</div>
+<!-- ════════════════════════════════ LOGO -->
+<div class="page sect dark" style="padding:76px 70px">
+  <div class="section-tag light">02 · Identity</div>
+  <div class="section-h" style="color:var(--w)">THE LOGO</div>
+  <div style="width:60px;height:3px;background:var(--blue2);margin:16px 0 28px;border-radius:2px"></div>
+  <p style="font-size:15px;color:var(--w55);max-width:560px;line-height:1.75;margin-bottom:36px">The Rate Hero logo consists of two elements: the golden lightning bolt mark and the "RATE HERO" wordmark in Bebas Neue. They must always appear together in navigation and official materials.</p>
+
+  <div class="logo-grid">
+    <div class="logo-box dark-bg">
+      <div class="logo-wordmark on-dark">
+        <svg width="28" height="40" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="b1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+          <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#b1)"/>
+        </svg>
+        RATE <span>HERO</span>
+      </div>
+      <div class="logo-label">Dark Background ✓</div>
+    </div>
+    <div class="logo-box white-bg">
+      <div class="logo-wordmark on-light" style="font-size:42px;letter-spacing:5px;display:flex;align-items:center;gap:10px">
+        <svg width="28" height="40" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="b2" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+          <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#b2)"/>
+        </svg>
+        <span style="color:var(--navy)">RATE</span> <span style="color:var(--blue)">HERO</span>
+      </div>
+      <div class="logo-label">White Background ✓</div>
+    </div>
+    <div class="logo-box gray-bg">
+      <div style="font-family:var(--fd);font-size:42px;letter-spacing:5px;display:flex;align-items:center;gap:10px">
+        <svg width="28" height="40" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="b3" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+          <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#b3)"/>
+        </svg>
+        <span style="color:#1A2E4A">RATE</span> <span style="color:#2563EB">HERO</span>
+      </div>
+      <div class="logo-label" style="color:#7a8a9a">Gray Background ✓</div>
+    </div>
+    <div class="logo-box" style="background:var(--blue);border:none">
+      <div class="logo-wordmark on-dark">
+        <svg width="28" height="40" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="b4" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#FCD34D"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient></defs>
+          <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#b4)"/>
+        </svg>
+        RATE <span style="color:rgba(255,255,255,0.7)">HERO</span>
+      </div>
+      <div class="logo-label">Blue Background ✓</div>
+    </div>
   </div>
-  <div class="sc-grid">
-    <div class="sc-card">
-      <div class="sc-card-icon">📈</div>
-      <div class="sc-card-title">Property Today</div>
-      <div class="sc-card-body">Smoky Mountains cabin purchased 2 years ago for $380K. Current appraised value after appreciation.</div>
-      <div class="sc-card-val">$460,000</div>
-    </div>
-    <div class="sc-card amber">
-      <div class="sc-card-icon">📋</div>
-      <div class="sc-card-title">Income Documentation</div>
-      <div class="sc-card-body">12-month Airbnb host statement. Gross $72,480/year. Platform fee 3%: $2,174. Net qualifying annual: $70,306.</div>
-      <div class="sc-card-val" style="color:var(--amber2)">$5,859/mo</div>
-    </div>
-    <div class="sc-card green">
-      <div class="sc-card-icon">💰</div>
-      <div class="sc-card-title">Cash-Out Proceeds</div>
-      <div class="sc-card-body">75% LTV on refi = $345K. Current loan balance $285K. Cash out: $60K — enough for next STR down payment.</div>
-      <div class="sc-card-val">$60,000</div>
-    </div>
+
+  <!-- Logo clearspace -->
+  <div style="margin-top:40px;padding:28px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px">
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--blue2);margin-bottom:12px">Clear Space Rule</div>
+    <p style="font-size:14px;color:var(--w55);line-height:1.75">Always maintain clear space equal to the height of the bolt icon on all sides of the logo. Never place other elements, text, or design within this exclusion zone. Minimum size: <strong style="color:var(--w80)">24px tall</strong> in digital, <strong style="color:var(--w80)">0.5in tall</strong> in print.</p>
   </div>
-  <div class="sc-detail">
-    <div class="sc-detail-box">
-      <div class="sc-d-label">Refinance Structure</div>
-      <div class="sc-d-row"><div class="sc-d-key">Current Appraised Value</div><div class="sc-d-val">$460,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Max LTV (cash-out, STR)</div><div class="sc-d-val">75%</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Max New Loan Amount</div><div class="sc-d-val blue">$345,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Existing Loan Payoff</div><div class="sc-d-val">$285,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Cash-Out Proceeds</div><div class="sc-d-val green">$60,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">New PITIA</div><div class="sc-d-val">$2,680</div></div>
-    </div>
-    <div class="sc-detail-box amber-border">
-      <div class="sc-d-label amber">DSCR Qualification</div>
-      <div class="sc-d-row"><div class="sc-d-key">12-mo Airbnb Gross</div><div class="sc-d-val">$72,480/yr</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Platform Fees (3%)</div><div class="sc-d-val red">−$2,174</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Net Annual Qualifying</div><div class="sc-d-val">$70,306</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Monthly Qualifying</div><div class="sc-d-val amber">$5,859</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">New PITIA</div><div class="sc-d-val">$2,680</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">DSCR Ratio</div><div class="sc-d-val green">2.19 ✓</div></div>
-    </div>
-  </div>
-  <div class="sc-result">
+</div>
+
+<!-- ════════════════════════════════ THE BOLT MARK -->
+<div class="page sect">
+  <div class="section-tag">02b · Identity</div>
+  <div class="section-h" style="color:var(--navy)">THE LIGHTNING<br>BOLT MARK</div>
+  <div style="width:60px;height:3px;background:var(--blue);margin:16px 0 28px;border-radius:2px"></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start">
     <div>
-      <div class="sc-result-label">What the $60K funds next</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:3px">20% down on a $300K STR purchase — Smoky Mtns cabin #2. Capital recycled, no money out of pocket.</div>
-    </div>
-    <div class="sc-result-val">EQUITY RECYCLED</div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ SCENARIO 3 -->
-<div class="page scenario-page">
-  <div class="sc-header">
-    <div class="sc-num">06</div>
-    <div class="sc-tag">Scenario 3 · Self-Employed Host · Mixed Documentation</div>
-    <div class="sc-title">WHEN YOU OWN<br>THE STR AND THE BUSINESS</div>
-    <div class="sc-sub">Self-employed borrowers who also operate Airbnb properties face double documentation challenges. Bank statement income from the business + STR DSCR qualification from the rental — two programs working together on the same deal.</div>
-  </div>
-  <div class="sc-grid">
-    <div class="sc-card">
-      <div class="sc-card-icon">💼</div>
-      <div class="sc-card-title">Borrower Profile</div>
-      <div class="sc-card-body">Restaurant owner. Tax return shows $42K net income after write-offs. Business deposits: $28K/month. No W-2.</div>
-      <div class="sc-card-val">$28K/mo</div>
-    </div>
-    <div class="sc-card amber">
-      <div class="sc-card-icon">🏖️</div>
-      <div class="sc-card-title">STR Being Purchased</div>
-      <div class="sc-card-body">Lake house, $480K purchase. AirDNA: $4,600/mo gross. After 20% vacancy: $3,680/mo net STR income.</div>
-      <div class="sc-card-val" style="color:var(--amber2)">$3,680/mo</div>
-    </div>
-    <div class="sc-card green">
-      <div class="sc-card-icon">🔗</div>
-      <div class="sc-card-title">Two Programs, One Loan</div>
-      <div class="sc-card-body">Property qualifies under DSCR STR — no personal income needed. Bank statements used for a simultaneous personal refinance. Separate transactions, same week.</div>
-      <div class="sc-card-val">Both Closed</div>
-    </div>
-  </div>
-  <div class="sc-detail">
-    <div class="sc-detail-box">
-      <div class="sc-d-label">STR Purchase (DSCR)</div>
-      <div class="sc-d-row"><div class="sc-d-key">Purchase Price</div><div class="sc-d-val">$480,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Down Payment (20%)</div><div class="sc-d-val">$96,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Loan Amount</div><div class="sc-d-val blue">$384,000</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Net STR Income</div><div class="sc-d-val green">$3,680/mo</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">PITIA</div><div class="sc-d-val">$2,880</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">DSCR</div><div class="sc-d-val green">1.28 ✓</div></div>
-    </div>
-    <div class="sc-detail-box amber-border">
-      <div class="sc-d-label amber">Why DSCR Was the Right Call</div>
-      <div class="sc-d-row"><div class="sc-d-key">Tax return qualifying income</div><div class="sc-d-val red">$3,500/mo</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">At tax return income, DTI would be</div><div class="sc-d-val red">82% — rejected</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">DSCR qualification income used</div><div class="sc-d-val green">$0 (property only)</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Personal income required</div><div class="sc-d-val green">None</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Tax returns submitted</div><div class="sc-d-val green">None</div></div>
-      <div class="sc-d-row"><div class="sc-d-key">Result</div><div class="sc-d-val amber">Approved ✓</div></div>
-    </div>
-  </div>
-  <div class="sc-result amber">
-    <div>
-      <div class="sc-result-label" style="color:var(--amber2)">Key Insight</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:3px">DSCR completely sidesteps the self-employment income problem. The property qualified itself — the borrower's write-offs were irrelevant.</div>
-    </div>
-    <div class="sc-result-val" style="color:var(--amber2)">PROGRAM MATCH</div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ SCENARIO 4 -->
-<div class="page scenario-page">
-  <div class="sc-header">
-    <div class="sc-num">07</div>
-    <div class="sc-tag">Scenario 4 · Portfolio Expansion · How Each Deal Funds the Next</div>
-    <div class="sc-title">SCALING FROM<br>1 STR TO 5</div>
-    <div class="sc-sub">The STR portfolio strategy: each property's equity — accessed through DSCR cash-out refinancing — funds the down payment on the next acquisition. No additional savings required. No income documentation needed at each step.</div>
-  </div>
-
-  <!-- Timeline flow -->
-  <div style="display:flex;gap:0;margin-top:28px;position:relative">
-    <!-- Connecting line -->
-    <div style="position:absolute;top:42px;left:32px;right:32px;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2),var(--blue3));opacity:0.3;z-index:0"></div>
-
-    <!-- Deal 1 -->
-    <div style="flex:1;text-align:center;position:relative;z-index:1;padding:0 6px">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:white">1</div>
-      <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:14px 10px">
-        <div style="font-size:10px;font-weight:800;color:var(--blue2);margin-bottom:4px">PURCHASE</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px">Saved $80K down. Lake house. DSCR 1.38.</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--blue2)">$400K</div>
+      <!-- Large bolt display -->
+      <div style="background:#f8f9fa;border:1px solid #e8ecf0;border-radius:20px;padding:50px;display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+        <svg width="100" height="140" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="bBig" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+          <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#bBig)"/>
+        </svg>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:var(--navy);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center">
+          <svg width="40" height="56" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="bSm1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+            <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#bSm1)"/>
+          </svg>
+        </div>
+        <div style="background:#EAECEF;border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:center">
+          <svg width="40" height="56" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="bSm2" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+            <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#bSm2)"/>
+          </svg>
+        </div>
       </div>
     </div>
-    <!-- Deal 2 -->
-    <div style="flex:1;text-align:center;position:relative;z-index:1;padding:0 6px">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:white">2</div>
-      <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:14px 10px">
-        <div style="font-size:10px;font-weight:800;color:var(--blue2);margin-bottom:4px">CASH-OUT REFI</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px">18 mo later. Appraised $470K. Pulled $72K equity.</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--amber2)">$72K OUT</div>
-      </div>
-    </div>
-    <!-- Deal 3 -->
-    <div style="flex:1;text-align:center;position:relative;z-index:1;padding:0 6px">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:white">3</div>
-      <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:14px 10px">
-        <div style="font-size:10px;font-weight:800;color:var(--blue2);margin-bottom:4px">PURCHASE #2</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px">$72K funds 20% down on beach condo #2. DSCR 1.44.</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--blue2)">$360K</div>
-      </div>
-    </div>
-    <!-- Deal 4 -->
-    <div style="flex:1;text-align:center;position:relative;z-index:1;padding:0 6px">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:white">4</div>
-      <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:14px 10px">
-        <div style="font-size:10px;font-weight:800;color:var(--blue2);margin-bottom:4px">2X REFI</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px">Both properties appreciate. Dual cash-out pulls $140K.</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--amber2)">$140K OUT</div>
-      </div>
-    </div>
-    <!-- Deal 5 -->
-    <div style="flex:1;text-align:center;position:relative;z-index:1;padding:0 6px">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:white">5</div>
-      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.22);border-radius:10px;padding:14px 10px">
-        <div style="font-size:10px;font-weight:800;color:var(--amber2);margin-bottom:4px">PROPERTIES 3–5</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px">$140K funds three more STRs at 20% down each. Portfolio = 5.</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--amber2)">5 PROPS</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Portfolio summary -->
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:28px">
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(37,99,235,0.18);border-radius:12px;padding:20px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px">Total Portfolio Value</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--blue2)">$2.1M</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px">5 STR properties combined</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(245,158,11,0.18);border-radius:12px;padding:20px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber2);margin-bottom:8px">Cash Out of Pocket</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--amber2)">$80K</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px">Original investment only — the rest was equity</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(34,197,94,0.18);border-radius:12px;padding:20px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4ade80;margin-bottom:8px">Monthly Gross Revenue</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#4ade80">$28K</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px">Combined STR income across portfolio</div>
-    </div>
-  </div>
-
-  <div class="sc-result" style="margin-top:20px">
-    <div>
-      <div class="sc-result-label">The Key Principle</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:3px">Each DSCR STR loan qualifies on the property's own income. The portfolio grows without being limited by personal DTI, property count caps, or income documentation.</div>
-    </div>
-    <div class="sc-result-val">NO INCOME DOCS</div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════ MISTAKES -->
-<div class="page mistakes-page">
-  <div style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue2)">Section 08</div>
-  <div style="font-family:var(--fd);font-size:58px;letter-spacing:2px;color:var(--w);line-height:.9;margin:12px 0 0">STR FINANCING<br>MISTAKES<br>TO AVOID</div>
-  <div class="mg">
-    <div class="mc">
-      <div class="mc-icon">📋</div>
-      <div class="mc-title">Submitting multiple income sources without thinking</div>
-      <div class="mc-body">When you submit AirDNA AND a platform statement AND bank deposits, the lender uses the lowest. If your AirDNA projection is lower than your actual history, don't volunteer AirDNA — it will reduce your qualifying income and potentially kill the deal.</div>
-    </div>
-    <div class="mc">
-      <div class="mc-icon">🏢</div>
-      <div class="mc-title">Not checking HOA rules before applying</div>
-      <div class="mc-body">A condo with STR-prohibiting CC&Rs cannot be financed as a DSCR STR loan regardless of what the lender allows. This is a hard stop that costs you the appraisal fee if discovered late. Always review HOA governing documents before ordering an appraisal.</div>
-    </div>
-    <div class="mc">
-      <div class="mc-icon">📊</div>
-      <div class="mc-title">Using an AirDNA market with a score below 60</div>
-      <div class="mc-body">AirDNA projections are only acceptable when the market score is 60 or higher. A beautiful property in a thin vacation rental market with a score of 52 cannot use AirDNA for qualification — you'll need 12 months of actual rental history instead.</div>
-    </div>
-    <div class="mc">
-      <div class="mc-icon">🔢</div>
-      <div class="mc-title">Forgetting the 20% vacancy factor in the math</div>
-      <div class="mc-body">If AirDNA projects $6,000/month, you qualify on $4,800/month — not $6,000. Investors who run their DSCR math on gross projections and then discover the vacancy factor often find a deal they thought penciled at 1.25 actually comes in at 0.99.</div>
-    </div>
-    <div class="mc">
-      <div class="mc-icon">⏰</div>
-      <div class="mc-title">Letting the AirDNA report go stale</div>
-      <div class="mc-body">The AirDNA Rentalizer report must be dated within 90 days of the note date. If your closing gets delayed — an extended inspection period, title issues, lender backlog — you may need a fresh AirDNA report. Budget for this in your timeline.</div>
-    </div>
-    <div class="mc">
-      <div class="mc-icon">💰</div>
-      <div class="mc-title">Treating all STR cash-out refis like LTR cash-out refis</div>
-      <div class="mc-body">STR cash-out refinances typically have a lower maximum LTV than LTR cash-out refis. A standard DSCR cash-out might go to 75% LTV on a long-term rental but only 70–72% on an STR. Run the numbers with STR-specific LTV caps before structuring the transaction.</div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div style="background:#f8f9fa;border:1px solid #e8ecf0;border-radius:14px;padding:22px">
+        <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:8px">What It Means</div>
+        <p style="font-size:14px;color:#374151;line-height:1.75">The lightning bolt communicates <strong>speed, power, and precision</strong> — the exact experience Rate Hero delivers. It's bold, directional, and instantly recognizable at any size from a 16px favicon to a billboard.</p>
+      </div>
+      <div style="background:#f8f9fa;border:1px solid #e8ecf0;border-radius:14px;padding:22px">
+        <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#B45309;margin-bottom:8px">Bolt Colors</div>
+        <div style="display:flex;gap:12px;margin-top:4px">
+          <div style="flex:1">
+            <div style="height:36px;background:linear-gradient(135deg,#F5B731,#E8920A);border-radius:8px;margin-bottom:6px"></div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Gradient (Primary)</div>
+            <div style="font-size:10px;font-family:monospace;color:#9ca3af">#F5B731 → #E8920A</div>
+          </div>
+          <div style="flex:1">
+            <div style="height:36px;background:#F5B731;border-radius:8px;margin-bottom:6px"></div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">Flat (Digital small)</div>
+            <div style="font-size:10px;font-family:monospace;color:#9ca3af">#F5B731</div>
+          </div>
+          <div style="flex:1">
+            <div style="height:36px;background:white;border:1px solid #e8ecf0;border-radius:8px;margin-bottom:6px"></div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy)">White (Reversed)</div>
+            <div style="font-size:10px;font-family:monospace;color:#9ca3af">On dark blue only</div>
+          </div>
+        </div>
+      </div>
+      <!-- Don'ts for bolt -->
+      <div style="background:#fff5f5;border:1px solid #fecaca;border-radius:14px;padding:22px">
+        <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#dc2626;margin-bottom:10px">❌ Never Do This</div>
+        <ul style="font-size:13px;color:#374151;line-height:2;padding-left:18px">
+          <li>Recolor the bolt green, red, or any non-amber/white</li>
+          <li>Rotate or flip the bolt orientation</li>
+          <li>Use the bolt without the wordmark on official materials</li>
+          <li>Apply drop shadows or glows to the bolt</li>
+          <li>Stretch or distort the bolt proportions</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════ CONCLUSION -->
-<div class="page concl">
-  <div class="concl-logo">RATE <span>HERO</span></div>
-  <p style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:.22em;text-transform:uppercase;position:relative;z-index:1">The Short-Term Rental Playbook</p>
-  <div class="concl-title">READY TO<br>RUN THE<br>NUMBERS?</div>
-  <div class="concl-body">Every STR deal starts with the same question: does the income support the loan? Let us run the AirDNA analysis, model the DSCR, and tell you exactly which program works — before you make an offer.</div>
-  <a href="https://goratehero.com" class="concl-cta">Start at goratehero.com →</a>
-  <div class="concl-contact">
-    <p>Sean Davoodian · NMLS #1252107</p>
-    <strong>(747) 308-1635 · hello@ratehero.com</strong>
-    <p style="margin-top:24px;font-size:11px;opacity:.4">Rate Hero · NMLS #2822806 · Equal Housing Lender · Licensed in 30+ States<br>Not a commitment to lend. Programs subject to approval. Terms and conditions apply.</p>
+<!-- ════════════════════════════════ COLOR PALETTE -->
+<div class="page sect">
+  <div class="section-tag">03 · Visual Identity</div>
+  <div class="section-h" style="color:var(--navy)">COLOR<br>PALETTE</div>
+  <div style="width:60px;height:3px;background:var(--blue);margin:16px 0 28px;border-radius:2px"></div>
+
+  <!-- Primary -->
+  <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#9ca3af;margin-bottom:14px">Primary Colors</div>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#080E1A"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Navy — Primary</div>
+        <div class="swatch-hex">#080E1A</div>
+        <div class="swatch-use">Page backgrounds, hero sections</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#2563EB"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Rate Hero Blue</div>
+        <div class="swatch-hex">#2563EB</div>
+        <div class="swatch-use">CTAs, "HERO" wordmark, accents</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#3B82F6"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Blue Bright</div>
+        <div class="swatch-hex">#3B82F6</div>
+        <div class="swatch-use">Hover states, secondary highlights</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:linear-gradient(135deg,#F5B731,#E8920A)"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Amber Gold</div>
+        <div class="swatch-hex">#F5B731 → #E8920A</div>
+        <div class="swatch-use">Lightning bolt, accent elements only</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Wave decoration -->
-  <svg viewBox="0 0 850 120" xmlns="http://www.w3.org/2000/svg" fill="none" style="position:absolute;bottom:0;left:0;width:100%;opacity:0.3;z-index:0">
-    <path d="M0 60 Q212 10 425 60 Q637 110 850 60 L850 120 L0 120 Z" fill="rgba(37,99,235,0.2)"/>
-    <path d="M0 75 Q212 30 425 75 Q637 120 850 75 L850 120 L0 120 Z" fill="rgba(37,99,235,0.12)"/>
+  <!-- Secondary -->
+  <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#9ca3af;margin:28px 0 14px">Supporting Colors</div>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0D1526"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Navy 2</div>
+        <div class="swatch-hex">#0D1526</div>
+        <div class="swatch-use">Section backgrounds, card bgs</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0F1B30"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Navy Card</div>
+        <div class="swatch-hex">#0F1B30</div>
+        <div class="swatch-use">UI cards on dark backgrounds</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:rgba(37,99,235,0.12);border:1px solid #e0e0e0"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Blue Tint</div>
+        <div class="swatch-hex">rgba(37,99,235,0.12)</div>
+        <div class="swatch-use">Pill backgrounds, card highlights</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FFFFFF;border:1px solid #e8ecf0"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">White</div>
+        <div class="swatch-hex">#FFFFFF</div>
+        <div class="swatch-use">Body text on dark, light-mode backgrounds</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text colors -->
+  <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#9ca3af;margin:28px 0 14px">Text Opacity Scale (on Dark)</div>
+  <div style="display:flex;gap:0;overflow:hidden;border-radius:12px;border:1px solid #e8ecf0">
+    <div style="flex:1;padding:20px 14px;background:var(--navy);text-align:center">
+      <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,1)">100%</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">Headlines</div>
+    </div>
+    <div style="flex:1;padding:20px 14px;background:var(--navy);text-align:center">
+      <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.8)">80%</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">Body copy</div>
+    </div>
+    <div style="flex:1;padding:20px 14px;background:var(--navy);text-align:center">
+      <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.65)">65%</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">Secondary</div>
+    </div>
+    <div style="flex:1;padding:20px 14px;background:var(--navy);text-align:center">
+      <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.4)">40%</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">Captions</div>
+    </div>
+    <div style="flex:1;padding:20px 14px;background:var(--navy);text-align:center">
+      <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.12)">12%</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px">Borders</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ TYPOGRAPHY -->
+<div class="page sect">
+  <div class="section-tag">04 · Visual Identity</div>
+  <div class="section-h" style="color:var(--navy)">TYPOGRAPHY</div>
+  <div style="width:60px;height:3px;background:var(--blue);margin:16px 0 28px;border-radius:2px"></div>
+
+  <div class="type-specimen">
+
+    <!-- Bebas Neue -->
+    <div class="type-row">
+      <div class="type-sample">
+        <div style="font-family:var(--fd);font-size:64px;letter-spacing:2px;color:var(--navy);line-height:1">YOUR INCOME.</div>
+        <div style="font-family:var(--fd);font-size:64px;letter-spacing:2px;color:var(--navy);line-height:1">YOUR RULES.</div>
+        <div style="font-family:var(--fd);font-size:64px;letter-spacing:2px;color:var(--blue);font-style:italic;line-height:1">Our Rates.</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-tag">Display Font <span>Bebas Neue</span></div>
+        <div class="type-tag">Weight <span>400 (Regular)</span></div>
+        <div class="type-tag">Use <span>Headlines, wordmark, stats, hero text</span></div>
+        <div class="type-tag">Google Font <span>free</span></div>
+      </div>
+    </div>
+
+    <!-- Plus Jakarta Sans — headings -->
+    <div class="type-row">
+      <div class="type-sample">
+        <div style="font-family:var(--fb);font-size:28px;font-weight:800;color:var(--navy);margin-bottom:6px">The mortgage industry was built to serve banks, not borrowers.</div>
+        <div style="font-family:var(--fb);font-size:17px;font-weight:400;color:#4b5563;line-height:1.8">Built for business owners, investors, and anyone the big banks ignore. We find the right program for your situation — not just the easiest one to approve.</div>
+      </div>
+      <div class="type-meta">
+        <div class="type-tag">Body Font <span>Plus Jakarta Sans</span></div>
+        <div class="type-tag">Heading Weight <span>800 ExtraBold</span></div>
+        <div class="type-tag">Body Weight <span>400–600</span></div>
+        <div class="type-tag">Use <span>All body copy, UI labels, sub-headings</span></div>
+      </div>
+    </div>
+
+    <!-- Type scale -->
+    <div style="background:#f8f9fa;border:1px solid #e8ecf0;border-radius:14px;padding:24px">
+      <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#9ca3af;margin-bottom:16px">Type Scale</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #e8ecf0">
+          <div style="font-family:var(--fd);font-size:52px;color:var(--navy);line-height:1;min-width:160px">Hero H1</div>
+          <div style="font-size:11px;color:#9ca3af;font-family:monospace">Bebas Neue · 72–96px · Letter-spacing: 2–4px</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #e8ecf0">
+          <div style="font-family:var(--fd);font-size:36px;color:var(--navy);line-height:1;min-width:160px">Section H2</div>
+          <div style="font-size:11px;color:#9ca3af;font-family:monospace">Bebas Neue · 42–56px · Letter-spacing: 1–2px</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #e8ecf0">
+          <div style="font-family:var(--fb);font-size:24px;font-weight:800;color:var(--navy);min-width:160px">Sub-heading</div>
+          <div style="font-size:11px;color:#9ca3af;font-family:monospace">Plus Jakarta Sans · 20–26px · 800 weight</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;padding-bottom:10px;border-bottom:1px solid #e8ecf0">
+          <div style="font-family:var(--fb);font-size:16px;font-weight:400;color:#374151;min-width:160px">Body copy</div>
+          <div style="font-size:11px;color:#9ca3af;font-family:monospace">Plus Jakarta Sans · 15–17px · 400 weight · 1.75–1.85 line-height</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:#9ca3af;min-width:160px">Labels / Tags</div>
+          <div style="font-size:11px;color:#9ca3af;font-family:monospace">Plus Jakarta Sans · 11–12px · 700 weight · 0.15–0.22em letter-spacing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ VOICE & TONE -->
+<div class="page sect dark" style="padding:76px 70px">
+  <div class="section-tag light">05 · Brand Voice</div>
+  <div class="section-h" style="color:var(--w)">VOICE<br>&amp; TONE</div>
+  <div style="width:60px;height:3px;background:var(--blue2);margin:16px 0 16px;border-radius:2px"></div>
+  <p style="font-size:15px;color:var(--w55);max-width:560px;line-height:1.75;margin-bottom:36px">Rate Hero speaks like a sharp advisor who genuinely gives a damn — not a banker reading from a script. Direct, confident, and always on the borrower's side.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div class="voice-card-title">Direct, Not Blunt</div>
+      <div class="voice-card-sub">We say what we mean. No jargon fog.</div>
+      <div class="voice-example dark">"Your write-offs are killing your qualifying income on paper. We fix that."</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-card-title">Expert, Not Arrogant</div>
+      <div class="voice-card-sub">We know our stuff and lead with it naturally.</div>
+      <div class="voice-example dark">"DSCR = Rent ÷ PITIA. If the property pays its own way, it qualifies."</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-card-title">Empowering, Not Pitchy</div>
+      <div class="voice-card-sub">We help people understand, then decide.</div>
+      <div class="voice-example dark">"No SSN. No credit pull. Tell us your situation and we'll tell you exactly what you qualify for."</div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-card-title">Urgent Without Pressure</div>
+      <div class="voice-card-sub">Speed is a feature. We respect their timeline.</div>
+      <div class="voice-example dark">"21-day average close. When you're ready, we move fast."</div>
+    </div>
+  </div>
+
+  <!-- Words we use / avoid -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px">
+    <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:14px;padding:22px">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#4ade80;margin-bottom:12px">✓ Words We Use</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Qualify</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Cash flow</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Investor</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">No income docs</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Scale</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Portfolio</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Equity</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">DSCR</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Program</span>
+        <span style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);color:#86efac;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Close fast</span>
+      </div>
+    </div>
+    <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.18);border-radius:14px;padding:22px">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#f87171;margin-bottom:12px">✕ Words We Avoid</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Solutions</span>
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Synergy</span>
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Innovative</span>
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Best in class</span>
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Guaranteed</span>
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Disrupting</span>
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Low rates!</span>
+        <span style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600">Easy</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ UI COMPONENTS -->
+<div class="page sect">
+  <div class="section-tag">06 · Components</div>
+  <div class="section-h" style="color:var(--navy)">UI PATTERNS<br>&amp; COMPONENTS</div>
+  <div style="width:60px;height:3px;background:var(--blue);margin:16px 0 28px;border-radius:2px"></div>
+
+  <div class="comp-grid">
+    <!-- Buttons -->
+    <div class="comp-card">
+      <div class="comp-label">Buttons</div>
+      <div class="btn-demo btn-primary">Check My Eligibility →</div>
+      <div class="btn-demo btn-outline">Learn More</div>
+      <div style="margin-top:12px;font-size:12px;color:#9ca3af">Primary: <code style="font-family:monospace;font-size:11px">#2563EB</code> fill, 10–12px radius, 700 weight<br>Secondary: outline only, same blue</div>
+    </div>
+
+    <!-- Pills / Badges -->
+    <div class="comp-card">
+      <div class="comp-label">Pills &amp; Badges</div>
+      <div style="margin-bottom:8px">
+        <span class="pill-demo pill-blue">📈 DSCR Loans</span>
+        <span class="pill-demo pill-blue">📋 Non-QM</span>
+        <span class="pill-demo pill-amber">✓ No SSN</span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.3);color:var(--blue);padding:6px 14px;border-radius:99px;font-size:12px;font-weight:700;margin-bottom:10px">📈 <svg width="13" height="18" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;flex-shrink:0"><defs><linearGradient id="bhb" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs><polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#bhb)"/></svg> 21-Day Close · Lightning Speed · No B.S.</div>
+      <div style="font-size:12px;color:#9ca3af">Rounded-full pills. Blue or amber only. Never green/red on marketing.</div>
+    </div>
+
+    <!-- Cards -->
+    <div class="comp-card" style="background:var(--navy);border-color:var(--navy)">
+      <div class="comp-label" style="color:rgba(255,255,255,0.4)">Cards (Dark)</div>
+      <div class="card-demo">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue2);margin-bottom:8px">DSCR Loans</div>
+        <div style="font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px">Qualify on Cash Flow</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6">No W-2s. No tax returns. The property pays for itself.</div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.3)">Navy card bg · Blue top accent · 14px radius</div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="comp-card">
+      <div class="comp-label">Navigation</div>
+      <div style="background:rgba(8,14,26,0.97);border-radius:10px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-family:var(--fd);font-size:18px;letter-spacing:3px;color:white;display:flex;align-items:center;gap:8px">
+          <svg width="12" height="17" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="bN" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+            <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#bN)"/>
+          </svg>
+          RATE <span style="color:#3B82F6">HERO</span>
+        </div>
+        <div style="display:flex;gap:14px">
+          <span style="font-size:11px;color:rgba(255,255,255,0.55)">DSCR</span>
+          <span style="font-size:11px;color:rgba(255,255,255,0.55)">Non-QM</span>
+          <span style="font-size:11px;color:rgba(255,255,255,0.55)">HELOCs</span>
+        </div>
+        <div style="background:#2563EB;color:white;padding:7px 14px;border-radius:7px;font-size:11px;font-weight:700">Apply Now</div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:#9ca3af">Sticky · Semi-transparent navy · Backdrop blur</div>
+    </div>
+  </div>
+
+  <!-- Do / Don't grid -->
+  <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#9ca3af;margin:36px 0 14px">Design Do's &amp; Don'ts</div>
+  <div class="rules-grid">
+    <div class="rule-card do">
+      <div class="rule-label">✓ Do</div>
+      <div class="rule-text"><strong>Use deep navy as the primary background.</strong> The brand lives on dark surfaces. Navy communicates authority, trust, and seriousness.</div>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-label">✕ Don't</div>
+      <div class="rule-text"><strong>Use white as the primary background on dark-mode materials.</strong> Light sections work as contrast breaks, not the primary canvas.</div>
+    </div>
+    <div class="rule-card do">
+      <div class="rule-label">✓ Do</div>
+      <div class="rule-text"><strong>Lead with Bebas Neue for impact.</strong> Headlines should command attention. Pair with Plus Jakarta Sans body copy for readability.</div>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-label">✕ Don't</div>
+      <div class="rule-text"><strong>Use the amber/gold for anything other than the bolt and rare accent moments.</strong> Overuse destroys its signal value. Blue is the primary accent.</div>
+    </div>
+    <div class="rule-card do">
+      <div class="rule-label">✓ Do</div>
+      <div class="rule-text"><strong>Use the subtle grid pattern as a background texture.</strong> The faint 56px blue grid adds depth without distraction on navy backgrounds.</div>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-label">✕ Don't</div>
+      <div class="rule-text"><strong>Use stock photography of generic families or handshakes.</strong> Rate Hero's audience is investors and business owners — not the conventional mortgage market.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ PRODUCT PROGRAMS -->
+<div class="page sect dark" style="padding:76px 70px">
+  <div class="section-tag light">07 · Products</div>
+  <div class="section-h" style="color:var(--w)">LOAN<br>PROGRAMS</div>
+  <div style="width:60px;height:3px;background:var(--blue2);margin:16px 0 16px;border-radius:2px"></div>
+  <p style="font-size:15px;color:var(--w55);max-width:560px;line-height:1.75;margin-bottom:36px">Rate Hero's core products. Each program should be described in borrower-outcome language, not lender-process language.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:14px;padding:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div>
+      <div style="font-size:20px;margin-bottom:8px">📈</div>
+      <div style="font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px">DSCR Long-Term Rental</div>
+      <div style="font-size:12px;color:var(--w55);line-height:1.6">Qualify on rental cash flow, not personal income. No W-2s or tax returns.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:14px;padding:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div>
+      <div style="font-size:20px;margin-bottom:8px">🏖️</div>
+      <div style="font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px">DSCR Short-Term Rental</div>
+      <div style="font-size:12px;color:var(--w55);line-height:1.6">Airbnb & VRBO income accepted. AirDNA, platform history, or deposits.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:14px;padding:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div>
+      <div style="font-size:20px;margin-bottom:8px">📋</div>
+      <div style="font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px">Non-QM Loans</div>
+      <div style="font-size:12px;color:var(--w55);line-height:1.6">Bank statements, P&L, WVOE, 1099, and asset utilization — for the self-employed.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:14px;padding:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div>
+      <div style="font-size:20px;margin-bottom:8px">💰</div>
+      <div style="font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px">HELOCs</div>
+      <div style="font-size:12px;color:var(--w55);line-height:1.6">Tap up to 90% equity. Keep your low first mortgage rate untouched.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:14px;padding:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div>
+      <div style="font-size:20px;margin-bottom:8px">🔓</div>
+      <div style="font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px">Hard Money Exit</div>
+      <div style="font-size:12px;color:var(--w55);line-height:1.6">Done flipping. Time to refi into a long-term DSCR loan and stop paying hard money rates.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:14px;padding:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div>
+      <div style="font-size:20px;margin-bottom:8px">🔄</div>
+      <div style="font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px">BRRRR Financing</div>
+      <div style="font-size:12px;color:var(--w55);line-height:1.6">Buy. Rehab. Rent. Refinance. Repeat. The exit refi is our specialty.</div>
+    </div>
+  </div>
+
+  <!-- Trust stats -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:14px;margin-top:32px;overflow:hidden">
+    <div style="padding:24px;text-align:center;border-right:1px solid var(--bd)">
+      <div style="font-family:var(--fd);font-size:46px;color:var(--w);line-height:1">$200M+</div>
+      <div style="font-size:11px;color:var(--w55);font-weight:600;letter-spacing:.05em;margin-top:4px">FUNDED</div>
+    </div>
+    <div style="padding:24px;text-align:center;border-right:1px solid var(--bd)">
+      <div style="font-family:var(--fd);font-size:46px;color:var(--w);line-height:1">21</div>
+      <div style="font-size:11px;color:var(--w55);font-weight:600;letter-spacing:.05em;margin-top:4px">DAY AVG CLOSE</div>
+    </div>
+    <div style="padding:24px;text-align:center;border-right:1px solid var(--bd)">
+      <div style="font-family:var(--fd);font-size:46px;color:var(--w);line-height:1">30+</div>
+      <div style="font-size:11px;color:var(--w55);font-weight:600;letter-spacing:.05em;margin-top:4px">STATES LICENSED</div>
+    </div>
+    <div style="padding:24px;text-align:center">
+      <div style="font-family:var(--fd);font-size:46px;color:var(--w);line-height:1">5,000+</div>
+      <div style="font-size:11px;color:var(--w55);font-weight:600;letter-spacing:.05em;margin-top:4px">CLIENTS SERVED</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ CONTACT / BACK COVER -->
+<div class="page back">
+  <svg width="28" height="40" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:20px;position:relative;z-index:1">
+    <defs><linearGradient id="bEnd" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#F5B731"/><stop offset="100%" stop-color="#E8920A"/></linearGradient></defs>
+    <polygon points="19,0 6,20 13,20 3,40 26,16 17,16" fill="url(#bEnd)"/>
   </svg>
+  <div style="font-family:var(--fd);font-size:52px;letter-spacing:6px;color:var(--w);position:relative;z-index:1;margin-bottom:6px">RATE <span style="color:var(--blue2)">HERO</span></div>
+  <p style="font-size:12px;color:var(--w25);letter-spacing:.2em;text-transform:uppercase;position:relative;z-index:1;margin-bottom:36px">Financing Built for the Way You Actually Earn</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:580px;position:relative;z-index:1;margin-bottom:40px">
+    <div style="text-align:center">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue2);margin-bottom:4px">Phone</div>
+      <div style="font-size:15px;font-weight:700;color:var(--w)">(747) 308-1635</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue2);margin-bottom:4px">Website</div>
+      <div style="font-size:15px;font-weight:700;color:var(--w)">goratehero.com</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue2);margin-bottom:4px">Email</div>
+      <div style="font-size:15px;font-weight:700;color:var(--w)">Hello@goratehero.com</div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--w25);position:relative;z-index:1;line-height:1.8">Rate Hero, Inc. · NMLS #2822806 · Equal Housing Lender · Not a commitment to lend. Available in 30+ states.
+  </p>
 </div>
 
 </body>

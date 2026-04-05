@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>First-Time Real Estate Investor Guide — Rate Hero</title>
+<title>Rate Hero vs. Big Banks — Why Borrowers Switch | Rate Hero</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -18,10 +18,10 @@
   --dk:     #F8FAFF;
   --dk2:    #EEF2FF;
   --dk3:    #F1F5FD;
-  --blue:   #2563EB;
+  --blue:   #3B82F6;
   --blue2:  #3B82F6;
   --blue3:  #1D4ED8;
-  --teal:   #2563EB;
+  --teal:   #3B82F6;
   --amber:  #E8920A;
   --amber2: #FCD34D;
   --gold:   #E8920A;
@@ -44,7 +44,67 @@
 html{scroll-behavior:smooth}body{font-family:var(--fb);background:var(--bg);overflow-x:hidden}
 .page{width:850px;min-height:1100px;margin:0 auto;position:relative;overflow:hidden}
 @media screen{body{padding:40px 20px}.page{box-shadow:0 24px 80px rgba(0,0,0,0.3);margin-bottom:32px}}
-@media print{body{background:#fff}.page{width:100%;margin:0;page-break-after:always}}
+@media print {
+  /* Page setup — Letter size, no margins so content fills page */
+  @page {
+    size: letter;
+    margin: 0;
+  }
+
+  /* Hide browser UI artifacts */
+  body {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Each .page div becomes one printed page */
+  .page {
+    width: 850px !important;
+    min-height: 1100px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* Last page — no trailing blank page */
+  .page:last-of-type {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Never break inside a page */
+  .page * {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Hide nav, skip links, and any screen-only UI */
+  nav,
+  .skip-link,
+  .doc-nav,
+  footer,
+  .screen-only {
+    display: none !important;
+  }
+
+  /* Force background colors and images to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Remove screen padding on body wrapper */
+  body > .page:first-child {
+    margin-top: 0 !important;
+  }
+}.page{width:100%;margin:0;page-break-after:always}}
 .cover{background:var(--navy);min-height:1100px;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .cv-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.07) 1px,transparent 1px);background-size:55px 55px}
 .cv-glow1{position:absolute;top:-100px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.18),transparent 70%)}
@@ -54,7 +114,7 @@ html{scroll-behavior:smooth}body{font-family:var(--fb);background:var(--bg);over
 .cv-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.4);color:var(--blue2);padding:6px 16px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .cv-hero{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 60px 40px;position:relative;z-index:2}
 .cv-eyebrow{font-size:12px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--blue2);margin-bottom:18px}
-.cv-title{font-family:var(--fd);font-size:88px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:8px}
+.cv-title{font-family:var(--fd);font-size:80px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:8px}
 .cv-title em{color:var(--blue2);font-style:normal}
 .cv-sub{font-family:var(--fd);font-size:28px;letter-spacing:3px;color:var(--amber2);margin-bottom:28px}
 .cv-desc{font-size:17px;color:var(--w55);line-height:1.8;max-width:500px;margin-bottom:36px}
@@ -65,86 +125,77 @@ html{scroll-behavior:smooth}body{font-family:var(--fb);background:var(--bg);over
 .cv-by{font-size:13px;color:var(--w55)}.cv-by strong{color:var(--w);font-weight:700}
 .cv-contact{text-align:right;font-size:12px;color:var(--w55)}.cv-contact strong{color:var(--blue2);font-size:14px}
 
-/* ROADMAP */
-.road-page{background:var(--navy2);min-height:1100px;padding:80px 68px;position:relative;overflow:hidden}
-.road-page::before{content:'';position:absolute;bottom:-80px;right:-80px;width:420px;height:420px;border-radius:50%;background:rgba(37,99,235,0.07);pointer-events:none}
-.pg-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue2);margin-bottom:10px;position:relative;z-index:1}
-.pg-h1{font-family:var(--fd);font-size:60px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:14px;position:relative;z-index:1}
-.pg-sub{font-size:16px;color:var(--w55);line-height:1.7;max-width:600px;margin-bottom:44px;position:relative;z-index:1}
-.road-steps{display:flex;flex-direction:column;gap:0;position:relative;z-index:1}
-.road-step{display:flex;gap:24px;padding:26px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
-.road-step:last-child{border:none}
-.road-num{font-family:var(--fd);font-size:48px;color:var(--blue2);line-height:1;min-width:44px;opacity:.8}
-.road-content{flex:1;padding-top:6px}
-.road-title{font-size:15px;font-weight:800;color:var(--w);margin-bottom:6px}
-.road-body{font-size:13px;color:var(--w55);line-height:1.7;margin-bottom:8px}
-.road-tip{display:inline-flex;align-items:center;gap:6px;background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.25);color:var(--blue2);padding:4px 11px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
-
-/* LOAN OPTIONS */
-.loans-page{background:#fff;min-height:1100px;padding:80px 68px}
+/* COMPARISON TABLE */
+.compare-page{background:#fff;min-height:1100px;padding:80px 68px}
 .pg-tag-l{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-.pg-h1-l{font-family:var(--fd);font-size:60px;letter-spacing:2px;color:var(--navy);line-height:.88;margin-bottom:14px}
-.pg-sub-l{font-size:16px;color:#4b5563;line-height:1.7;max-width:600px;margin-bottom:40px}
-.loan-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.loan-card{border-radius:16px;padding:26px;position:relative;overflow:hidden}
-.loan-card.dark{background:var(--navy);border:1px solid rgba(37,99,235,0.18)}
-.loan-card.light{background:#f0f4ff;border:1px solid rgba(37,99,235,0.15)}
-.loan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))}
-.loan-card.amber::before{background:linear-gradient(90deg,var(--amber),var(--amber2))}
-.loan-card.green::before{background:linear-gradient(90deg,var(--green),var(--green2))}
-.lc-icon{font-size:24px;margin-bottom:10px}
-.lc-name{font-size:14px;font-weight:800;margin-bottom:4px}
-.loan-card.dark .lc-name{color:var(--w)}
-.loan-card.light .lc-name{color:var(--navy)}
-.lc-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue2);margin-bottom:10px}
-.loan-card.amber .lc-tag{color:var(--amber)}
-.loan-card.green .lc-tag{color:var(--green)}
-.lc-body{font-size:12px;line-height:1.65}
-.loan-card.dark .lc-body{color:var(--w55)}
-.loan-card.light .lc-body{color:#4b5563}
-.lc-specs{margin-top:12px;display:flex;flex-direction:column;gap:5px}
-.lc-spec{font-size:11px;display:flex;gap:6px}
-.lc-spec-k{color:#9ca3af;min-width:70px}
-.loan-card.dark .lc-spec-k{color:var(--w55)}
-.lc-spec-v{font-weight:700}
-.loan-card.light .lc-spec-v{color:var(--navy)}
-.loan-card.dark .lc-spec-v{color:var(--w80)}
+.pg-h1-l{font-family:var(--fd);font-size:58px;letter-spacing:2px;color:var(--navy);line-height:.88;margin-bottom:14px}
+.pg-sub-l{font-size:16px;color:#4b5563;line-height:1.7;max-width:600px;margin-bottom:36px}
+.compare-table{width:100%;border-radius:14px;overflow:hidden;border:1px solid #e5e7eb}
+.ct-header{display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--navy)}
+.ct-h{padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.ct-h:first-child{color:#6B7280}
+.ct-h.rh{color:var(--blue2)}
+.ct-h.bank{color:#6B7280}
+.ct-row{display:grid;grid-template-columns:2fr 1fr 1fr;border-bottom:1px solid #e5e7eb}
+.ct-row:last-child{border:none}
+.ct-row:nth-child(even){background:#f9fafb}
+.ct-row:nth-child(odd){background:#fff}
+.ct-label{padding:14px 18px;font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center}
+.ct-rh{padding:14px 18px;font-size:13px;font-weight:700;color:var(--green);display:flex;align-items:center;gap:6px}
+.ct-bank{padding:14px 18px;font-size:13px;color:var(--red);display:flex;align-items:center;gap:6px}
 
-/* MISTAKES */
-.mistakes-page{background:var(--navy);min-height:1100px;padding:80px 68px;position:relative;overflow:hidden}
-.mistakes-page::before{content:'';position:absolute;bottom:-100px;left:-80px;width:450px;height:450px;border-radius:50%;background:rgba(37,99,235,0.06);pointer-events:none}
-.mg{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px;position:relative;z-index:1}
-.mc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:26px;position:relative;overflow:hidden}
-.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue)}
-.mc-icon{font-size:26px;margin-bottom:10px}
-.mc-title{font-size:14px;font-weight:800;color:var(--w);margin-bottom:7px}
-.mc-body{font-size:13px;color:var(--w55);line-height:1.65}
+/* WHY THEY SWITCH */
+.switch-page{background:var(--navy2);min-height:1100px;padding:80px 68px;position:relative;overflow:hidden}
+.switch-page::before{content:'';position:absolute;top:-80px;right:-80px;width:440px;height:440px;border-radius:50%;background:rgba(37,99,235,0.08);pointer-events:none}
+.pg-tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue2);margin-bottom:10px;position:relative;z-index:1}
+.pg-h1{font-family:var(--fd);font-size:58px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:14px;position:relative;z-index:1}
+.pg-sub{font-size:16px;color:var(--w55);line-height:1.7;max-width:600px;margin-bottom:40px;position:relative;z-index:1}
+.story-cards{display:flex;flex-direction:column;gap:18px;position:relative;z-index:1}
+.story{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:flex-start}
+.story-icon{font-size:28px;padding-top:4px}
+.story-title{font-size:14px;font-weight:800;color:var(--w);margin-bottom:4px}
+.story-what{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue2);margin-bottom:8px}
+.story-body{font-size:13px;color:var(--w55);line-height:1.65}
+.story-result{display:inline-flex;align-items:center;gap:5px;background:rgba(22,163,74,0.12);border:1px solid rgba(22,163,74,0.3);color:var(--green2);padding:4px 11px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-top:10px}
+
+/* HOW WE WORK */
+.how-page{background:var(--navy);min-height:1100px;padding:80px 68px;position:relative;overflow:hidden}
+.how-page::before{content:'';position:absolute;bottom:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(37,99,235,0.07);pointer-events:none}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;position:relative;z-index:1}
+.how-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2))}
+.how-card.amber::before{background:linear-gradient(90deg,var(--amber),var(--amber2))}
+.how-icon{font-size:22px;margin-bottom:9px}
+.how-title{font-size:14px;font-weight:800;color:var(--w);margin-bottom:6px}
+.how-body{font-size:12px;color:var(--w55);line-height:1.65}
+.how-stat{font-family:var(--fd);font-size:30px;color:var(--blue2);line-height:1;margin-top:10px}
+.how-card.amber .how-stat{color:var(--amber2)}
 
 .concl{background:var(--navy);min-height:1100px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 70px;position:relative;overflow:hidden}
 .concl::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(37,99,235,0.15),transparent),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(245,158,11,0.07),transparent)}
 .concl-logo{font-family:var(--fd);font-size:44px;letter-spacing:8px;color:var(--w);position:relative;z-index:1;margin-bottom:6px}.concl-logo span{color:var(--blue2)}
 .concl-title{font-family:var(--fd);font-size:66px;letter-spacing:2px;color:var(--w);line-height:.9;position:relative;z-index:1;margin:36px 0 20px}
-.concl-body{font-size:17px;color:rgba(255,255,255,0.75);line-height:1.82;max-width:500px;position:relative;z-index:1;margin-bottom:44px}
+.concl-body{font-size:17px;color:#374151;line-height:1.82;max-width:500px;position:relative;z-index:1;margin-bottom:44px}
 .concl-cta{background:var(--blue);color:var(--w);padding:17px 42px;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;position:relative;z-index:1;display:inline-block}
-.concl-contact{margin-top:34px;position:relative;z-index:1}.concl-contact p{font-size:13px;color:rgba(255,255,255,0.48);margin-bottom:4px}.concl-contact strong{color:var(--w);font-size:15px}
+.concl-contact{margin-top:34px;position:relative;z-index:1}.concl-contact p{font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:4px}.concl-contact strong{color:var(--w);font-size:15px}
 
 /* ── LIGHT THEME: COVER ── */
 .cover{background:linear-gradient(145deg,#0F1E38 0%,#1A3A8F 55%,#2563EB 100%) !important}
 .cv-grid{background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px) !important}
 .cv-logo{color:#fff !important}
 .cv-logo span{color:#FCD34D !important}
-.cv-badge{background:rgba(255,255,255,0.12) !important;border-color:rgba(255,255,255,0.25) !important;color:#fff !important}
-.cv-eyebrow{color:rgba(255,255,255,0.7) !important}
+.cv-badge{background:rgba(255,255,255,0.12) !important;border-color:#D1D5DB !important;color:#fff !important}
+.cv-eyebrow{color:#4B5563 !important}
 .cv-title{color:#fff !important}
 .cv-title em,.cv-title-em{color:#FCD34D !important}
-.cv-sub{color:rgba(255,255,255,0.65) !important}
+.cv-sub{color:#4B5563 !important}
 .cv-desc{color:rgba(255,255,255,0.78) !important}
 .cv-pill{background:rgba(255,255,255,0.1) !important;border-color:rgba(255,255,255,0.22) !important;color:#fff !important}
 .cv-pill.am{background:rgba(245,183,49,0.15) !important;border-color:rgba(245,183,49,0.35) !important;color:#FCD34D !important}
-.cv-bottom{border-top-color:rgba(255,255,255,0.1) !important}
-.cv-by{color:rgba(255,255,255,0.55) !important}
+.cv-bottom{border-top-color:#F9FAFB !important}
+.cv-by{color:#6B7280 !important}
 .cv-by strong{color:#fff !important}
-.cv-contact{color:rgba(255,255,255,0.55) !important}
+.cv-contact{color:#6B7280 !important}
 .cv-contact strong{color:#FCD34D !important}
 
 /* ── LIGHT THEME: BODY + BASE ── */
@@ -250,10 +301,10 @@ p{color:#374151}
 /* Formula box stays dark */
 .formula-box{background:#0F1E38 !important;border-color:rgba(37,99,235,0.2) !important}
 .formula-num{color:#fff !important}
-.formula-num span{color:rgba(255,255,255,0.55) !important}
+.formula-num span{color:#6B7280 !important}
 .formula-div,.formula-eq{color:var(--blue2) !important}
 .formula-result{color:var(--blue2) !important}
-.formula-result span{color:rgba(255,255,255,0.55) !important}
+.formula-result span{color:#6B7280 !important}
 .formula-label{color:var(--blue2) !important}
 
 /* BRRRR letters */
@@ -264,7 +315,7 @@ p{color:#374151}
 .deal-flow{background:#0F1E38 !important}
 .df-label,.df-title{color:var(--blue2) !important}
 .df-row{border-bottom-color:rgba(255,255,255,0.06) !important}
-.df-key,.df-val{color:rgba(255,255,255,0.7) !important}
+.df-key,.df-val{color:#4B5563 !important}
 .df-row.total .df-key{color:#fff !important}
 
 /* Key metrics */
@@ -385,164 +436,255 @@ p{color:#374151}
 .concl-title,.cta-title{color:#fff !important}
 .concl-body,.cta-body{color:rgba(255,255,255,0.78) !important}
 .concl-cta,.cta-btn{background:#fff !important;color:var(--blue) !important;box-shadow:0 8px 32px rgba(0,0,0,0.2) !important}
-.concl-contact p,.cta-contact p{color:rgba(255,255,255,0.5) !important}
+.concl-contact p,.cta-contact p{color:#6B7280 !important}
 .concl-contact strong,.cta-contact strong{color:#fff !important}
-.cal-box{background:rgba(255,255,255,0.1) !important;border-color:rgba(255,255,255,0.2) !important}
-.cal-box p{color:rgba(255,255,255,0.6) !important}
+.cal-box{background:rgba(255,255,255,0.1) !important;border-color:#E5E7EB !important}
+.cal-box p{color:#4B5563 !important}
 .cal-box a{color:#FCD34D !important}
+
+/* ── FIX: var(--navy) used as text color = now white on light bg ── */
+body { color: #0F172A !important; }
+.toc-heading, .toc-label, .toc-intro { color: #0F172A !important; }
+.toc-sub { color: #6B7280 !important; }
+.prog-page.light .prog-title { color: #0F172A !important; }
+.prog-page.light .prog-use-label { color: #0F172A !important; }
+.prog-page.light .example-text { color: #374151 !important; }
+.prog-page.light .prog-left { background: #ffffff !important; }
+
+/* ── FIX: var(--w) used as background = now dark bg ── */
+.toc-page { background: #ffffff !important; }
+.prog-page.light .prog-left { background: #ffffff !important; }
+
+/* ── FIX: intro section headings ── */
+.intro-h1 { color: #0F172A !important; }
+.intro-body { color: #374151 !important; }
+.intro-sub { color: #374151 !important; }
+
+/* ── FIX: mistakes/cards text ── */
+.mistake-title { color: #0F172A !important; }
+.mistake-body { color: #4B5563 !important; }
+.mc-title { color: #0F172A !important; }
+.mc-body { color: #4B5563 !important; }
+
+/* ── FIX: section headings on light pages ── */
+.sect h1, .sect h2, .sect h3 { color: #0F172A !important; }
+.sect p, .sect li { color: #374151 !important; }
+.sect-left h2, .sect-right h2 { color: #0F172A !important; }
+.sect-left p, .sect-right p { color: #374151 !important; }
+.sect-left li, .sect-right li { color: #374151 !important; }
+.prog-left h2, .prog-left p, .prog-left li { color: #0F172A !important; }
+.prog-right h2, .prog-right p { color: #0F172A !important; }
+
+/* TOC number and items */
+.toc-num { color: var(--blue) !important; }
+.toc-pg { color: #9CA3AF !important; }
+.toc-item { border-bottom-color: #E5E7EB !important; }
+
+/* Conclusion stays dark with white text */
+.conclusion-page { background: linear-gradient(145deg,#0F1E38 0%,#1A3A8F 55%,#2563EB 100%) !important; }
+.conclusion-page, .conclusion-page * { color:#fff !important; }
+.conclusion-cta, .concl-cta, .cta-btn { background:#fff !important; color:var(--blue) !important; }
+.conclusion-cta { background: #ffffff !important; color: var(--blue) !important; }
+
+
+/* ── FORCE WHITE TEXT ON DARK CONCLUSION PAGES ── */
+.concl, .conclusion-page, .cta-page,
+.concl *, .conclusion-page *, .cta-page * {
+  color: #fff !important;
+}
+.concl-logo span, .conclusion-logo span { color: #FCD34D !important; }
+.concl-body, .conclusion-body { color: rgba(255,255,255,0.82) !important; }
+.concl-contact p, .conclusion-contact p { color: rgba(255,255,255,0.55) !important; }
+.concl-cta, .conclusion-cta, .cta-btn {
+  background: #fff !important;
+  color: var(--blue) !important;
+  color: #2563EB !important;
+}
+.cal-box a { color: #FCD34D !important; }
+.cal-box p { color: rgba(255,255,255,0.6) !important; }
+
 </style></head><body>
-<a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:#2563EB;color:#fff;padding:8px 16px;z-index:10001;font-weight:700;text-decoration:none;border-radius:0 0 6px 0;transition:top .2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+<a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:#2563EB;color:#0F172A;padding:8px 16px;z-index:10001;font-weight:700;text-decoration:none;border-radius:0 0 6px 0;transition:top .2s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 
 <!-- COVER -->
 <div class="page cover">
   <div class="cv-grid"></div><div class="cv-glow1"></div><div class="cv-glow2"></div>
-  <div class="cv-top"><div class="cv-logo">RATE <span>HERO</span></div><div class="cv-badge">🏠 First-Time Investor Guide</div></div>
+  <div class="cv-top"><div class="cv-logo">RATE <span>HERO</span></div><div class="cv-badge">🏦 Lender Comparison Guide</div></div>
   <div class="cv-hero">
-    <div class="cv-eyebrow">From First Deal to Financial Freedom</div>
-    <div class="cv-title">YOUR FIRST<br>RENTAL<br><em>PROPERTY.</em></div>
-    <div class="cv-sub">THE PLAYBOOK</div>
-    <div class="cv-desc">How to finance your first investment property without the confusion — which loan to use, what you need to qualify, and the mistakes first-time investors most commonly make.</div>
+    <div class="cv-eyebrow">Why Borrowers Leave Big Banks and Never Go Back</div>
+    <div class="cv-title">RATE HERO<br>VS.<br><em>YOUR BANK.</em></div>
+    <div class="cv-sub">THE HONEST COMPARISON</div>
+    <div class="cv-desc">Big banks have one set of programs, one set of rules, and a call center that doesn't know your file. We have 30+ lenders, programs for every situation, and one advisor who answers your call.</div>
     <div class="cv-pills">
-      <div class="cv-pill">🏠 DSCR for Investors</div>
-      <div class="cv-pill am">📊 No W-2 Required</div>
-      <div class="cv-pill">💰 20% Down Options</div>
-      <div class="cv-pill am">🔒 LLC Lending OK</div>
-      <div class="cv-pill">⚡ 21-Day Close</div>
+      <div class="cv-pill">🏦 30+ Lender Network</div>
+      <div class="cv-pill am">⚡ 21-Day Close Avg</div>
+      <div class="cv-pill">📞 Direct Advisor Access</div>
+      <div class="cv-pill am">📋 DSCR · Non-QM · Conv</div>
+      <div class="cv-pill">🔒 No Bait-and-Switch</div>
     </div>
   </div>
   <div class="cv-bottom">
     <div class="cv-by">Prepared by <strong>Sean Davoodian</strong> · NMLS #1252107</div>
-    <div class="cv-contact"><div>(747) 308-1635</div><strong>hello@ratehero.com</strong></div>
+    <div class="cv-contact"><div>(747) 308-1635</div><strong>hello@goratehero.com</strong></div>
   </div>
 </div>
 
-<!-- ROADMAP -->
-<div class="page road-page">
-  <div class="pg-tag">Step by Step</div>
-  <div class="pg-h1">YOUR ROAD MAP<br>TO DEAL #1.</div>
-  <div class="pg-sub">Every first-time investor goes through the same sequence. Here's what that looks like — and where we fit in.</div>
-  <div class="road-steps">
-    <div class="road-step">
-      <div class="road-num">01</div>
-      <div class="road-content">
-        <div class="road-title">Know Your Numbers Before You Shop</div>
-        <div class="road-body">Before you look at a single property, know what you can afford. Down payment (typically 20%), closing costs (2–3%), and reserves (3–6 months PITIA). This determines your price range and loan size.</div>
-        <div class="road-tip">🎯 Talk to us first — we'll give you a real budget in 10 min</div>
-      </div>
+<!-- COMPARISON TABLE -->
+<div class="page compare-page">
+  <div class="pg-tag-l">Head to Head</div>
+  <div class="pg-h1-l">HOW WE<br>COMPARE.</div>
+  <div class="pg-sub-l">An honest, side-by-side look at how Rate Hero stacks up against a typical big-bank mortgage experience.</div>
+  <div class="compare-table">
+    <div class="ct-header">
+      <div class="ct-h"></div>
+      <div class="ct-h rh">⚡ Rate Hero</div>
+      <div class="ct-h bank">🏦 Big Bank</div>
     </div>
-    <div class="road-step">
-      <div class="road-num">02</div>
-      <div class="road-content">
-        <div class="road-title">Choose the Right Loan Type for Your Situation</div>
-        <div class="road-body">W-2 income with good credit? Conventional investment loan is usually the move. Self-employed or want to qualify on rent alone? DSCR is your program. We'll tell you exactly which fits in the first conversation.</div>
-        <div class="road-tip">📋 No SSN needed for a loan type recommendation</div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">Loan Programs Available</div>
+      <div class="ct-rh">✓ DSCR, Non-QM, Conv, HELOC, BRRRR, FHA, VA</div>
+      <div class="ct-bank">✗ Conventional & FHA only (usually)</div>
     </div>
-    <div class="road-step">
-      <div class="road-num">03</div>
-      <div class="road-content">
-        <div class="road-title">Find the Property & Run the DSCR Math</div>
-        <div class="road-body">Once you have a target property, we run the DSCR calculation: Does the rent support the payment? We'll do this before you make an offer so you know if it qualifies. Most lenders won't do this — we do it every time.</div>
-        <div class="road-tip">📊 Free DSCR calculation — before you offer</div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">Average Close Time</div>
+      <div class="ct-rh">✓ 21 days</div>
+      <div class="ct-bank">✗ 45–60 days</div>
     </div>
-    <div class="road-step">
-      <div class="road-num">04</div>
-      <div class="road-content">
-        <div class="road-title">Go Under Contract & Lock Your Rate</div>
-        <div class="road-body">Once you're under contract, we issue pre-approval and lock your rate within 24 hours. Your checklist is minimal compared to conventional financing — especially if you're using DSCR.</div>
-        <div class="road-tip">⚡ Rate lock within 24 hours of going under contract</div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">Self-Employed / Non-QM</div>
+      <div class="ct-rh">✓ Specialized programs available</div>
+      <div class="ct-bank">✗ Typically declined or very limited</div>
     </div>
-    <div class="road-step">
-      <div class="road-num">05</div>
-      <div class="road-content">
-        <div class="road-title">Close in 21 Days or Less</div>
-        <div class="road-body">Our average close is 21 days. Sellers love it. If you're competing against other buyers, speed is a real competitive advantage. We've closed deals in 14 days when the deal required it.</div>
-        <div class="road-tip">🏁 Average close: 21 days</div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">Investment Property (DSCR)</div>
+      <div class="ct-rh">✓ Core specialty — qualify on rent</div>
+      <div class="ct-bank">✗ Uses personal income only, capped at 10 properties</div>
     </div>
-  </div>
-</div>
-
-<!-- LOAN OPTIONS -->
-<div class="page loans-page">
-  <div class="pg-tag-l">Loan Programs</div>
-  <div class="pg-h1-l">WHICH LOAN<br>IS YOURS?</div>
-  <div class="pg-sub-l">First-time investors have more options than most people realize. Here are the four most common programs we use for deal #1.</div>
-  <div class="loan-cards">
-    <div class="loan-card dark">
-      <div class="lc-icon">📈</div>
-      <div class="lc-name">DSCR Loan</div>
-      <div class="lc-tag">Qualify on Rent — Not Your Income</div>
-      <div class="lc-body">The property's rental income pays the mortgage. Your W-2, tax returns, and personal income don't matter. If the rent covers the payment, you qualify.</div>
-      <div class="lc-specs">
-        <div class="lc-spec"><span class="lc-spec-k">Down</span><span class="lc-spec-v">20–25%</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Credit</span><span class="lc-spec-v">620+ (680 for best rates)</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Income docs</span><span class="lc-spec-v">None required</span></div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">Who Answers Your Call?</div>
+      <div class="ct-rh">✓ Sean Davoodian — knows your file</div>
+      <div class="ct-bank">✗ Call center — different person each time</div>
     </div>
-    <div class="loan-card light green">
-      <div class="lc-icon">🏠</div>
-      <div class="lc-name">Conventional Investment Loan</div>
-      <div class="lc-tag">Lowest Rates for W-2 Borrowers</div>
-      <div class="lc-body">If you have W-2 income and strong credit, conventional is usually the cheapest option. Up to 10 financed properties. Standard underwriting process.</div>
-      <div class="lc-specs">
-        <div class="lc-spec"><span class="lc-spec-k">Down</span><span class="lc-spec-v">15–25% (varies by property)</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Credit</span><span class="lc-spec-v">680+ preferred</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Income docs</span><span class="lc-spec-v">W-2 + 2 years returns</span></div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">Rate Shopping</div>
+      <div class="ct-rh">✓ We shop 30+ lenders for your best rate</div>
+      <div class="ct-bank">✗ One bank, one rate</div>
     </div>
-    <div class="loan-card light amber">
-      <div class="lc-icon">📋</div>
-      <div class="lc-name">Non-QM / Bank Statement</div>
-      <div class="lc-tag">Self-Employed Investors</div>
-      <div class="lc-body">Own a business? Your tax returns may show less than you actually earn. We use 12–24 months of bank deposits to establish your qualifying income instead.</div>
-      <div class="lc-specs">
-        <div class="lc-spec"><span class="lc-spec-k">Down</span><span class="lc-spec-v">10–20%</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Credit</span><span class="lc-spec-v">620+</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Income docs</span><span class="lc-spec-v">Bank statements only</span></div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">LLC Lending</div>
+      <div class="ct-rh">✓ Available on DSCR programs</div>
+      <div class="ct-bank">✗ Rarely available</div>
     </div>
-    <div class="loan-card dark amber">
-      <div class="lc-icon">💰</div>
-      <div class="lc-name">HELOC / Cash-Out Refi</div>
-      <div class="lc-tag">Use Existing Equity for Down Payment</div>
-      <div class="lc-body">Already own your primary home? Tap the equity as a revolving credit line or lump-sum cash-out to fund the down payment on your investment property.</div>
-      <div class="lc-specs">
-        <div class="lc-spec"><span class="lc-spec-k">LTV</span><span class="lc-spec-v">Up to 90% on primary</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Credit</span><span class="lc-spec-v">680+</span></div>
-        <div class="lc-spec"><span class="lc-spec-k">Use for</span><span class="lc-spec-v">Down payment + reserves</span></div>
-      </div>
+    <div class="ct-row">
+      <div class="ct-label">Foreign National Programs</div>
+      <div class="ct-rh">✓ Dedicated programs, no SSN required</div>
+      <div class="ct-bank">✗ Usually declined</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-label">Initial Rate Quote</div>
+      <div class="ct-rh">✓ No SSN, no credit pull required</div>
+      <div class="ct-bank">✗ Often requires credit pull first</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-label">Sub-1.0 DSCR Programs</div>
+      <div class="ct-rh">✓ Available with right credit profile</div>
+      <div class="ct-bank">✗ Not available</div>
     </div>
   </div>
 </div>
 
-<!-- MISTAKES -->
-<div class="page mistakes-page">
-  <div class="pg-tag" style="position:relative;z-index:1">Section 04</div>
-  <div class="pg-h1" style="position:relative;z-index:1;font-family:var(--fd);font-size:56px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:12px">FIRST-TIME INVESTOR<br>MISTAKES TO AVOID</div>
-  <div class="mg">
-    <div class="mc"><div class="mc-icon">📱</div><div class="mc-title">Going to your personal bank first</div><div class="mc-body">Your bank doesn't offer DSCR loans and may not have investment property programs at all. They'll underwrite it as a conventional loan against your personal income — which often kills the deal before it starts.</div></div>
-    <div class="mc"><div class="mc-icon">📊</div><div class="mc-title">Forgetting to include all PITIA costs</div><div class="mc-body">The DSCR calculation uses Principal, Interest, Taxes, Insurance, AND HOA. Investors who run a quick mortgage estimate and forget property taxes, insurance, or HOA often find their DSCR looks better than it actually is.</div></div>
-    <div class="mc"><div class="mc-icon">🏢</div><div class="mc-title">Waiting to set up the LLC</div><div class="mc-body">If you want to buy in an LLC, set it up before going under contract — not after. Changing vesting after rate lock can cause issues. Get your entity structure sorted before you make offers.</div></div>
-    <div class="mc"><div class="mc-icon">💳</div><div class="mc-title">Using credit cards to fund the down payment</div><div class="mc-body">Lenders verify that your down payment funds have been in your account for 60+ days ("seasoned"). Last-minute credit card advances or transfers from unknown sources can blow up your approval.</div></div>
-    <div class="mc"><div class="mc-icon">📋</div><div class="mc-title">Not accounting for reserves requirement</div><div class="mc-body">Most investment property loans require 3–6 months of PITIA in reserves after closing. Investors who spend every dollar on the down payment and closing costs often get surprised by the reserves check at closing.</div></div>
-    <div class="mc"><div class="mc-icon">⏰</div><div class="mc-title">Waiting until you're under contract to call a lender</div><div class="mc-body">Knowing your loan program, rate range, and down payment before you start shopping changes everything. You make better offers, negotiate from strength, and never lose a deal to a financing contingency.</div></div>
+<!-- WHY THEY SWITCH -->
+<div class="page switch-page">
+  <div class="pg-tag">Real Scenarios</div>
+  <div class="pg-h1">WHY CLIENTS<br>COME TO US.</div>
+  <div class="pg-sub">The most common reasons borrowers leave their bank and call Rate Hero.</div>
+  <div class="story-cards">
+    <div class="story">
+      <div class="story-icon">❌</div>
+      <div>
+        <div class="story-title">The Bank Said They Were Self-Employed and Couldn't Qualify</div>
+        <div class="story-what">Non-QM / Bank Statement Solution</div>
+        <div class="story-body">A business owner with $380K in annual deposits was denied by their bank because their tax returns showed $42K after deductions. We qualified them on 24 months of business bank deposits, using a 50% expense factor. Closed in 21 days on a $620K purchase.</div>
+        <div class="story-result">✓ Closed — Bank Statement Loan</div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="story-icon">⏰</div>
+      <div>
+        <div class="story-title">Their Bank Took 52 Days and Lost the Deal</div>
+        <div class="story-what">DSCR Purchase — Speed Solution</div>
+        <div class="story-body">An investor went under contract on an off-market deal with a 21-day close requirement. Their bank said 45 days minimum. We closed in 19 days using a DSCR loan — no personal income documentation required. The bank would have killed the deal.</div>
+        <div class="story-result">✓ Closed in 19 Days</div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="story-icon">🏢</div>
+      <div>
+        <div class="story-title">Their Bank Hit the 10-Property Fannie Mae Limit</div>
+        <div class="story-what">DSCR Portfolio Expansion</div>
+        <div class="story-body">A portfolio investor with 10 financed conventional properties couldn't get deal #11 at their bank — Fannie Mae caps at 10. We moved them to DSCR loans, which have no property count limit. They've added 4 more properties in the last 18 months.</div>
+        <div class="story-result">✓ No Property Count Limit on DSCR</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW WE WORK -->
+<div class="page how-page">
+  <div class="pg-tag" style="position:relative;z-index:1">How Rate Hero Works</div>
+  <div class="pg-h1" style="position:relative;z-index:1;font-family:var(--fd);font-size:56px;letter-spacing:2px;color:var(--w);line-height:.88;margin-bottom:12px">THE RATE HERO<br>DIFFERENCE.</div>
+  <div style="font-size:15px;color:var(--w55);line-height:1.7;max-width:600px;margin-bottom:10px;position:relative;z-index:1">It's not just the programs — it's how we operate. Here's what makes the experience different from the first call to closing.</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-icon">🏦</div>
+      <div class="how-title">We Shop 30+ Lending Partners</div>
+      <div class="how-body">We don't originate from a single balance sheet. We access lending partner networks and find the right program to find the best rate and terms for your specific profile. Your bank can only offer their own products.</div>
+      <div class="how-stat">30+ Lenders</div>
+    </div>
+    <div class="how-card amber">
+      <div class="how-icon">📞</div>
+      <div class="how-title">One Advisor. Direct Line. Always.</div>
+      <div class="how-body">When you call (747) 308-1635, you reach Sean. When you have a question during underwriting, you reach Sean. When something comes up the day before closing, you reach Sean — not a queue.</div>
+      <div class="how-stat">(747) 308-1635</div>
+    </div>
+    <div class="how-card">
+      <div class="how-icon">⚡</div>
+      <div class="how-title">21-Day Average Close Time</div>
+      <div class="how-body">Our process is tight because we've done this hundreds of times. We know exactly what each lender needs, when to order the appraisal, and how to keep the timeline on track. Speed is not an accident — it's process.</div>
+      <div class="how-stat">21 Days Avg</div>
+    </div>
+    <div class="how-card amber">
+      <div class="how-icon">🎯</div>
+      <div class="how-title">Program Matched to Your Situation</div>
+      <div class="how-body">We don't fit you into whatever we happen to offer. We analyze your income type, property, goals, and timeline — then identify the program that gets you the best rate and terms. The right program first, every time.</div>
+      <div class="how-stat">Match First</div>
+    </div>
+    <div class="how-card">
+      <div class="how-icon">🔒</div>
+      <div class="how-title">No SSN Until You're Ready</div>
+      <div class="how-body">The initial consultation and rate quote require no social security number and no credit pull. You get a full picture of your options with zero impact to your credit file — before you commit to anything.</div>
+      <div class="how-stat">No Credit Pull</div>
+    </div>
+    <div class="how-card amber">
+      <div class="how-icon">💬</div>
+      <div class="how-title">Transparent from Quote to Close</div>
+      <div class="how-body">The rate we quote is the rate we aim to close. We walk you through the loan estimate, explain every fee, and flag anything that could change before you sign. No surprises at the closing table.</div>
+      <div class="how-stat">No Surprises</div>
+    </div>
   </div>
 </div>
 
 <!-- CONCLUSION -->
 <div class="page concl">
   <div class="concl-logo">RATE <span>HERO</span></div>
-  <p style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:.22em;text-transform:uppercase;position:relative;z-index:1">First-Time Investor Guide</p>
-  <div class="concl-title">DEAL #1<br>STARTS<br>HERE.</div>
-  <div class="concl-body">You don't need to have everything figured out before you call. Tell me your situation — how much you have for a down payment, what kind of property you're considering, and your income setup. I'll tell you exactly which program fits and what it will cost.</div>
+  <p style="font-size:12px;color:#9CA3AF;letter-spacing:.22em;text-transform:uppercase;position:relative;z-index:1">Rate Hero vs. Big Banks</p>
+  <div class="concl-title">ONE CALL.<br>SEE THE<br>DIFFERENCE.</div>
+  <div class="concl-body">You don't have to take my word for it. Call me, tell me what you're trying to do, and I'll tell you exactly which program fits and what it costs. No SSN, no credit pull, no pressure. Then you decide.</div>
   <a href="https://goratehero.com" class="concl-cta">Start at goratehero.com →</a>
   <div class="concl-contact">
     <p>Sean Davoodian · NMLS #1252107</p>
-    <strong>(747) 308-1635 · hello@ratehero.com</strong>
-    <p style="margin-top:24px;font-size:11px;opacity:.4">Rate Hero · NMLS #2822806 · Equal Housing Lender · Licensed in 30+ States<br>Not a commitment to lend. Programs subject to approval.</p>
+    <strong>(747) 308-1635 · hello@goratehero.com</strong>
+    <p style="margin-top:24px;font-size:11px;opacity:.4">Rate Hero · NMLS #2822806 · Equal Housing Lender · Available in 30+ States<br>Not a commitment to lend. Programs subject to approval.</p>
   </div>
   <svg viewBox="0 0 850 120" xmlns="http://www.w3.org/2000/svg" fill="none" style="position:absolute;bottom:0;left:0;width:100%;opacity:0.3;z-index:0"><path d="M0 60 Q212 10 425 60 Q637 110 850 60 L850 120 L0 120 Z" fill="rgba(37,99,235,0.2)"/><path d="M0 75 Q212 30 425 75 Q637 120 850 75 L850 120 L0 120 Z" fill="rgba(37,99,235,0.12)"/></svg>
 </div>
