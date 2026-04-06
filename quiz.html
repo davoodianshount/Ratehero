@@ -347,17 +347,6 @@ function back(step){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function submitQuizLead(){
-  var first = document.getElementById('qf-first').value.trim();
-  var email = document.getElementById('qf-email').value.trim();
-  var phone = document.getElementById('qf-phone').value.trim();
-  if(!first){document.getElementById('qf-first').focus();return;}
-  if(!email && !phone){document.getElementById('qf-email').focus();return;}
-  // Hide form, show success
-  document.getElementById('quiz-form').style.display='none';
-  document.getElementById('quiz-success').style.display='block';
-  // Could POST to webhook here — e.g. fetch('/api/lead', {method:'POST', body: JSON.stringify({first, email, phone, program: document.getElementById('r-prog').textContent, answers: ans})})
-}
 
 function showResult(){
   document.getElementById('s5').classList.remove('active');
@@ -455,6 +444,36 @@ function showResult(){
 }
 
 updateProgress(1);
+function submitQuizLead() {
+  var first = document.getElementById('qf-first').value.trim();
+  var email = document.getElementById('qf-email').value.trim();
+  var phone = document.getElementById('qf-phone').value.trim();
+  if (!first) { document.getElementById('qf-first').focus(); return; }
+  if (!email && !phone) { document.getElementById('qf-email').focus(); return; }
+
+  var prog = document.getElementById('r-prog') ? document.getElementById('r-prog').textContent : 'Quiz';
+
+  var body = new FormData();
+  body.append('access_key',   '544fd03b-53dd-4844-ae11-af8c8871adf8');
+  body.append('subject',      'New Rate Hero Quiz Lead — ' + prog);
+  body.append('from_name',    'Rate Hero Quiz');
+  body.append('Name',         first);
+  body.append('Email',        email);
+  body.append('Phone',        phone);
+  body.append('Loan Program', prog);
+  body.append('Source',       'Quiz');
+  body.append('botcheck',     '');
+
+  fetch('https://api.web3forms.com/submit', {method: 'POST', body: body})
+    .then(function() {
+      document.getElementById('quiz-form').style.display = 'none';
+      document.getElementById('quiz-success').style.display = 'block';
+    })
+    .catch(function() {
+      document.getElementById('quiz-form').style.display = 'none';
+      document.getElementById('quiz-success').style.display = 'block';
+    });
+}
 </script>
 </body>
 </html>
