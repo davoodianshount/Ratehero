@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate Hero | BiggerPockets Featured Lender | DSCR & Investor Loans</title>
+<meta name="description" content="Rate Hero is BiggerPockets' Featured Lender for real estate investors. DSCR loans, Non-QM, Short-Term Rental, BRRRR, HELOC and more. No tax returns. 21-day close. NMLS #2822806.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#080E1A;--navy2:#0C1527;--navy3:#101D34;--card:#0E1A2E;
+  --teal:#3B82F6;--tealP:rgba(37,99,235,0.12);--tealG:rgba(37,99,235,0.25);
+  --gold:#F59E0B;--goldP:rgba(245,158,11,0.12);
+  --w:#FFFFFF;--w70:rgba(255,255,255,0.7);--w65:rgba(255,255,255,0.65);--w40:rgba(255,255,255,0.4);--w08:rgba(255,255,255,0.05);
+  --bd:rgba(255,255,255,0.08);--bdt:rgba(37,99,235,0.25);
+  --fd:'Bebas Neue',sans-serif;--fb:'Plus Jakarta Sans',sans-serif
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--navy);color:var(--w);overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(8,14,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{font-family:var(--fd);font-size:22px;letter-spacing:1px;color:var(--w)}
+.logo-mark span{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-phone{font-size:14px;font-weight:600;color:var(--w70);text-decoration:none}
+.nav-cta{background:var(--teal);color:var(--w);font-size:13px;font-weight:700;padding:9px 20px;border-radius:8px;text-decoration:none;white-space:nowrap}
+
+/* BP BADGE BAR */
+.bp-bar{background:linear-gradient(135deg,rgba(37,99,235,0.15) 0%,rgba(245,158,11,0.08) 100%);border-bottom:1px solid rgba(37,99,235,0.2);padding:10px 40px;display:flex;align-items:center;justify-content:center;gap:16px}
+.bp-bar img{height:28px;opacity:0.95}
+.bp-bar-text{font-size:13px;color:var(--w65);font-weight:500}
+.bp-bar-text strong{color:var(--w);font-weight:700}
+
+/* HERO */
+.hero{padding:80px 40px 72px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--goldP);border:1px solid rgba(245,158,11,0.3);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
+.hero-tag svg{width:14px;height:14px;stroke:var(--gold)}
+h1{font-family:var(--fd);font-size:clamp(48px,6vw,72px);line-height:1;letter-spacing:1px;color:var(--w);margin-bottom:20px}
+h1 span{color:var(--teal)}
+.hero-sub{font-size:18px;color:var(--w65);line-height:1.7;margin-bottom:32px;max-width:520px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:var(--w);font-size:15px;font-weight:700;padding:14px 28px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s}
+.btn-primary:hover{opacity:.88}
+.btn-ghost{border:1px solid var(--bd);color:var(--w70);font-size:15px;font-weight:600;padding:14px 24px;border-radius:10px;text-decoration:none;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:var(--teal);color:var(--w)}
+.hero-card{background:var(--navy2);border:1px solid var(--bd);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--gold))}
+.hc-title{font-size:13px;font-weight:700;color:var(--w40);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+.hc-stat{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd)}
+.hc-stat:last-child{border-bottom:none}
+.hc-label{font-size:14px;color:var(--w65)}
+.hc-val{font-size:14px;font-weight:700;color:var(--w);display:flex;align-items:center;gap:6px}
+.hc-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block}
+
+/* STATS */
+.stats{background:var(--navy2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:28px 24px;text-align:center;border-right:1px solid var(--bd)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:var(--fd);font-size:40px;color:var(--teal);letter-spacing:2px;display:block;line-height:1}
+.stat-lbl{font-size:11px;color:var(--w40);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;font-weight:600;display:block}
+.stat-note{font-size:10px;color:rgba(255,255,255,0.2);margin-top:8px;text-align:center;grid-column:1/-1;padding:0 24px 12px}
+
+/* WHY BP */
+.section{padding:80px 40px;max-width:1100px;margin:0 auto}
+.section-tag{display:inline-block;background:var(--tealP);border:1px solid var(--bdt);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+h2{font-family:var(--fd);font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:.5px;margin-bottom:8px}
+.section-sub{font-size:17px;color:var(--w65);line-height:1.7;max-width:600px;margin-bottom:48px}
+
+/* PROGRAMS */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:24px;text-decoration:none;color:var(--w);display:block;transition:border-color .2s,transform .2s}
+.pcard:hover{border-color:rgba(37,99,235,0.4);transform:translateY(-4px)}
+.pcard-icon{width:40px;height:40px;background:var(--tealP);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.pcard h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.pcard-tag{font-size:11px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.pcard p{font-size:14px;color:var(--w65);line-height:1.6}
+.pcard-arrow{margin-top:14px;font-size:13px;color:var(--teal);font-weight:700;display:flex;align-items:center;gap:4px}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--bdt),transparent)}
+.step{text-align:center;padding:0 16px}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--tealP);border:1px solid var(--bdt);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:24px;color:var(--teal);margin:0 auto 16px;position:relative;z-index:1}
+.step h4{font-size:15px;font-weight:800;margin-bottom:6px}
+.step p{font-size:13px;color:var(--w65);line-height:1.6}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,rgba(37,99,235,0.15),rgba(37,99,235,0.05));border-top:1px solid var(--bdt);border-bottom:1px solid var(--bdt);padding:64px 40px;text-align:center}
+.cta-band h2{margin-bottom:12px}
+.cta-band p{font-size:17px;color:var(--w65);margin-bottom:32px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid var(--bd);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-left{font-size:12px;color:var(--w40);line-height:1.7}
+.footer-right{display:flex;gap:20px}
+.footer-right a{font-size:12px;color:var(--w40);text-decoration:none}
+.footer-right a:hover{color:var(--w70)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:40px}
+  .hero-card{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .pgrid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr;gap:32px}
+  .steps::before{display:none}
+  nav{padding:0 20px}
+  .bp-bar{padding:10px 20px}
+  .section{padding:56px 20px}
+  .cta-band{padding:56px 20px}
+  footer{padding:24px 20px}
+}
+@media(max-width:600px){
+  .pgrid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .hero{padding:48px 20px 40px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat-num{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <span class="logo-mark">⚡ RATE<span>HERO</span></span>
+  </a>
+  <div class="nav-right">
+    <a href="tel:7473081635" class="nav-phone">(747) 308-1635</a>
+    <a href="../quiz.html" class="nav-cta">Check My Eligibility →</a>
+  </div>
+</nav>
+
+<!-- BP BAR -->
+<div class="bp-bar">
+  <img src="../BP_Featured-Lender-White_500W.png" alt="BiggerPockets Featured Lender">
+  <span class="bp-bar-text"><strong>Rate Hero</strong> is an official BiggerPockets Featured Lender — trusted by real estate investors nationwide</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      BiggerPockets Featured Lender
+    </div>
+    <h1>The Investor's<br><span>Lending Partner.</span></h1>
+    <p class="hero-sub">Rate Hero specializes in the loans BiggerPockets investors actually need — DSCR, Short-Term Rental, Non-QM, BRRRR, and more. No tax returns. No W-2s. Close in 21 days.</p>
+    <div class="hero-btns">
+      <a href="../quiz.html" class="btn-primary">Find My Loan → </a>
+      <a href="tel:7473081635" class="btn-ghost">Call (747) 308-1635</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hc-title">Why Investors Choose Rate Hero</div>
+    <div class="hc-stat">
+      <span class="hc-label">Income documentation</span>
+      <span class="hc-val"><span class="hc-dot"></span>Not required</span>
+    </div>
+    <div class="hc-stat">
+      <span class="hc-label">Average close time</span>
+      <span class="hc-val"><span class="hc-dot"></span>21 days</span>
+    </div>
+    <div class="hc-stat">
+      <span class="hc-label">STR income (Airbnb/VRBO)</span>
+      <span class="hc-val"><span class="hc-dot"></span>Accepted</span>
+    </div>
+    <div class="hc-stat">
+      <span class="hc-label">LLC / entity vesting</span>
+      <span class="hc-val"><span class="hc-dot"></span>Allowed</span>
+    </div>
+    <div class="hc-stat">
+      <span class="hc-label">Foreign nationals</span>
+      <span class="hc-val"><span class="hc-dot"></span>Eligible</span>
+    </div>
+    <div class="hc-stat">
+      <span class="hc-label">Credit pull required</span>
+      <span class="hc-val"><span class="hc-dot"></span>Soft pull only</span>
+    </div>
+    <div class="hc-stat">
+      <span class="hc-label">NMLS</span>
+      <span class="hc-val">#2822806</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div style="background:var(--navy2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)">
+  <div class="stats" style="max-width:1100px;margin:0 auto">
+    <div class="stat"><span class="stat-num">$200M+</span><span class="stat-lbl">Leadership Funded</span></div>
+    <div class="stat"><span class="stat-num">5,000+</span><span class="stat-lbl">Clients Served</span></div>
+    <div class="stat"><span class="stat-num">21</span><span class="stat-lbl">Day Avg. Close</span></div>
+    <div class="stat"><span class="stat-num">18+</span><span class="stat-lbl">States Covered</span></div>
+  </div>
+  <p class="stat-note">Based on leadership experience prior to Rate Hero</p>
+</div>
+
+<!-- PROGRAMS -->
+<div class="section">
+  <div class="section-tag">Loan Programs</div>
+  <h2>Every Loan a BP Investor Needs</h2>
+  <p class="section-sub">From your first rental to your 50th door — we have a program for every stage of your portfolio.</p>
+  <div class="pgrid">
+
+    <a href="../pages/long-term-rental.html" class="pcard">
+      <div class="pcard-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      </div>
+      <h3>DSCR — Long-Term Rental</h3>
+      <div class="pcard-tag">No Income Docs Required</div>
+      <p>Qualify on the property's rental income alone. No tax returns, no W-2s, no DTI calculation. Perfect for investors with complex income.</p>
+      <div class="pcard-arrow">Learn more →</div>
+    </a>
+
+    <a href="../pages/short-term-rental.html" class="pcard">
+      <div class="pcard-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3>DSCR — Short-Term Rental</h3>
+      <div class="pcard-tag">Airbnb & VRBO Income Accepted</div>
+      <p>We use AirDNA data to qualify your STR. Finance Airbnb and VRBO properties the way they actually earn — not how a bank thinks they should.</p>
+      <div class="pcard-arrow">Learn more →</div>
+    </a>
+
+    <a href="../pages/hard-money-exit.html" class="pcard">
+      <div class="pcard-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+      </div>
+      <h3>BRRRR / Hard Money Exit</h3>
+      <div class="pcard-tag">Refinance in 21 Days</div>
+      <p>Done rehabbing? Get out of hard money fast and lock in a 30-year DSCR loan. No income docs. Built for BRRRR investors who move quickly.</p>
+      <div class="pcard-arrow">Learn more →</div>
+    </a>
+
+    <a href="../pages/non-qm.html" class="pcard">
+      <div class="pcard-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <h3>Non-QM Loans</h3>
+      <div class="pcard-tag">Self-Employed? You Qualify.</div>
+      <p>Bank statement loans, 1099-only, asset utilization, ITIN, and more. If you make money but don't show it on paper, Non-QM is built for you.</p>
+      <div class="pcard-arrow">Learn more →</div>
+    </a>
+
+    <a href="../pages/heloc.html" class="pcard">
+      <div class="pcard-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="1"/><path d="M12 3v6"/><line x1="2" y1="13" x2="22" y2="13"/></svg>
+      </div>
+      <h3>HELOC</h3>
+      <div class="pcard-tag">Your Equity. Your Weapon.</div>
+      <p>Tap your primary or investment property equity to fund your next deal. Use it as a down payment, bridge financing, or renovation capital.</p>
+      <div class="pcard-arrow">Learn more →</div>
+    </a>
+
+    <a href="../pages/conventional.html" class="pcard">
+      <div class="pcard-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>
+      </div>
+      <h3>Conventional / FHA / VA</h3>
+      <div class="pcard-tag">Lowest Rates for W-2 Borrowers</div>
+      <p>House hacking, primary residence, or investment property with full documentation. We shop multiple lenders to get you the sharpest rate.</p>
+      <div class="pcard-arrow">Learn more →</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="background:var(--navy2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:80px 40px">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-tag">Process</div>
+    <h2 style="margin-bottom:8px">Close in 21 Days</h2>
+    <p style="font-size:17px;color:var(--w65);margin-bottom:56px">A process built for investors who don't have time to wait.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Tell Us Your Situation</h4>
+        <p>Take the 60-second quiz. We match you to the right program — no credit pull, no commitment.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Get Your Rate</h4>
+        <p>A real advisor calls you within 24 hours with a rate and term sheet. No automated bots.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Submit Docs</h4>
+        <p>Minimal documentation. DSCR loans typically need a lease or rent schedule — that's it.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Close & Scale</h4>
+        <p>21-day average close. Get your keys, cash-out, or refi done. Then go find the next deal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="section-tag" style="margin-bottom:20px">Ready to Move?</div>
+  <h2>Let's Find Your Loan.</h2>
+  <p>Tell us about your deal in 60 seconds and we'll show you exactly what you qualify for.</p>
+  <div class="cta-btns">
+    <a href="../quiz.html" class="btn-primary">Start the Quiz →</a>
+    <a href="tel:7473081635" class="btn-ghost">Call (747) 308-1635</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <strong style="color:var(--w70)">⚡ Rate Hero, Inc.</strong> · NMLS #2822806<br>
+    Licensed in multiple states. Not available in all areas.<br>
+    © 2026 Rate Hero, Inc. All rights reserved.
+  </div>
+  <div class="footer-right">
+    <a href="../legal/privacy-policy.html">Privacy Policy</a>
+    <a href="../legal/terms-of-use.html">Terms of Use</a>
+    <a href="../pages/about.html">About</a>
+  </div>
+</footer>
+
+</body>
+</html>
