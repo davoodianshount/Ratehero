@@ -1,0 +1,39 @@
+name: Deploy bolt-admin Worker
+
+on:
+  push:
+    branches:
+      - main
+      - claude/bolt-admin-v1
+    paths:
+      - 'bolt-admin/**'
+      - '.github/workflows/deploy-bolt-admin.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install wrangler
+        run: npm install -g wrangler@4
+
+      - name: Deploy Worker
+        working-directory: bolt-admin
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if grep -q 'REPLACE_AT_DEPLOY' wrangler.jsonc; then
+            echo "❌ D1/KV IDs not populated in bolt-admin/wrangler.jsonc."
+            echo "   Run the 'Setup Bolt Infra (one-time)' workflow first."
+            exit 1
+          fi
+          wrangler deploy
