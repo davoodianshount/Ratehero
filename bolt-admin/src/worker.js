@@ -18,6 +18,7 @@
 const ADMIN_EMAILS = new Set([
   'davoodianshount@gmail.com',
   'admin@goratehero.com',
+  'sean@goratehero.com',
 ]);
 
 export default {
