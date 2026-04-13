@@ -1,0 +1,110 @@
+name: Setup Bolt Infra (one-time)
+
+# Creates the D1 database and KV namespace Bolt needs, then commits the
+# generated IDs into bolt-proxy/wrangler.jsonc and bolt-admin/wrangler.jsonc.
+# Idempotent — safe to re-run. If the resources already exist it just reuses
+# the IDs.
+#
+# Run manually: Actions → "Setup Bolt Infra (one-time)" → Run workflow.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.ref }}
+
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+
+      - name: Install wrangler
+        run: npm install -g wrangler@4
+
+      - name: Resolve or create D1 database
+        id: d1
+        run: |
+          # Try to find an existing database named bolt-data
+          LIST=$(wrangler d1 list --json 2>/dev/null || echo '[]')
+          DB_ID=$(echo "$LIST" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{const a=JSON.parse(d);const m=a.find(x=>x.name==='bolt-data');process.stdout.write(m?m.uuid:'');}catch(e){process.stdout.write('')}} )")
+          if [ -z "$DB_ID" ]; then
+            echo "Creating D1 database bolt-data…"
+            CREATE=$(wrangler d1 create bolt-data --json)
+            echo "$CREATE"
+            DB_ID=$(echo "$CREATE" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{const o=JSON.parse(d);process.stdout.write(o.uuid||o.d1?.uuid||'')}catch(e){process.stdout.write('')}} )")
+          else
+            echo "Reusing existing D1 database bolt-data ($DB_ID)"
+          fi
+          echo "db_id=$DB_ID" >> "$GITHUB_OUTPUT"
+          if [ -z "$DB_ID" ]; then
+            echo "ERROR: Could not determine D1 database ID." >&2
+            exit 1
+          fi
+
+      - name: Resolve or create KV namespace
+        id: kv
+        run: |
+          LIST=$(wrangler kv namespace list 2>/dev/null || echo '[]')
+          KV_ID=$(echo "$LIST" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{const a=JSON.parse(d);const m=a.find(x=>x.title==='BOLT_CONFIG'||x.title==='bolt-proxy-BOLT_CONFIG');process.stdout.write(m?m.id:'');}catch(e){process.stdout.write('')}} )")
+          if [ -z "$KV_ID" ]; then
+            echo "Creating KV namespace BOLT_CONFIG…"
+            CREATE=$(wrangler kv namespace create BOLT_CONFIG 2>&1)
+            echo "$CREATE"
+            KV_ID=$(echo "$CREATE" | grep -oE '"id":\s*"[a-f0-9]+"' | head -1 | grep -oE '[a-f0-9]{32}')
+          else
+            echo "Reusing existing KV namespace BOLT_CONFIG ($KV_ID)"
+          fi
+          echo "kv_id=$KV_ID" >> "$GITHUB_OUTPUT"
+          if [ -z "$KV_ID" ]; then
+            echo "ERROR: Could not determine KV namespace ID." >&2
+            exit 1
+          fi
+
+      - name: Patch wrangler.jsonc files with IDs
+        env:
+          DB_ID: ${{ steps.d1.outputs.db_id }}
+          KV_ID: ${{ steps.kv.outputs.kv_id }}
+        run: |
+          node -e '
+            const fs = require("fs");
+            for (const p of ["bolt-proxy/wrangler.jsonc","bolt-admin/wrangler.jsonc"]) {
+              if (!fs.existsSync(p)) continue;
+              let s = fs.readFileSync(p,"utf8");
+              s = s.replace(/"database_id":\s*"[^"]*"/g, `"database_id": "${process.env.DB_ID}"`);
+              // Only replace the KV "id" (inside kv_namespaces) — not the D1 database_id.
+              s = s.replace(/("kv_namespaces":\s*\[\s*\{[^}]*"binding":\s*"BOLT_CONFIG"[^}]*"id":\s*)"[^"]*"/s,
+                            `$1"${process.env.KV_ID}"`);
+              fs.writeFileSync(p,s);
+              console.log("patched", p);
+            }
+          '
+
+      - name: Run D1 schema migration
+        run: wrangler d1 execute bolt-data --remote --file=bolt-proxy/schema.sql
+
+      - name: Commit patched configs
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bolt-proxy/wrangler.jsonc bolt-admin/wrangler.jsonc
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Wire D1 (${{ steps.d1.outputs.db_id }}) and KV (${{ steps.kv.outputs.kv_id }}) bindings into Bolt workers"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+
+      - name: Summary
+        run: |
+          echo "=== Bolt infra ready ==="
+          echo "D1 bolt-data : ${{ steps.d1.outputs.db_id }}"
+          echo "KV BOLT_CONFIG: ${{ steps.kv.outputs.kv_id }}"
