@@ -12,13 +12,13 @@
     {
       "binding": "BOLT_DB",
       "database_name": "bolt-data",
-      "database_id": "REPLACE_AT_DEPLOY"
+      "database_id": "d872842e-62db-4fa1-9d56-86a656946e45"
     }
   ],
   "kv_namespaces": [
     {
       "binding": "BOLT_CONFIG",
-      "id": "REPLACE_AT_DEPLOY"
+      "id": "083d29dd347748c6ad1139b58e2003b9"
     }
   ],
 
