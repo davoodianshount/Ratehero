@@ -35,13 +35,19 @@ Programs: DSCR (rental income, up to 85% LTV, min DSCR 1.0–1.25), Non-QM (bank
 
 Style: 2–3 sentences max. Direct, warm, never pushy. Never quote specific rates — say rates depend on property / credit / structure and offer a personalized quote.
 
-Lead capture: when a user shares their situation AND shows intent (asks about getting started, a quote, a call, timing), offer to have a strategist reach out. If they agree, call the submit_lead tool with what you have — name + phone (or email) are required, everything else optional. After asking for the phone number, ALSO ask for their email in the same turn — email helps strategists follow up if the call is missed. If they decline email, proceed with phone only.
+Lead capture flow — when a user shares their situation AND shows intent (asks about getting started, a quote, a call, timing), offer to have a strategist reach out. If they agree, collect the following in this exact order, ONE question per turn:
+  1. First and last name
+  2. Property address (street, city, state — or "not yet decided" if they're shopping)
+  3. Phone number
+  4. Email address
+
+Only after you have all four should you call submit_lead. Name + phone are hard requirements; address and email should be asked for but skip gracefully if the user declines. Pass everything else you've learned in the conversation (loan_program, state, loan_amount, credit_score, timeline, property_type, notes) into the tool call.
 
 After the submit_lead tool returns, read its result:
 - If "ok":true → confirm in ONE sentence that a strategist will reach out.
 - If "ok":false → do NOT claim success. Tell the user you hit a technical issue and give them the phone number (747) 308-1635 to call directly. Do not retry the tool with the same inputs.
 
-Don't interrogate — collect naturally over the chat.`;
+Don't interrogate — if the user volunteers info earlier (e.g. gives their address unprompted), skip that step. Keep the tone warm and conversational throughout.`;
 
 const SUBMIT_LEAD_TOOL = {
   name: 'submit_lead',
@@ -135,47 +141,46 @@ async function logTurn(env, { sessionId, messages, ipHash, userAgent, referer, l
 
 /* ─────────────── submit_lead tool ─────────────── */
 
-async function submitLead(input, sourcePage, sessionId) {
+// Build the web3forms payload as plain name/value pairs the browser widget
+// will submit. (We can't submit this server-side — see notes above.)
+function buildWeb3FormsPayload(input, sourcePage, sessionId) {
   const fullName = [input.first_name, input.last_name].filter(Boolean).join(' ').trim();
-
-  // web3forms rejects submissions where "email" is not a valid address, so if
-  // Bolt didn't collect one, synthesize a deterministic placeholder that's
-  // flagged clearly in the inbox.
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((input.email || '').trim());
   const emailToSend = validEmail
     ? input.email.trim()
     : `bolt-${(sessionId || 'unknown').replace(/[^a-z0-9]/gi, '').slice(0, 16)}@leads.goratehero.com`;
 
-  const body = new FormData();
-  body.append('access_key',      WEB3FORMS_ACCESS_KEY);
-  body.append('subject',         'New Bolt Lead — ' + (input.loan_program || 'Chat'));
-  body.append('from_name',       'Rate Hero — Bolt AI');
-  body.append('Name',            fullName || 'Not provided');
-  body.append('Email',           emailToSend);
-  body.append('Email Provided',  validEmail ? 'Yes' : 'No — phone-only lead from Bolt');
-  body.append('Phone',           input.phone            || 'Not provided');
-  body.append('Loan Program',    input.loan_program     || 'Not specified');
-  body.append('Borrower Type',   input.borrower_type    || 'Not specified');
-  body.append('Property Type',   input.property_type    || 'Not specified');
-  body.append('State',           input.state            || 'Not specified');
-  body.append('Loan Amount',     input.loan_amount      || 'Not specified');
-  body.append('Credit Score',    input.credit_score     || 'Not specified');
-  body.append('Timeline',        input.timeline         || 'Not specified');
-  body.append('Property Address',input.property_address || 'Not provided');
-  body.append('Properties',      input.property_count   || 'Not specified');
-  body.append('Source',          'Bolt AI Chat' + (sourcePage ? ` · ${sourcePage}` : ''));
-  if (input.notes) body.append('Notes', input.notes);
-  body.append('botcheck', '');
-
-  const res = await fetch(WEB3FORMS_URL, { method: 'POST', body });
-  const ok = res.ok;
-  let msg = ok ? 'Lead submitted. A strategist will follow up.' : 'Submission failed.';
-  try {
-    const data = await res.json();
-    if (data && data.message) msg = data.message;
-  } catch { /* non-JSON response */ }
-  return { ok, message: msg };
+  return {
+    url: WEB3FORMS_URL,
+    fields: {
+      access_key:        WEB3FORMS_ACCESS_KEY,
+      subject:           'New Bolt Lead — ' + (input.loan_program || 'Chat'),
+      from_name:         'Rate Hero — Bolt AI',
+      Name:              fullName || 'Not provided',
+      email:             emailToSend,
+      'Email Provided':  validEmail ? 'Yes' : 'No — phone-only lead from Bolt',
+      Phone:             input.phone            || 'Not provided',
+      'Loan Program':    input.loan_program     || 'Not specified',
+      'Borrower Type':   input.borrower_type    || 'Not specified',
+      'Property Type':   input.property_type    || 'Not specified',
+      State:             input.state            || 'Not specified',
+      'Loan Amount':     input.loan_amount      || 'Not specified',
+      'Credit Score':    input.credit_score     || 'Not specified',
+      Timeline:          input.timeline         || 'Not specified',
+      'Property Address':input.property_address || 'Not provided',
+      Properties:        input.property_count   || 'Not specified',
+      Source:            'Bolt AI Chat' + (sourcePage ? ` · ${sourcePage}` : ''),
+      Notes:             input.notes || '',
+      botcheck:          '',
+    },
+  };
 }
+
+// NOTE: No server-side web3forms POST. Cloudflare's bot protection in front
+// of web3forms blocks Worker-originated requests (error 1106 / 403) even with
+// full browser-style headers, because CF also checks TLS fingerprint. The
+// widget POSTs to web3forms directly from the user's browser instead —
+// same exact path as the main site's CTA funnel.
 
 async function fireAlertWebhook(env, { payload, sessionId, origin }) {
   const url = await loadAlertWebhook(env);
@@ -276,18 +281,14 @@ export default {
       // Execute the tool
       let toolResult;
       if (toolUse.name === 'submit_lead') {
-        try {
-          const r = await submitLead(toolUse.input || {}, referer, sessionId);
-          toolResult = JSON.stringify(r);
-          if (r.ok) {
-            leadCaptured = true;
-            leadPayload = toolUse.input || {};
-            // Fire alert webhook without blocking the response
-            ctx.waitUntil(fireAlertWebhook(env, { payload: leadPayload, sessionId, origin }));
-          }
-        } catch (err) {
-          toolResult = JSON.stringify({ ok: false, message: err.message });
-        }
+        // We mark the lead as captured and return the payload to the browser
+        // to POST to web3forms. Going browser-side avoids Cloudflare's bot
+        // filter that blocks Worker-originated requests (CF error 1106).
+        leadCaptured = true;
+        leadPayload = toolUse.input || {};
+        toolResult = JSON.stringify({ ok: true, message: 'Lead captured. A strategist will follow up shortly.' });
+        // Fire alert webhook without blocking the response
+        ctx.waitUntil(fireAlertWebhook(env, { payload: leadPayload, sessionId, origin }));
       } else {
         toolResult = JSON.stringify({ ok: false, message: 'Unknown tool' });
       }
@@ -309,10 +310,17 @@ export default {
       leadPayload,
     }));
 
-    return json({
+    // If a lead was captured, pass the web3forms payload back to the widget
+    // so the browser can POST it (browser-originated requests pass CF's bot
+    // check, Worker-originated ones are blocked with error 1106).
+    const response = {
       reply: finalText || "I'm here — tell me about your property or loan situation.",
       lead_captured: leadCaptured,
-    }, 200, baseCors);
+    };
+    if (leadCaptured && leadPayload) {
+      response.lead_submission = buildWeb3FormsPayload(leadPayload, referer, sessionId);
+    }
+    return json(response, 200, baseCors);
   },
 };
 
