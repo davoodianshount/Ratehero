@@ -7,8 +7,7 @@
  */
 
 (function () {
-  // TODO: After `wrangler deploy` in /bolt-proxy, paste the printed URL here.
-  const WORKER_URL = 'https://bolt-proxy.goratehero.workers.dev';
+  const WORKER_URL = 'https://bolt-proxy.davoodianshount.workers.dev';
 
   const CHIPS = [
     { e: '🏘️', t: "I'm a real estate investor" },
