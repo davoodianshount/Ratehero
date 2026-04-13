@@ -53,15 +53,20 @@
       opacity: 1; pointer-events: all;
     }
 
-    /* Mobile */
+    /* Mobile — fullscreen, follow visualViewport so keyboard never covers input */
     @media (max-width: 480px) {
       #bolt-window {
-        width: calc(100vw - 24px);
-        right: 12px; bottom: 88px;
-        height: 70vh; max-height: 580px;
-        border-radius: 20px;
+        width: 100vw;
+        right: 0; left: 0; top: 0; bottom: 0;
+        height: 100vh;               /* fallback */
+        height: 100dvh;              /* shrinks when keyboard opens */
+        max-height: none;
+        border-radius: 0;
+        padding-bottom: env(safe-area-inset-bottom);
       }
       #bolt-fab { bottom: 20px; right: 16px; }
+      /* Hide the FAB while the fullscreen window is open — close button in header */
+      body.bolt-open-mobile #bolt-fab { display: none; }
     }
 
     .bolt-header {
@@ -199,6 +204,23 @@
   let started = false;
   let open = false;
 
+  /* ── Stable session id (persists across pages & reloads) ── */
+  const SESSION_KEY = 'bolt-session-id';
+  function getSessionId() {
+    try {
+      let id = localStorage.getItem(SESSION_KEY);
+      if (!id) {
+        id = 'bolt_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem(SESSION_KEY, id);
+      }
+      return id;
+    } catch {
+      // Private mode / storage blocked — fall back to per-load id.
+      return 'bolt_mem_' + Math.random().toString(36).slice(2, 12);
+    }
+  }
+  const sessionId = getSessionId();
+
   /* ── DOM ── */
   const fab = document.createElement('button');
   fab.id = 'bolt-fab';
@@ -308,13 +330,26 @@
       const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({
+          messages,
+          session_id: sessionId,
+          page: location.pathname + location.search,
+        }),
       });
       const data = await res.json();
-      const reply = data?.content?.[0]?.text || 'Reach a Rate Hero strategist at (747) 308-1635 or visit goratehero.com.';
+      const reply = data?.reply || data?.content?.[0]?.text
+        || 'Reach a Rate Hero strategist at (747) 308-1635 or visit goratehero.com.';
       hideTyping();
       messages.push({ role: 'assistant', content: reply });
       addBubble('assistant', reply);
+      if (data?.lead_captured) {
+        // Subtle affirmation row
+        const row = document.createElement('div');
+        row.className = 'bolt-bubble-row bot';
+        row.innerHTML = '<div class="bolt-bubble-avatar">✓</div><div class="bolt-bubble bot" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.35);color:#A7F3D0;">A strategist will reach out shortly. Text (747) 308-1635 if you need them sooner.</div>';
+        msgsEl.appendChild(row);
+        msgsEl.scrollTop = msgsEl.scrollHeight;
+      }
     } catch {
       hideTyping();
       addBubble('assistant', 'Reach a Rate Hero strategist at (747) 308-1635 or visit goratehero.com.');
@@ -323,19 +358,57 @@
     busy = false;
   }
 
+  /* ── Mobile viewport tracking — keep the window locked to the visible viewport
+        so the iOS keyboard can never overlap the input. ── */
+  const isMobile = () => window.matchMedia('(max-width: 480px)').matches;
+  function syncMobileViewport() {
+    if (!open || !isMobile()) {
+      win.style.height = '';
+      win.style.top = '';
+      return;
+    }
+    const vv = window.visualViewport;
+    if (vv) {
+      win.style.height = vv.height + 'px';
+      win.style.top = vv.offsetTop + 'px';
+    }
+  }
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', syncMobileViewport);
+    window.visualViewport.addEventListener('scroll', syncMobileViewport);
+  }
+  window.addEventListener('orientationchange', () => setTimeout(syncMobileViewport, 100));
+
   /* ── Events ── */
   fab.addEventListener('click', () => {
     open = !open;
     win.classList.toggle('bolt-open', open);
     fab.innerHTML = open ? '✕' : '⚡';
+    document.body.classList.toggle('bolt-open-mobile', open && isMobile());
     if (open && msgsEl.children.length === 0) renderWelcome();
-    if (open) inputEl.focus();
+    if (open) {
+      syncMobileViewport();
+      // Don't autofocus on mobile — that forces the keyboard open before the
+      // user has seen the welcome chips.
+      if (!isMobile()) inputEl.focus();
+    }
   });
 
   document.getElementById('bolt-close-btn').addEventListener('click', () => {
     open = false;
     win.classList.remove('bolt-open');
     fab.innerHTML = '⚡';
+    document.body.classList.remove('bolt-open-mobile');
+    inputEl.blur();
+  });
+
+  // When the input gains focus on mobile, scroll the latest message into view
+  // so the user sees what they're typing in context.
+  inputEl.addEventListener('focus', () => {
+    setTimeout(() => {
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+      syncMobileViewport();
+    }, 50);
   });
 
   inputEl.addEventListener('input', () => {

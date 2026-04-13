@@ -1,14 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "bolt-proxy",
+  "name": "bolt-admin",
   "main": "src/worker.js",
   "compatibility_date": "2026-04-12",
   "observability": {
     "enabled": true
   },
 
-  // D1 database for conversation logging. IDs populated at deploy time by
-  // .github/workflows/deploy-bolt-proxy.yml (resolved from `wrangler d1 list`).
+  // Same D1 + KV bindings as bolt-proxy — this worker reads/writes them.
   "d1_databases": [
     {
       "binding": "BOLT_DB",
@@ -16,12 +15,22 @@
       "database_id": "d872842e-62db-4fa1-9d56-86a656946e45"
     }
   ],
-
-  // KV namespace for editable system prompt + alert webhook URL.
   "kv_namespaces": [
     {
       "binding": "BOLT_CONFIG",
       "id": "083d29dd347748c6ad1139b58e2003b9"
+    }
+  ],
+
+  // Serve at goratehero.com/admin/*
+  "routes": [
+    {
+      "pattern": "goratehero.com/admin",
+      "zone_name": "goratehero.com"
+    },
+    {
+      "pattern": "goratehero.com/admin/*",
+      "zone_name": "goratehero.com"
     }
   ]
 }
