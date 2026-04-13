@@ -199,6 +199,23 @@
   let started = false;
   let open = false;
 
+  /* ── Stable session id (persists across pages & reloads) ── */
+  const SESSION_KEY = 'bolt-session-id';
+  function getSessionId() {
+    try {
+      let id = localStorage.getItem(SESSION_KEY);
+      if (!id) {
+        id = 'bolt_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem(SESSION_KEY, id);
+      }
+      return id;
+    } catch {
+      // Private mode / storage blocked — fall back to per-load id.
+      return 'bolt_mem_' + Math.random().toString(36).slice(2, 12);
+    }
+  }
+  const sessionId = getSessionId();
+
   /* ── DOM ── */
   const fab = document.createElement('button');
   fab.id = 'bolt-fab';
@@ -308,13 +325,26 @@
       const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({
+          messages,
+          session_id: sessionId,
+          page: location.pathname + location.search,
+        }),
       });
       const data = await res.json();
-      const reply = data?.content?.[0]?.text || 'Reach a Rate Hero strategist at (747) 308-1635 or visit goratehero.com.';
+      const reply = data?.reply || data?.content?.[0]?.text
+        || 'Reach a Rate Hero strategist at (747) 308-1635 or visit goratehero.com.';
       hideTyping();
       messages.push({ role: 'assistant', content: reply });
       addBubble('assistant', reply);
+      if (data?.lead_captured) {
+        // Subtle affirmation row
+        const row = document.createElement('div');
+        row.className = 'bolt-bubble-row bot';
+        row.innerHTML = '<div class="bolt-bubble-avatar">✓</div><div class="bolt-bubble bot" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.35);color:#A7F3D0;">A strategist will reach out shortly. Text (747) 308-1635 if you need them sooner.</div>';
+        msgsEl.appendChild(row);
+        msgsEl.scrollTop = msgsEl.scrollHeight;
+      }
     } catch {
       hideTyping();
       addBubble('assistant', 'Reach a Rate Hero strategist at (747) 308-1635 or visit goratehero.com.');

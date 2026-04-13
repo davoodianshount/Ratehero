@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - claude/deploy-cloudflare-site-Wq2k6
+      - claude/bolt-admin-v1
     paths:
       - 'bolt-proxy/**'
       - '.github/workflows/deploy-bolt-proxy.yml'
@@ -36,12 +37,30 @@ jobs:
         run: |
           printf '%s' "$ANTHROPIC_API_KEY" | wrangler secret put ANTHROPIC_API_KEY
 
+      # Apply schema (CREATE TABLE IF NOT EXISTS — idempotent).
+      # Only runs if the D1 binding is wired up (post-setup).
+      - name: Migrate D1 schema
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if grep -q 'REPLACE_AT_DEPLOY' bolt-proxy/wrangler.jsonc; then
+            echo "⚠  D1 not yet set up — run the 'Setup Bolt Infra' workflow first. Skipping migration."
+          else
+            wrangler d1 execute bolt-data --remote --file=bolt-proxy/schema.sql
+          fi
+
       - name: Deploy Worker
         working-directory: bolt-proxy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          if grep -q 'REPLACE_AT_DEPLOY' wrangler.jsonc; then
+            echo "❌ D1/KV IDs not populated in bolt-proxy/wrangler.jsonc."
+            echo "   Run the 'Setup Bolt Infra (one-time)' workflow first."
+            exit 1
+          fi
           wrangler deploy 2>&1 | tee deploy.log
           echo ""
           echo "=== Deployed URL ==="

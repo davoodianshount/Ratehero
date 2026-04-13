@@ -1,65 +1,233 @@
 /**
  * Bolt — Cloudflare Worker
- * Proxies requests from the Bolt widget to the Anthropic API.
  *
- * Deploy:
- *   cd bolt-proxy
- *   wrangler secret put ANTHROPIC_API_KEY    # paste key when prompted
- *   wrangler deploy
+ * Responsibilities:
+ *   1. Proxy chat messages from the Bolt widget to the Anthropic API.
+ *   2. Read system prompt from KV (BOLT_CONFIG / system_prompt) with a
+ *      sane default if unset.
+ *   3. Expose a `submit_lead` tool so Claude can collect lead info and
+ *      POST it to web3forms — same payload your funnel uses.
+ *   4. Log every conversation turn to D1 keyed by session_id.
+ *   5. On lead capture, optionally POST to an alert webhook set in KV.
+ *
+ * Bindings (wrangler.jsonc):
+ *   - BOLT_DB       (D1)
+ *   - BOLT_CONFIG   (KV)
+ *   - ANTHROPIC_API_KEY (secret)
  */
 
-const ALLOWED_ORIGIN = 'https://goratehero.com';
+const ALLOWED_ORIGINS = new Set([
+  'https://goratehero.com',
+  'https://www.goratehero.com',
+]);
 
-const SYSTEM_PROMPT = `You are Bolt, an AI Mortgage Assistant for Rate Hero, a modern non-QM and DSCR mortgage lender. You help real estate investors, self-employed borrowers, homeowners, and first-time buyers understand their loan options.
+const MODEL = 'claude-sonnet-4-5';
+const MAX_TOKENS = 800;
 
-Rate Hero specializes in:
-- DSCR Loans: qualify on rental income, no tax returns required. Available up to 85% LTV on purchases for strong borrowers, 80% standard. Minimum DSCR ratio typically 1.0–1.25 depending on program.
-- Non-QM Loans: bank statement, P&L, 1099, asset-based qualification
-- Conventional / FHA / VA for W-2 borrowers
-- HELOCs up to 90% LTV
-- Short-Term Rental Loans (Airbnb/VRBO — AirDNA projections accepted)
-- Foreign National Loans (no US credit or SSN required)
-- Hard Money Exit / BRRRR refinances into 30-year DSCR — average 21-day close
-- LLC and entity lending — investments stay off personal credit
+// web3forms config — matches the funnel in index.html so leads land in
+// the same inbox / automation as CTA submissions.
+const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
+const WEB3FORMS_ACCESS_KEY = '544fd03b-53dd-4844-ae11-af8c8871adf8';
 
-Key facts:
-- 21-day average close time
-- No SSN or credit pull required to start
-- Available in 30+ states
-- $200M+ funded by leadership team
-- BiggerPockets Featured Lender
-- Phone: (747) 308-1635
-- Website: goratehero.com
+const DEFAULT_SYSTEM_PROMPT = `You are Bolt, Rate Hero's AI Mortgage Assistant. Rate Hero is a non-QM / DSCR lender — 21-day average close, no SSN to start, 30+ states, $200M+ funded by leadership, BiggerPockets Featured Lender, phone (747) 308-1635.
 
-Keep answers concise (3–5 sentences), conversational, and helpful. Always end by offering to connect them with a loan strategist or start a 60-second qualification. Never give specific rate quotes — say rates depend on property type, credit, and loan structure, and offer a personalized quote. Be warm, direct, never pushy.`;
+Programs: DSCR (rental income, up to 85% LTV, min DSCR 1.0–1.25), Non-QM (bank statement, P&L, 1099, asset-based), Conventional / FHA / VA, HELOC up to 90% LTV, STR (AirDNA accepted), Foreign Nationals, Hard Money Exit / BRRRR into 30-yr DSCR, LLC lending.
+
+Style: 2–3 sentences max. Direct, warm, never pushy. Never quote specific rates — say rates depend on property / credit / structure and offer a personalized quote.
+
+Lead capture: when a user shares their situation AND shows intent (asks about getting started, a quote, a call, timing), offer to have a strategist reach out. If they agree, call the submit_lead tool with what you have — name + phone (or email) are required, everything else optional. After the tool succeeds, confirm in one sentence. Don't interrogate — collect naturally over the chat.`;
+
+const SUBMIT_LEAD_TOOL = {
+  name: 'submit_lead',
+  description: "Submits the user's contact info and loan situation to Rate Hero so a strategist can follow up. Call this only after the user has agreed to be contacted AND you have at least first name + last name + phone (or email). The rest of the fields are optional — pass whatever you've collected naturally in the conversation.",
+  input_schema: {
+    type: 'object',
+    properties: {
+      first_name:    { type: 'string', description: "User's first name" },
+      last_name:     { type: 'string', description: "User's last name" },
+      phone:         { type: 'string', description: 'Phone number, any format' },
+      email:         { type: 'string', description: 'Email address' },
+      loan_program:  { type: 'string', description: 'One of: dscr, non-qm, conventional, fha, va, heloc, str, foreign-national, brrrr, other' },
+      borrower_type: { type: 'string', description: 'e.g. real estate investor, self-employed, w2, first-time buyer' },
+      property_type: { type: 'string', description: 'e.g. single family, multi-family, condo, STR, mixed-use' },
+      state:         { type: 'string', description: 'US state, 2-letter or full name' },
+      loan_amount:   { type: 'string', description: 'Approximate loan amount, e.g. "$400k"' },
+      credit_score:  { type: 'string', description: 'Approximate credit score or range' },
+      timeline:      { type: 'string', description: 'When they need to close, e.g. "30 days", "ASAP"' },
+      property_address: { type: 'string', description: 'Property address if shared' },
+      property_count:   { type: 'string', description: 'Number of properties owned, if mentioned' },
+      notes:         { type: 'string', description: 'Short free-text summary of the situation to pass to the strategist.' },
+    },
+    required: ['first_name', 'last_name'],
+  },
+};
+
+/* ─────────────── helpers ─────────────── */
+
+const now = () => Date.now();
+
+function corsHeaders(origin) {
+  const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://goratehero.com';
+  return {
+    'Access-Control-Allow-Origin': allow,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
+
+async function sha256(text) {
+  const buf = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest('SHA-256', buf);
+  return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function loadSystemPrompt(env) {
+  if (!env.BOLT_CONFIG) return DEFAULT_SYSTEM_PROMPT;
+  const stored = await env.BOLT_CONFIG.get('system_prompt');
+  return stored && stored.trim() ? stored : DEFAULT_SYSTEM_PROMPT;
+}
+
+async function loadAlertWebhook(env) {
+  if (!env.BOLT_CONFIG) return null;
+  const url = await env.BOLT_CONFIG.get('alert_webhook_url');
+  return url && /^https?:\/\//.test(url) ? url : null;
+}
+
+/* ─────────────── D1 logging ─────────────── */
+
+async function logTurn(env, { sessionId, messages, ipHash, userAgent, referer, leadCaptured, leadPayload }) {
+  if (!env.BOLT_DB) return;
+  const ts = now();
+  const msgJson = JSON.stringify(messages);
+  try {
+    await env.BOLT_DB.prepare(
+      `INSERT INTO conversations
+        (session_id, started_at, updated_at, messages, lead_captured, lead_payload, ip_hash, user_agent, referer, msg_count)
+       VALUES (?1, ?2, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)
+       ON CONFLICT(session_id) DO UPDATE SET
+         updated_at    = excluded.updated_at,
+         messages      = excluded.messages,
+         lead_captured = MAX(conversations.lead_captured, excluded.lead_captured),
+         lead_payload  = COALESCE(excluded.lead_payload, conversations.lead_payload),
+         msg_count     = excluded.msg_count`
+    ).bind(
+      sessionId,
+      ts,
+      msgJson,
+      leadCaptured ? 1 : 0,
+      leadPayload ? JSON.stringify(leadPayload) : null,
+      ipHash || null,
+      userAgent || null,
+      referer || null,
+      messages.length,
+    ).run();
+  } catch (err) {
+    console.error('D1 logTurn failed:', err.message);
+  }
+}
+
+/* ─────────────── submit_lead tool ─────────────── */
+
+async function submitLead(input, sourcePage) {
+  const fullName = [input.first_name, input.last_name].filter(Boolean).join(' ').trim();
+  const body = new FormData();
+  body.append('access_key',      WEB3FORMS_ACCESS_KEY);
+  body.append('subject',         'New Bolt Lead — ' + (input.loan_program || 'Chat'));
+  body.append('from_name',       'Rate Hero — Bolt AI');
+  body.append('Name',            fullName || 'Not provided');
+  body.append('Email',           input.email            || 'Not provided');
+  body.append('Phone',           input.phone            || 'Not provided');
+  body.append('Loan Program',    input.loan_program     || 'Not specified');
+  body.append('Borrower Type',   input.borrower_type    || 'Not specified');
+  body.append('Property Type',   input.property_type    || 'Not specified');
+  body.append('State',           input.state            || 'Not specified');
+  body.append('Loan Amount',     input.loan_amount      || 'Not specified');
+  body.append('Credit Score',    input.credit_score     || 'Not specified');
+  body.append('Timeline',        input.timeline         || 'Not specified');
+  body.append('Property Address',input.property_address || 'Not provided');
+  body.append('Properties',      input.property_count   || 'Not specified');
+  body.append('Source',          'Bolt AI Chat' + (sourcePage ? ` · ${sourcePage}` : ''));
+  if (input.notes) body.append('Notes', input.notes);
+  body.append('botcheck', '');
+
+  const res = await fetch(WEB3FORMS_URL, { method: 'POST', body });
+  const ok = res.ok;
+  let msg = ok ? 'Lead submitted. A strategist will follow up.' : 'Submission failed.';
+  try {
+    const data = await res.json();
+    if (data && data.message) msg = data.message;
+  } catch { /* non-JSON response */ }
+  return { ok, message: msg };
+}
+
+async function fireAlertWebhook(env, { payload, sessionId, origin }) {
+  const url = await loadAlertWebhook(env);
+  if (!url) return;
+  const text = `🔥 New Bolt lead — *${payload.first_name || ''} ${payload.last_name || ''}* (${payload.phone || payload.email || 'no contact'})`
+    + `\nProgram: ${payload.loan_program || '—'}  ·  State: ${payload.state || '—'}  ·  Amount: ${payload.loan_amount || '—'}`
+    + `\nNotes: ${payload.notes || '—'}`
+    + `\nSession: ${sessionId}  ·  From: ${origin || '—'}`;
+  try {
+    // Generic shape — works for Slack, Discord (with content key), and most Zapier/Make hooks
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, content: text, payload, session_id: sessionId }),
+    });
+  } catch (err) {
+    console.error('alert webhook failed:', err.message);
+  }
+}
+
+/* ─────────────── main fetch ─────────────── */
 
 export default {
-  async fetch(request, env) {
-    // Handle CORS preflight
+  async fetch(request, env, ctx) {
+    const origin = request.headers.get('Origin') || '';
+    const baseCors = corsHeaders(origin);
+
     if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        headers: {
-          'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-      });
+      return new Response(null, { headers: baseCors });
     }
-
     if (request.method !== 'POST') {
-      return new Response('Method not allowed', { status: 405 });
+      return new Response('Method not allowed', { status: 405, headers: baseCors });
+    }
+    if (!ALLOWED_ORIGINS.has(origin)) {
+      return new Response('Forbidden', { status: 403, headers: baseCors });
     }
 
-    // Validate origin
-    const origin = request.headers.get('Origin');
-    if (origin !== ALLOWED_ORIGIN) {
-      return new Response('Forbidden', { status: 403 });
-    }
-
+    let payload;
     try {
-      const { messages } = await request.json();
+      payload = await request.json();
+    } catch {
+      return json({ error: 'Invalid JSON' }, 400, baseCors);
+    }
 
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const { messages, session_id: sessionId, page } = payload || {};
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return json({ error: 'messages required' }, 400, baseCors);
+    }
+    if (!sessionId || typeof sessionId !== 'string') {
+      return json({ error: 'session_id required' }, 400, baseCors);
+    }
+
+    const systemPrompt = await loadSystemPrompt(env);
+    const ua      = request.headers.get('User-Agent') || '';
+    const referer = request.headers.get('Referer') || page || '';
+    const ip      = request.headers.get('CF-Connecting-IP') || '';
+    const ipHash  = ip ? await sha256(ip + '::' + sessionId) : null;
+
+    // Work on a growing transcript so we can capture tool-use exchanges too.
+    const transcript = messages.slice();
+    let leadCaptured = false;
+    let leadPayload = null;
+
+    // Agentic loop: call model, if it returns tool_use, run the tool, feed
+    // the result back, repeat. Hard-capped to avoid runaway loops.
+    let finalText = '';
+    for (let hop = 0; hop < 3; hop++) {
+      const apiRes = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,29 +235,74 @@ export default {
           'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: SYSTEM_PROMPT,
-          messages,
+          model: MODEL,
+          max_tokens: MAX_TOKENS,
+          system: systemPrompt,
+          tools: [SUBMIT_LEAD_TOOL],
+          messages: transcript,
         }),
       });
 
-      const data = await response.json();
+      const data = await apiRes.json();
+      if (!apiRes.ok || data.type === 'error') {
+        return json({ error: data?.error?.message || 'Upstream error', upstream: data }, 502, baseCors);
+      }
 
-      return new Response(JSON.stringify(data), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-        },
-      });
-    } catch (err) {
-      return new Response(JSON.stringify({ error: err.message }), {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-        },
+      // Capture assistant turn in the transcript
+      transcript.push({ role: 'assistant', content: data.content });
+
+      const toolUse = (data.content || []).find(b => b.type === 'tool_use');
+      const textBlock = (data.content || []).find(b => b.type === 'text');
+      if (textBlock) finalText = textBlock.text;
+
+      if (data.stop_reason !== 'tool_use' || !toolUse) break;
+
+      // Execute the tool
+      let toolResult;
+      if (toolUse.name === 'submit_lead') {
+        try {
+          const r = await submitLead(toolUse.input || {}, referer);
+          toolResult = JSON.stringify(r);
+          if (r.ok) {
+            leadCaptured = true;
+            leadPayload = toolUse.input || {};
+            // Fire alert webhook without blocking the response
+            ctx.waitUntil(fireAlertWebhook(env, { payload: leadPayload, sessionId, origin }));
+          }
+        } catch (err) {
+          toolResult = JSON.stringify({ ok: false, message: err.message });
+        }
+      } else {
+        toolResult = JSON.stringify({ ok: false, message: 'Unknown tool' });
+      }
+
+      transcript.push({
+        role: 'user',
+        content: [{ type: 'tool_result', tool_use_id: toolUse.id, content: toolResult }],
       });
     }
+
+    // Persist the conversation (fire-and-forget)
+    ctx.waitUntil(logTurn(env, {
+      sessionId,
+      messages: transcript,
+      ipHash,
+      userAgent: ua,
+      referer,
+      leadCaptured,
+      leadPayload,
+    }));
+
+    return json({
+      reply: finalText || "I'm here — tell me about your property or loan situation.",
+      lead_captured: leadCaptured,
+    }, 200, baseCors);
   },
 };
+
+function json(obj, status, headers) {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { 'Content-Type': 'application/json', ...headers },
+  });
+}
