@@ -873,6 +873,94 @@
     if (fallback) fallback.href = buildFallbackHref();
   }
 
+  function validateAndShowErrors() {
+    var lc = state.leadCapture;
+    var valid = true;
+    var firstInvalid = null;
+
+    var fname = document.getElementById('rh-sim-fname');
+    if (!lc.firstName.trim()) {
+      if (fname) { fname.classList.add('error'); }
+      valid = false;
+      if (!firstInvalid) firstInvalid = fname;
+    }
+
+    var phone = document.getElementById('rh-sim-phone');
+    if (phoneDigits(lc.phone).length !== 10) {
+      if (phone) { phone.classList.add('error'); }
+      valid = false;
+      if (!firstInvalid) firstInvalid = phone;
+    }
+
+    var email = document.getElementById('rh-sim-email');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lc.email)) {
+      if (email) { email.classList.add('error'); }
+      valid = false;
+      if (!firstInvalid) firstInvalid = email;
+    }
+
+    var tcpa = document.getElementById('rh-sim-tcpa');
+    var tcpaText = document.getElementById('rh-sim-tcpa-text');
+    if (!lc.consentTcpa) {
+      if (tcpaText) tcpaText.style.color = '#EF4444';
+      valid = false;
+      if (!firstInvalid) firstInvalid = tcpa;
+    } else {
+      if (tcpaText) tcpaText.style.color = '';
+    }
+
+    if (!valid && firstInvalid) firstInvalid.focus();
+    return valid;
+  }
+
+  function setFormDisabled(disabled) {
+    ['rh-sim-fname', 'rh-sim-phone', 'rh-sim-email', 'rh-sim-tcpa'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.disabled = disabled;
+    });
+  }
+
+  function handleSubmitClick() {
+    // Clear previous errors
+    var errorBanner = document.getElementById('rh-sim-error');
+    if (errorBanner) { errorBanner.classList.remove('show'); errorBanner.textContent = ''; }
+
+    if (!validateAndShowErrors()) return;
+
+    // Transition to submitting state
+    state.submitStatus = 'submitting';
+    var btn = document.getElementById('rh-sim-submit');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Sending\u2026';
+    }
+    setFormDisabled(true);
+
+    trackEvent('sim_lead_submit_start', { scenario: state.scenario, approvalTier: state.approvalTier });
+
+    submitLead().then(function (response) {
+      state.submitStatus = 'success';
+      console.log('Submission success:', response);
+      trackEvent('sim_lead_submit_success', { scenario: state.scenario, approvalTier: state.approvalTier });
+    }).catch(function (err) {
+      state.submitStatus = 'error';
+      console.log('Submission error:', err);
+      trackEvent('sim_lead_submit_error', { scenario: state.scenario, message: err.message });
+      // Re-enable form for retry
+      if (btn) {
+        btn.disabled = false;
+        var vis = TIER_VISUALS[state.approvalTier];
+        btn.textContent = vis ? vis.cta : 'Try Again';
+        btn.className = 'rh-sim-submit ' + (vis ? vis.ctaColor : 'blue');
+      }
+      setFormDisabled(false);
+      if (errorBanner) {
+        errorBanner.innerHTML = 'Couldn\u2019t send that through. Text Sean directly at <a href="tel:7473081635" style="color:var(--sim-blue)">(747) 308-1635</a> or call <a href="tel:6266577954" style="color:var(--sim-blue)">(626) 657-7954</a>.';
+        errorBanner.classList.add('show');
+      }
+    });
+  }
+
   function attachLeadListeners() {
     var fname = document.getElementById('rh-sim-fname');
     var phone = document.getElementById('rh-sim-phone');
@@ -897,8 +985,7 @@
       state.leadCapture.consentTcpa = tcpa.checked;
     });
     if (btn) btn.addEventListener('click', function () {
-      // Phase 4A will wire real submission here
-      console.log('Phase 4A: submit', { valid: isFormValid(), state: state.leadCapture });
+      handleSubmitClick();
     });
 
     var fallback = document.getElementById('rh-sim-fallback');
