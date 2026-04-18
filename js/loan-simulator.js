@@ -117,7 +117,7 @@
 /* Rate range (directly under primary number) */
 .rh-sim-rate-range { font-size: 14px; font-weight: 700; color: var(--sim-blue); margin-bottom: 16px; }
 .rh-sim-rate-range .custom { color: var(--sim-amber); font-style: italic; }
-.rh-sim-rate-fine { font-size: 10px; color: var(--sim-w25); line-height: 1.5; margin-top: 2px; }
+.rh-sim-rate-fine { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; margin-top: 2px; }
 
 /* Approval state banner */
 .rh-sim-approval { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; margin-bottom: 16px; font-size: 14px; font-weight: 700; transition: all 0.3s ease; }
@@ -144,19 +144,24 @@
 .rh-sim-chip.good { color: var(--sim-green); border-color: rgba(34,197,94,0.2); }
 .rh-sim-chip.possible .dot { background: var(--sim-amber); }
 .rh-sim-chip.possible { color: var(--sim-amber); border-color: rgba(245,158,11,0.15); }
-.rh-sim-chips-fine { font-size: 10px; color: var(--sim-w25); line-height: 1.4; margin-bottom: 14px; }
+.rh-sim-chips-fine { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; margin-bottom: 14px; }
 
 /* ── DSCR SCALE BAR ── */
 .rh-sim-scale { position: relative; height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--sim-red) 0%, var(--sim-amber) 12%, var(--sim-green) 22%, var(--sim-green) 100%); margin: 20px 0 28px; }
 .rh-sim-scale-marker { position: absolute; top: -6px; width: 22px; height: 22px; border-radius: 50%; background: var(--sim-w); border: 3px solid var(--sim-blue); box-shadow: 0 2px 8px rgba(0,0,0,0.4); transform: translateX(-50%); transition: left 0.3s ease; z-index: 2; }
 .rh-sim-scale-line { position: absolute; top: -18px; bottom: -18px; width: 1px; background: rgba(255,255,255,0.3); z-index: 1; }
-.rh-sim-scale-line-label { position: absolute; bottom: -28px; transform: translateX(-50%); font-size: 9px; font-weight: 700; color: var(--sim-w25); white-space: nowrap; letter-spacing: 0.04em; }
+.rh-sim-scale-line-label { position: absolute; bottom: -28px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); white-space: nowrap; letter-spacing: 0.04em; text-shadow: 0 0 4px rgba(0,0,0,0.8); }
 
 /* Tertiary insight line */
 .rh-sim-insight { font-size: 13px; color: var(--sim-w65); line-height: 1.6; padding: 12px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid var(--sim-blue); margin-bottom: 16px; }
 
 /* Rate-as-of fine print — NON-NEGOTIABLE on every result state */
-.rh-sim-fine { font-size: 11px; color: var(--sim-w25); line-height: 1.5; margin-top: 12px; }
+.rh-sim-fine { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; margin-top: 12px; }
+
+/* ── LEAD CAPTURE BRIDGE ── */
+.rh-sim-bridge { border-top: 1px solid var(--sim-border); margin-top: 16px; padding-top: 16px; }
+.rh-sim-bridge-header { font-size: 19px; font-weight: 600; line-height: 1.3; margin-bottom: 6px; }
+.rh-sim-bridge-subline { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 20px; }
 
 /* ── LEAD CAPTURE FORM (inside result card) ── */
 .rh-sim-lead { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; opacity: 0; }
@@ -223,17 +228,17 @@
 
   // ====== STATE ======
   var TIER_VISUALS = {
-    'dscr-strong':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Strong Approval', note: 'Numbers look strong. Sean can lock pricing fast.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green' },
-    'dscr-qualifies':  { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Qualifies', note: 'Cash flow works. Let\u2019s run the full quote.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green' },
-    'dscr-close':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close Match \u2014 Let\u2019s Structure It', note: 'Close enough to work. Sean has 3\u20134 ways to get this done.', cta: 'See My Custom Options', ctaColor: 'amber' },
-    'dscr-path':       { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Build a Path', note: 'Numbers need work, but there\u2019s almost always a way. Quick call?', cta: 'Talk to Sean \u2014 15 Min', ctaColor: 'blue' },
-    'brrrr-ready':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Cash-Out Ready', note: '', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green' },
-    'brrrr-structure': { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Let\u2019s Structure It', note: '', cta: 'See My Custom Options', ctaColor: 'amber' },
-    'brrrr-gap':       { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close the Gap \u2014 Let\u2019s Talk', note: '', cta: 'See My Custom Options', ctaColor: 'amber' },
-    'brrrr-path':      { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Build a Path', note: 'Numbers need work but there\u2019s almost always a way.', cta: 'Talk to Sean \u2014 15 Min', ctaColor: 'blue' },
-    'fthb-range':      { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'You\u2019re in Range', note: 'Budget looks strong for your income.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green' },
-    'fthb-tight':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Tight but Workable', note: 'Close to conforming. FHA, buydowns, or a co-borrower may open more room.', cta: 'See My Custom Options', ctaColor: 'amber' },
-    'fthb-program':    { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Find the Right Program', note: 'DTI\u2019s high \u2014 but there are FHA, VA, and 2-1 buydown programs built for this.', cta: 'Talk to Sean \u2014 15 Min', ctaColor: 'blue' },
+    'dscr-strong':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Strong Approval', note: 'Numbers look strong. Sean can lock pricing fast.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'Sean and the Rate Hero team will text you in 5 minutes to walk through next steps.' },
+    'dscr-qualifies':  { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Qualifies', note: 'Cash flow works. Let\u2019s run the full quote.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'Sean and the Rate Hero team will text you in 5 minutes to walk through next steps.' },
+    'dscr-close':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close Match \u2014 Let\u2019s Structure It', note: 'Close enough to work. Sean has 3\u20134 ways to get this done.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Sean will text you 3\u20134 paths to make this work within 5 minutes.' },
+    'dscr-path':       { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Build a Path', note: 'Numbers need work, but there\u2019s almost always a way. Quick call?', cta: 'Talk to Sean \u2014 15 Min', ctaColor: 'blue', callSean: true, bridgeHeader: 'Every deal has a path.', bridgeSubline: 'Book 15 minutes with Sean. He\u2019ll map the right program for this specific deal.' },
+    'brrrr-ready':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Cash-Out Ready', note: '', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'Sean and the Rate Hero team will text you in 5 minutes to walk through next steps.' },
+    'brrrr-structure': { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Let\u2019s Structure It', note: 'Refi covers payoff \u2014 we\u2019ll structure the cash flow.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Sean will text you 3\u20134 paths to make this work within 5 minutes.' },
+    'brrrr-gap':       { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close the Gap \u2014 Let\u2019s Talk', note: '', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Sean will text you 3\u20134 paths to make this work within 5 minutes.' },
+    'brrrr-path':      { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Build a Path', note: 'Numbers need work but there\u2019s almost always a way.', cta: 'Talk to Sean \u2014 15 Min', ctaColor: 'blue', callSean: true, bridgeHeader: 'Every deal has a path.', bridgeSubline: 'Book 15 minutes with Sean. He\u2019ll map the right program for this specific deal.' },
+    'fthb-range':      { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'You\u2019re in Range', note: 'Budget looks strong for your income.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'Sean and the Rate Hero team will text you in 5 minutes to walk through next steps.' },
+    'fthb-tight':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Tight but Workable', note: 'Close to conforming. FHA, buydowns, or a co-borrower may open more room.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Sean will text you 3\u20134 paths to make this work within 5 minutes.' },
+    'fthb-program':    { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Find the Right Program', note: 'DTI\u2019s high \u2014 but there are FHA, VA, and 2-1 buydown programs built for this.', cta: 'Talk to Sean \u2014 15 Min', ctaColor: 'blue', callSean: true, bridgeHeader: 'Every deal has a path.', bridgeSubline: 'Book 15 minutes with Sean. He\u2019ll map the right program for this specific deal.' },
   };
 
   var state = {
@@ -523,6 +528,10 @@
             /* Lead capture placeholder — form injected in Phase 3 */
             '<div class="rh-sim-lead" id="rh-sim-lead">' +
               '<div class="rh-sim-lead-inner">' +
+                '<div class="rh-sim-bridge">' +
+                  '<h3 class="rh-sim-bridge-header" id="rh-sim-bridge-header"></h3>' +
+                  '<p class="rh-sim-bridge-subline" id="rh-sim-bridge-subline"></p>' +
+                '</div>' +
                 '<div class="rh-sim-error" id="rh-sim-error"></div>' +
                 '<div class="rh-sim-field">' +
                   '<label for="rh-sim-fname">First Name</label>' +
@@ -601,8 +610,7 @@
     var chips = state.outputs.programChips || [];
     el.innerHTML = chips.map(function (c) {
       var cls = c.fit === 'good' ? 'good' : 'possible';
-      var sym = c.fit === 'good' ? '\u2713' : '\u2022';
-      return '<span class="rh-sim-chip ' + cls + '"><span class="dot"></span>' + sym + ' ' + c.name + '</span>';
+      return '<span class="rh-sim-chip ' + cls + '"><span class="dot"></span>' + c.name + '</span>';
     }).join('');
   }
 
@@ -633,7 +641,13 @@
     if (banner) { banner.className = 'rh-sim-approval ' + vis.color; }
     if (icon) icon.textContent = vis.icon;
     if (label) label.textContent = vis.label;
-    if (note) note.textContent = vis.note;
+    if (note) {
+      var noteHTML = vis.note ? vis.note : '';
+      if (vis.callSean) {
+        noteHTML += (noteHTML ? ' ' : '') + 'Or call Sean directly: <a href="tel:7473081635" style="color:' + vis.accent + ';text-decoration:none;font-weight:700">(747) 308-1635</a>';
+      }
+      note.innerHTML = noteHTML;
+    }
   }
 
   function renderResultCard() {
@@ -834,9 +848,19 @@
     }
   }
 
+  function renderLeadBridge() {
+    var vis = TIER_VISUALS[state.approvalTier];
+    if (!vis) return;
+    var header = document.getElementById('rh-sim-bridge-header');
+    var subline = document.getElementById('rh-sim-bridge-subline');
+    if (header) { header.textContent = vis.bridgeHeader || ''; header.style.color = vis.accent; }
+    if (subline) subline.textContent = vis.bridgeSubline || '';
+  }
+
   function updateLeadFormUI() {
     var vis = TIER_VISUALS[state.approvalTier];
     if (!vis) return;
+    renderLeadBridge();
     var btn = document.getElementById('rh-sim-submit');
     if (btn) {
       btn.textContent = vis.cta;
