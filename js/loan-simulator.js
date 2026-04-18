@@ -264,13 +264,12 @@
   /* __MATH_PLACEHOLDER__ */
 
   // ====== DOM SCAFFOLD ======
-  var AVAILABLE_STATES = [
-    'AL','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA',
-    'KS','KY','LA','ME','MD','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
-    'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT',
-    'VT','VA','WA','WV','WI','WY'
+  var US_STATES = [
+    'AL','AK','AZ','AR','CA','CO','CT','DC','DE','FL','GA','HI','ID','IL',
+    'IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE',
+    'NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD',
+    'TN','TX','UT','VT','VA','WA','WV','WI','WY'
   ];
-  var COMING_SOON = ['AK', 'DC', 'MA'];
   var STATE_NAMES = {
     AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',
     CT:'Connecticut',DC:'District of Columbia',DE:'Delaware',FL:'Florida',GA:'Georgia',
@@ -285,11 +284,8 @@
 
   function stateOptions() {
     var html = '<option value="">Select state</option>';
-    AVAILABLE_STATES.forEach(function (s) {
+    US_STATES.forEach(function (s) {
       html += '<option value="' + s + '">' + STATE_NAMES[s] + '</option>';
-    });
-    COMING_SOON.forEach(function (s) {
-      html += '<option value="" disabled>' + STATE_NAMES[s] + ' \u2014 coming soon</option>';
     });
     return html;
   }
@@ -331,9 +327,9 @@
               sliderHTML('sim-rent', 'Monthly Rent Estimate', 800, 8000, 50, 3400, fmtDollar) +
               sliderHTML('sim-down', 'Down Payment', 0.20, 0.40, 0.01, 0.25, fmtPct) +
               '<div class="rh-sim-slider-row">' +
-                '<div class="rh-sim-slider-label"><span class="rh-sim-slider-name">Property State</span></div>' +
-                '<select class="rh-sim-select" id="sim-state" aria-label="Property State">' + stateOptions() + '</select>' +
-                '<div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:5px;">Available in most states. AK, MA, and DC coming soon.</div>' +
+                '<div class="rh-sim-slider-label"><span class="rh-sim-slider-name">Where is the property?</span></div>' +
+                '<select class="rh-sim-select" id="sim-state" aria-label="Where is the property?">' + stateOptions() + '</select>' +
+                '<div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:5px;">Used to estimate your property taxes and insurance.</div>' +
               '</div>' +
             '</div>' +
             '<div class="rh-sim-scenario hidden" id="rh-sim-brrrr">' +
@@ -398,7 +394,8 @@
   function init() {
     var mount = document.getElementById('loan-simulator');
     if (!mount) return;
-    /* init wiring goes here */
+    injectStyles();
+    buildInitialDOM(mount);
   }
 
   if (document.readyState === 'loading') {
