@@ -117,7 +117,6 @@
 /* Rate range (directly under primary number) */
 .rh-sim-rate-range { font-size: 14px; font-weight: 700; color: var(--sim-blue); margin-bottom: 16px; }
 .rh-sim-rate-range .custom { color: var(--sim-amber); font-style: italic; }
-.rh-sim-rate-fine { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; margin-top: 2px; }
 
 /* Approval state banner */
 .rh-sim-approval { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; margin-bottom: 16px; font-size: 14px; font-weight: 700; transition: all 0.3s ease; }
@@ -144,7 +143,6 @@
 .rh-sim-chip.good { color: var(--sim-green); border-color: rgba(34,197,94,0.2); }
 .rh-sim-chip.possible .dot { background: var(--sim-amber); }
 .rh-sim-chip.possible { color: var(--sim-amber); border-color: rgba(245,158,11,0.15); }
-.rh-sim-chips-fine { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; margin-bottom: 14px; }
 
 /* ── DSCR SCALE BAR ── */
 .rh-sim-scale { position: relative; height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--sim-red) 0%, var(--sim-amber) 12%, var(--sim-green) 22%, var(--sim-green) 100%); margin: 20px 0 28px; }
@@ -156,10 +154,11 @@
 .rh-sim-insight { font-size: 13px; color: var(--sim-w65); line-height: 1.6; padding: 12px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid var(--sim-blue); margin-bottom: 16px; }
 
 /* Rate-as-of fine print — NON-NEGOTIABLE on every result state */
-.rh-sim-fine { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; margin-top: 12px; }
+.rh-sim-fine { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; margin-top: 12px; }
 
 /* ── LEAD CAPTURE BRIDGE ── */
-.rh-sim-bridge { border-top: 1px solid var(--sim-border); margin-top: 16px; padding-top: 16px; }
+.rh-sim-bridge { border-top: 1px solid var(--sim-border); margin-top: 16px; padding-top: 16px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease; border-top-color: transparent; }
+.rh-sim-bridge.open { max-height: 200px; opacity: 1; border-top-color: var(--sim-border); }
 .rh-sim-bridge-header { font-size: 19px; font-weight: 600; line-height: 1.3; margin-bottom: 6px; }
 .rh-sim-bridge-subline { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 20px; }
 
@@ -510,28 +509,24 @@
             '<div class="rh-sim-primary-label" id="rh-sim-primary-label">Pre-Approval Estimate</div>' +
             '<div class="rh-sim-primary-num" id="rh-sim-primary-num">\u2014</div>' +
             '<div class="rh-sim-rate-range" id="rh-sim-rate-range"></div>' +
-            '<div class="rh-sim-rate-fine">Rate range based on DSCR, LTV, and property type. Final rate after full underwriting.</div>' +
             '<div class="rh-sim-approval" id="rh-sim-approval"><span class="rh-sim-approval-icon" id="rh-sim-approval-icon"></span><div><div id="rh-sim-approval-label"></div><div class="rh-sim-approval-note" id="rh-sim-approval-note"></div></div></div>' +
+            '<div class="rh-sim-bridge" id="rh-sim-bridge-wrap">' +
+              '<h3 class="rh-sim-bridge-header" id="rh-sim-bridge-header"></h3>' +
+              '<p class="rh-sim-bridge-subline" id="rh-sim-bridge-subline"></p>' +
+            '</div>' +
             '<div class="rh-sim-metrics" id="rh-sim-metrics">' +
               '<div class="rh-sim-metric"><span class="rh-sim-metric-val" id="rh-sim-m1-val">\u2014</span><span class="rh-sim-metric-lbl" id="rh-sim-m1-lbl">Monthly PITIA</span></div>' +
               '<div class="rh-sim-metric"><span class="rh-sim-metric-val" id="rh-sim-m2-val">\u2014</span><span class="rh-sim-metric-lbl" id="rh-sim-m2-lbl">DSCR Ratio</span></div>' +
               '<div class="rh-sim-metric"><span class="rh-sim-metric-val" id="rh-sim-m3-val">\u2014</span><span class="rh-sim-metric-lbl" id="rh-sim-m3-lbl">Net Cash Flow</span></div>' +
             '</div>' +
             '<div class="rh-sim-chips" id="rh-sim-chips"></div>' +
-            '<div class="rh-sim-chips-fine">Program matching is informational. Final eligibility determined by full application and underwriting.</div>' +
             '<div class="rh-sim-scale" id="rh-sim-scale">' +
               '<div class="rh-sim-scale-marker" id="rh-sim-marker" style="left:25%"></div>' +
               '<div class="rh-sim-scale-line" style="left:25%"><span class="rh-sim-scale-line-label">1.00\u00d7 Qualifies</span></div>' +
             '</div>' +
             '<div class="rh-sim-insight" id="rh-sim-insight"></div>' +
-            '<div class="rh-sim-fine" id="rh-sim-fine">Example rate as of ' + SIM_CONFIG.rateAsOf + '. Actual rate depends on credit, LTV, reserves, and property type.</div>' +
-            /* Lead capture placeholder — form injected in Phase 3 */
             '<div class="rh-sim-lead" id="rh-sim-lead">' +
               '<div class="rh-sim-lead-inner">' +
-                '<div class="rh-sim-bridge">' +
-                  '<h3 class="rh-sim-bridge-header" id="rh-sim-bridge-header"></h3>' +
-                  '<p class="rh-sim-bridge-subline" id="rh-sim-bridge-subline"></p>' +
-                '</div>' +
                 '<div class="rh-sim-error" id="rh-sim-error"></div>' +
                 '<div class="rh-sim-field">' +
                   '<label for="rh-sim-fname">First Name</label>' +
@@ -555,6 +550,7 @@
                 '<button class="rh-sim-submit" id="rh-sim-submit" type="button"></button>' +
                 '<a class="rh-sim-fallback" id="rh-sim-fallback" href="/apply.html">Or fill out the full application \u2192</a>' +
                 '<div class="rh-sim-trust">\uD83D\uDD12 No credit pull \u00b7 No SSN \u00b7 We never sell your info</div>' +
+                '<div class="rh-sim-fine">Rate range and program matching are informational. Example rate as of ' + SIM_CONFIG.rateAsOf + '. Final rate and eligibility determined by full application and underwriting.</div>' +
               '</div>' +
             '</div>' +
             '<div class="rh-sim-success" id="rh-sim-success"></div>' +
@@ -669,7 +665,12 @@
       if (m1l) m1l.textContent = 'Monthly PITIA';
       if (m2v) { m2v.textContent = o.dscr.toFixed(2) + '\u00d7'; m2v.className = 'rh-sim-metric-val' + (o.dscr >= 1.0 ? ' pos' : o.dscr >= 0.75 ? ' amber' : ''); }
       if (m2l) m2l.textContent = 'DSCR Ratio';
-      if (m3v) { animateNumber(m3v, Math.abs(o.cashFlow), o.cashFlow >= 0 ? '+$' : '-$', ''); m3v.className = 'rh-sim-metric-val' + (o.cashFlow >= 0 ? ' pos' : ' neg'); }
+      if (m3v) {
+        animateNumber(m3v, Math.abs(o.cashFlow), o.cashFlow >= 0 ? '+$' : '-$', '');
+        // Negative cash flow: red only on green tiers (unusual edge case), amber on amber/blue tiers (softer signal)
+        var cfClass = o.cashFlow >= 0 ? ' pos' : (TIER_VISUALS[state.approvalTier].color === 'green' ? ' neg' : ' amber');
+        m3v.className = 'rh-sim-metric-val' + cfClass;
+      }
       if (m3l) m3l.textContent = 'Net Cash Flow';
       if (insight) insight.textContent = 'Your $' + formatNum(state.inputs.rent) + ' rent supports up to $' + formatNum(o.maxSupportedLoan) + ' in financing at 1.00\u00d7 DSCR.';
       if (insight) insight.style.display = '';
@@ -840,8 +841,10 @@
 
   function showLeadForm() {
     var el = document.getElementById('rh-sim-lead');
+    var bridge = document.getElementById('rh-sim-bridge-wrap');
     if (!el || el.classList.contains('open')) return;
     el.classList.add('open');
+    if (bridge) bridge.classList.add('open');
     if (!state.leadFormShown) {
       state.leadFormShown = true;
       trackEvent('sim_lead_form_view', { scenario: state.scenario, tier: state.approvalTier });
