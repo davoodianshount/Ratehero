@@ -908,7 +908,92 @@
   }
 
   // ====== PIPELINE ======
-  /* __PIPELINE_PLACEHOLDER__ */
+  // Field labels are a contract with the Apps Script parser in the
+  // Rate Hero Leads Google Sheet. Do NOT rename without updating the
+  // parser (Extensions → Apps Script). Parser keys on lowercased labels.
+  async function submitLead() {
+    var lc = state.leadCapture;
+    var inp = state.inputs;
+    var o = state.outputs;
+    var tier = state.approvalTier;
+    var scenario = state.scenario;
+
+    var body = new FormData();
+
+    body.append('access_key', SIM_CONFIG.web3forms.accessKey);
+    body.append('botcheck', '');
+
+    var sourceMap = {
+      'dscr-strong':      'Simulator - DSCR - Strong',
+      'dscr-qualifies':   'Simulator - DSCR - Qualifies',
+      'dscr-close':       'Simulator - DSCR - Close Match',
+      'dscr-path':        'Simulator - DSCR - Needs Path',
+      'brrrr-ready':      'Simulator - BRRRR - Ready',
+      'brrrr-structure':  'Simulator - BRRRR - Structure',
+      'brrrr-gap':        'Simulator - BRRRR - Gap',
+      'brrrr-path':       'Simulator - BRRRR - Needs Path',
+      'fthb-range':       'Simulator - FTHB - In Range',
+      'fthb-tight':       'Simulator - FTHB - Tight',
+      'fthb-program':     'Simulator - FTHB - Needs Program',
+    };
+    body.append('Source', sourceMap[tier]);
+
+    body.append('Name', lc.firstName);
+    body.append('Email', lc.email);
+    body.append('Phone', lc.phone);
+
+    var programMap = {
+      dscr:  'DSCR - 30yr Fixed',
+      brrrr: 'DSCR Cash-Out Refi (BRRRR)',
+      fthb:  'Conventional - First-Time Buyer',
+    };
+    body.append('Loan Program', programMap[scenario]);
+
+    var borrowerMap = {
+      dscr:  'Real Estate Investor',
+      brrrr: 'Real Estate Investor',
+      fthb:  'First-Time Homebuyer',
+    };
+    body.append('Borrower Type', borrowerMap[scenario]);
+
+    body.append('Property Type', 'Single Family Residence');
+    body.append('State', inp.state || 'Not specified');
+
+    var loanAmount = Math.round(
+      o.preApproval || o.cashOut ||
+      (inp.price ? inp.price * (1 - inp.fthbDownPct) : 0)
+    );
+    body.append('Loan Amount', String(loanAmount));
+    body.append('Credit Score', 'Not provided');
+    body.append('Timeline', 'Exploring options');
+    body.append('Property Address', 'Not provided');
+    body.append('Properties', '1');
+
+    body.append('Simulator DSCR', o.dscr ? o.dscr.toFixed(2) + 'x' : 'N/A');
+    body.append('Simulator PITIA', o.pitia ? '$' + Math.round(o.pitia) : 'N/A');
+    body.append('Simulator Cash Flow', o.cashFlow != null
+      ? (o.cashFlow >= 0 ? '+' : '') + '$' + Math.round(o.cashFlow) : 'N/A');
+    body.append('Simulator Property Value',
+      inp.propertyValue ? '$' + inp.propertyValue :
+      inp.arv           ? '$' + inp.arv :
+      inp.price         ? '$' + inp.price : 'N/A');
+    body.append('Simulator Monthly Rent', inp.rent ? '$' + inp.rent :
+      inp.brrrrRent ? '$' + inp.brrrrRent : 'N/A');
+    body.append('Simulator Down Payment', inp.downPct != null
+      ? Math.round(inp.downPct * 100) + '%' :
+      inp.fthbDownPct != null ? Math.round(inp.fthbDownPct * 100) + '%' : 'N/A');
+    body.append('TCPA Consent', lc.consentTcpa
+      ? 'Yes - ' + new Date().toISOString() : 'No');
+
+    body.append('from_name', 'Rate Hero Simulator');
+    body.append('subject', 'New Simulator Lead \u2014 ' + sourceMap[tier]);
+
+    var res = await fetch(SIM_CONFIG.web3forms.endpoint, { method: 'POST', body: body });
+    if (!res.ok) throw new Error('Web3Forms submission failed: ' + res.status);
+    var data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Submission failed');
+    return data;
+  }
 
   // ====== ANALYTICS ======
   function trackEvent(name, data) {
