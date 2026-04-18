@@ -34,6 +34,16 @@
       endpoint: 'https://api.web3forms.com/submit',
       accessKey: '544fd03b-53dd-4844-ae11-af8c8871adf8',
     },
+    contact: {
+      textLine: '(747) 308-1635',
+      textLineSmsHref: 'sms:+17473081635',
+      textLineTelHref: 'tel:+17473081635',
+      officeLine: '(626) 657-7954',
+      officeLineTelHref: 'tel:+16266577954',
+      officeHours: '8am\u20138pm PT',
+      responseTime: '5 minutes',
+      teamName: 'Rate Hero team',
+    },
   };
 
   // ====== STYLES (injected) ======
@@ -202,8 +212,10 @@
 .rh-sim-success-title { font-family: var(--sim-fd); font-size: 36px; letter-spacing: 1px; color: var(--sim-green); margin-bottom: 6px; }
 .rh-sim-success-sub { font-size: 15px; color: var(--sim-w65); line-height: 1.7; margin-bottom: 14px; }
 .rh-sim-success-recap { font-size: 13px; color: var(--sim-w25); margin-bottom: 16px; }
-.rh-sim-success-cta { display: inline-block; padding: 12px 28px; border-radius: 10px; background: var(--sim-green); color: var(--sim-w); font-family: var(--sim-fb); font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+.rh-sim-success-cta { display: block; width: 100%; padding: 12px 28px; border-radius: 10px; background: var(--sim-green); color: var(--sim-w); font-family: var(--sim-fb); font-size: 15px; font-weight: 700; text-decoration: none; text-align: center; transition: all 0.2s; box-sizing: border-box; }
 .rh-sim-success-cta:hover { background: #16a34a; transform: translateY(-1px); }
+.rh-sim-success-cta-secondary { display: block; width: 100%; padding: 12px 28px; border-radius: 10px; background: transparent; border: 1px solid var(--sim-green); color: var(--sim-w); font-family: var(--sim-fb); font-size: 15px; font-weight: 700; text-decoration: none; text-align: center; transition: all 0.2s; margin-top: 8px; box-sizing: border-box; }
+.rh-sim-success-cta-secondary:hover { background: rgba(34,197,94,0.1); transform: translateY(-1px); }
 
 /* ── ERROR STATE ── */
 .rh-sim-error { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 13px; color: var(--sim-red); display: none; }
@@ -212,7 +224,7 @@
 
 /* ── RESPONSIVE part 2 ── */
 @media (max-width: 767px) {
-  .rh-sim-result { position: sticky; bottom: 0; z-index: 10; border-radius: 16px 16px 0 0; border-bottom: none; box-shadow: 0 -8px 32px rgba(0,0,0,0.5); }
+  .rh-sim-result { border-radius: 16px; }
   .rh-sim-metrics { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
   .rh-sim-metric { padding: 8px 6px; }
   .rh-sim-metric-val { font-size: 18px; }
@@ -226,17 +238,19 @@
   var C_GREEN = '#22C55E', C_AMBER = '#F59E0B', C_BLUE = '#3B82F6';
 
   // ====== STATE ======
+  var CT = SIM_CONFIG.contact; // shorthand for template strings
+
   var TIER_VISUALS = {
-    'dscr-strong':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Strong Approval', note: 'Numbers look strong. Let\u2019s lock pricing fast.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The Rate Hero team will text you in 5 minutes to walk through next steps.' },
-    'dscr-qualifies':  { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Qualifies', note: 'Cash flow works. Let\u2019s run the full quote.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The Rate Hero team will text you in 5 minutes to walk through next steps.' },
-    'dscr-close':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close Match \u2014 Let\u2019s Structure It', note: 'Close enough to work. We have 3\u20134 ways to get this done.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within 5 minutes.' },
+    'dscr-strong':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Strong Approval', note: 'Numbers look strong. Let\u2019s lock pricing fast.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The ' + CT.teamName + ' will text you in ' + CT.responseTime + ' to walk through next steps.' },
+    'dscr-qualifies':  { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Qualifies', note: 'Cash flow works. Let\u2019s run the full quote.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The ' + CT.teamName + ' will text you in ' + CT.responseTime + ' to walk through next steps.' },
+    'dscr-close':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close Match \u2014 Let\u2019s Structure It', note: 'Close enough to work. We have 3\u20134 ways to get this done.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within ' + CT.responseTime + '.' },
     'dscr-path':       { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Build a Path', note: 'Numbers need work, but there\u2019s almost always a way. Quick call?', cta: 'Talk to Rate Hero \u2014 15 Min', ctaColor: 'blue', callSean: true, bridgeHeader: 'Every deal has a path.', bridgeSubline: 'Book 15 minutes with Rate Hero. We\u2019ll map the right program for this specific deal.' },
-    'brrrr-ready':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Cash-Out Ready', note: '', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The Rate Hero team will text you in 5 minutes to walk through next steps.' },
-    'brrrr-structure': { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Let\u2019s Structure It', note: 'Refi covers payoff \u2014 we\u2019ll structure the cash flow.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within 5 minutes.' },
-    'brrrr-gap':       { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close the Gap \u2014 Let\u2019s Talk', note: '', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within 5 minutes.' },
+    'brrrr-ready':     { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'Cash-Out Ready', note: '', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The ' + CT.teamName + ' will text you in ' + CT.responseTime + ' to walk through next steps.' },
+    'brrrr-structure': { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Let\u2019s Structure It', note: 'Refi covers payoff \u2014 we\u2019ll structure the cash flow.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within ' + CT.responseTime + '.' },
+    'brrrr-gap':       { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Close the Gap \u2014 Let\u2019s Talk', note: '', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within ' + CT.responseTime + '.' },
     'brrrr-path':      { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Build a Path', note: 'Numbers need work but there\u2019s almost always a way.', cta: 'Talk to Rate Hero \u2014 15 Min', ctaColor: 'blue', callSean: true, bridgeHeader: 'Every deal has a path.', bridgeSubline: 'Book 15 minutes with Rate Hero. We\u2019ll map the right program for this specific deal.' },
-    'fthb-range':      { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'You\u2019re in Range', note: 'Budget looks strong for your income.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The Rate Hero team will text you in 5 minutes to walk through next steps.' },
-    'fthb-tight':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Tight but Workable', note: 'Close to conforming. FHA, buydowns, or a co-borrower may open more room.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within 5 minutes.' },
+    'fthb-range':      { color: 'green', accent: C_GREEN, icon: '\u2713', label: 'You\u2019re in Range', note: 'Budget looks strong for your income.', cta: 'Get Pre-Qualified \u2014 No Credit Pull', ctaColor: 'green', bridgeHeader: 'You qualify \u2014 let\u2019s make it official.', bridgeSubline: 'The ' + CT.teamName + ' will text you in ' + CT.responseTime + ' to walk through next steps.' },
+    'fthb-tight':      { color: 'amber', accent: C_AMBER, icon: '\u2022', label: 'Tight but Workable', note: 'Close to conforming. FHA, buydowns, or a co-borrower may open more room.', cta: 'See My Custom Options', ctaColor: 'amber', callSean: true, bridgeHeader: 'Close \u2014 let\u2019s shape it together.', bridgeSubline: 'Share your info. Rate Hero will text you 3\u20134 paths to make this work within ' + CT.responseTime + '.' },
     'fthb-program':    { color: 'blue',  accent: C_BLUE,  icon: '\u2192', label: 'Let\u2019s Find the Right Program', note: 'DTI\u2019s high \u2014 but there are FHA, VA, and 2-1 buydown programs built for this.', cta: 'Talk to Rate Hero \u2014 15 Min', ctaColor: 'blue', callSean: true, bridgeHeader: 'Every deal has a path.', bridgeSubline: 'Book 15 minutes with Rate Hero. We\u2019ll map the right program for this specific deal.' },
   };
 
@@ -640,7 +654,7 @@
     if (note) {
       var noteHTML = vis.note ? vis.note : '';
       if (vis.callSean) {
-        noteHTML += (noteHTML ? ' ' : '') + 'Or call us directly: <a href="tel:7473081635" style="color:' + vis.accent + ';text-decoration:none;font-weight:700">(747) 308-1635</a>';
+        noteHTML += (noteHTML ? ' ' : '') + 'Or call us directly: <a href="' + CT.textLineTelHref + '" style="color:' + vis.accent + ';text-decoration:none;font-weight:700">' + CT.textLine + '</a>';
       }
       note.innerHTML = noteHTML;
     }
@@ -907,9 +921,10 @@
         successEl.innerHTML =
           '<div style="font-size:48px;margin-bottom:12px">\u2713</div>' +
           '<div class="rh-sim-success-title">You\u2019re in, ' + lc.firstName.trim() + '.</div>' +
-          '<div class="rh-sim-success-sub">Someone from the Rate Hero team will text you at ' + formattedPhone + ' within 5 minutes.<br>Office hours: 8am\u20138pm PT.</div>' +
+          '<div class="rh-sim-success-sub">Someone from the ' + CT.teamName + ' will text you at ' + formattedPhone + ' within ' + CT.responseTime + '.<br>Office hours: ' + CT.officeHours + '.</div>' +
           '<div class="rh-sim-success-recap">Your numbers: ' + recap + '</div>' +
-          '<a href="tel:7473081635" class="rh-sim-success-cta">Text Rate Hero \u2192 (747) 308-1635</a>';
+          '<a href="' + CT.textLineSmsHref + '" class="rh-sim-success-cta">\uD83D\uDCAC  Text Rate Hero \u2192 ' + CT.textLine + '</a>' +
+          '<a href="' + CT.textLineTelHref + '" class="rh-sim-success-cta-secondary">\uD83D\uDCDE  Call Rate Hero \u2192 ' + CT.textLine + '</a>';
         successEl.classList.add('show');
       }
       result.style.opacity = '1';
@@ -997,7 +1012,7 @@
       }
       setFormDisabled(false);
       if (errorBanner) {
-        errorBanner.innerHTML = '\u26a0 Couldn\u2019t send that through. Text us directly: <a href="tel:7473081635" style="color:var(--sim-blue)">(747) 308-1635</a> or call <a href="tel:6266577954" style="color:var(--sim-blue)">(626) 657-7954</a>.';
+        errorBanner.innerHTML = '\u26a0 Couldn\u2019t send that through. Text us directly: <a href="' + CT.textLineSmsHref + '" style="color:var(--sim-blue)">' + CT.textLine + '</a> or call <a href="' + CT.officeLineTelHref + '" style="color:var(--sim-blue)">' + CT.officeLine + '</a>.';
         errorBanner.classList.add('show');
       }
     });
