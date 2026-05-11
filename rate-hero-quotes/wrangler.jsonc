@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rate-hero-quotes",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-04-12",
+  "observability": { "enabled": true },
+
+  // Hostnames this worker serves:
+  //   quotes.goratehero.com  → admin panel + API
+  //   *.goratehero.com       → client-facing quote pages (subdomain = slug)
+  //
+  // The wildcard route is broad on purpose: the worker checks KV for a
+  // matching quote, and if there is no match it redirects to goratehero.com
+  // so that www.goratehero.com, mail.goratehero.com, etc. continue to work
+  // (they will never produce a KV hit). The existing Pages site for
+  // goratehero.com itself is NOT routed here.
+  "routes": [
+    { "pattern": "quotes.goratehero.com/*", "zone_name": "goratehero.com" },
+    { "pattern": "*.goratehero.com/*", "zone_name": "goratehero.com" }
+  ],
+
+  "kv_namespaces": [
+    { "binding": "QUOTES", "id": "REPLACE_WITH_KV_ID_AFTER_CREATION" }
+  ]
+}
