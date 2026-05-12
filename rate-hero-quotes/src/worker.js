@@ -353,6 +353,8 @@ async function createQuote(env, user, body) {
   const transactionType = (body.transactionType || '').trim();
   const loanProgram = (body.loanProgram || '').trim();
   const loanTerm = (body.loanTerm || '30-YR FIXED').trim();
+  const creditScore = (body.creditScore || '').toString().trim();
+  const dscrRatio = (body.dscrRatio || '').toString().trim();
   const options = Array.isArray(body.options) ? body.options : [];
 
   if (!clientName) return { error: 'Client name is required' };
@@ -371,6 +373,8 @@ async function createQuote(env, user, body) {
     transactionType,
     loanProgram,
     loanTerm,
+    creditScore,
+    dscrRatio: loanProgram === 'DSCR' ? dscrRatio : '',
     lo: {
       id: user.id,
       name: user.name,
@@ -507,6 +511,8 @@ async function updateQuote(env, user, slug, body) {
   const transactionType = (body.transactionType || '').trim();
   const loanProgram = (body.loanProgram || '').trim();
   const loanTerm = (body.loanTerm || '30-YR FIXED').trim();
+  const creditScore = (body.creditScore || '').toString().trim();
+  const dscrRatio = (body.dscrRatio || '').toString().trim();
   const options = Array.isArray(body.options) ? body.options : [];
 
   if (!clientName) return { error: 'Client name is required' };
@@ -538,6 +544,8 @@ async function updateQuote(env, user, slug, body) {
     transactionType,
     loanProgram,
     loanTerm,
+    creditScore,
+    dscrRatio: loanProgram === 'DSCR' ? dscrRatio : '',
     options: options.map(normalizeOption),
     lo,
     updatedAt: new Date().toISOString(),
@@ -968,6 +976,8 @@ function defaultForm() {
     transactionType: 'Purchase',
     loanProgram: 'DSCR',
     loanTerm: '30-YR FIXED',
+    creditScore: '',
+    dscrRatio: '',
     activeOption: 0,
     options: [defaultOption()],
   };
@@ -1131,6 +1141,8 @@ function renderNewQuote() {
         <div class="field"><label>Transaction Type</label>\${selectHtml('transactionType', TRANSACTION_TYPES, f.transactionType)}</div>
         <div class="field"><label>Loan Program</label>\${selectHtml('loanProgram', LOAN_PROGRAMS, f.loanProgram)}</div>
         <div class="field"><label>Loan Term</label>\${selectHtml('loanTerm', LOAN_TERMS, f.loanTerm)}</div>
+        <div class="field"><label>Credit Score</label><input class="input" data-f="creditScore" value="\${escapeHtml(f.creditScore)}" placeholder="720" /></div>
+        <div class="field dscrRatioField" style="display:\${f.loanProgram === 'DSCR' ? 'flex' : 'none'};"><label>DSCR Ratio</label><input class="input" data-f="dscrRatio" value="\${escapeHtml(f.dscrRatio)}" placeholder="1.25" /></div>
       </div>
     </div>
 
@@ -1218,12 +1230,17 @@ function refreshDynamicLabels() {
   const sectionLbl = breakdownSectionTitle(t);
   document.querySelectorAll('.breakdownSectionTitle').forEach(el => { el.textContent = sectionLbl; });
 }
+function refreshDscrFieldVisibility() {
+  const show = state.form.loanProgram === 'DSCR';
+  document.querySelectorAll('.dscrRatioField').forEach(el => { el.style.display = show ? 'flex' : 'none'; });
+}
 
 function attachFormHandlers() {
   document.querySelectorAll('[data-f]').forEach(el=>{
     const apply = () => {
       state.form[el.dataset.f] = el.value;
       if (el.dataset.f === 'transactionType') refreshDynamicLabels();
+      if (el.dataset.f === 'loanProgram') refreshDscrFieldVisibility();
     };
     el.addEventListener('input', apply);
     el.addEventListener('change', apply);
@@ -1288,6 +1305,8 @@ async function editQuote(slug) {
       transactionType: q.transactionType || 'Purchase',
       loanProgram: q.loanProgram || 'DSCR',
       loanTerm: q.loanTerm || '30-YR FIXED',
+      creditScore: q.creditScore || '',
+      dscrRatio: q.dscrRatio || '',
       activeOption: 0,
       options: (q.options && q.options.length ? q.options : [defaultOption()]).map(o => Object.assign(defaultOption(), o)),
     };
@@ -1639,6 +1658,14 @@ footer a{color:rgba(255,255,255,0.55);}
         <div class="info-label">Program</div>
         <div class="info-val"><span class="pill">${escapeHtml(q.loanProgram)}</span></div>
       </div>
+      ${q.creditScore ? `<div class="info-row">
+        <div class="info-label">Credit Score</div>
+        <div class="info-val">${escapeHtml(q.creditScore)}</div>
+      </div>` : ''}
+      ${(q.loanProgram === 'DSCR' && q.dscrRatio) ? `<div class="info-row">
+        <div class="info-label">DSCR Ratio</div>
+        <div class="info-val">${escapeHtml(q.dscrRatio)}</div>
+      </div>` : ''}
       <div class="info-row">
         <div class="info-label">Term</div>
         <div class="info-val">${escapeHtml(q.loanTerm)}</div>
